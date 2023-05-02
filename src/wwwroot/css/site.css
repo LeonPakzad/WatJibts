@@ -15,9 +15,8 @@ html {
 
 body {
   margin-bottom: 60px;
-  
 }
 
-p {
-  color: red;
+.text-center {
+  text-align: center;
 }
