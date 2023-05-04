@@ -1,53 +1,8 @@
-﻿@model Book;
-
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <form method="post">
-        <label for="name">Name:</label>
-        <br>
-        <input type="text" id="fname" name="fname" value="Name">
-        <br>
-
-        <label for="author">Author</label>
-        <br>
-        <input type="text" id="author" name="lname" value="Author">
-        <br>
-
-        <label for="isbn">ISBN</label>
-        <br>
-        <input type="number" id="isbn" name="lname" value="0">
-        <br>
-
-        <label for="erscheinungsjahr">Erscheinungsjahr</label>
-        <br>
-        <input type="number" id="erscheinungsjahr" value="0">
-        <br>
-
-        <label for="auflage">Auflage</label>
-        <br>
-        <input type="number" id="auflage" value="0">
-        <br>
-        
-        <br>
-        <input type="submit" value="Submit">
-    </form> 
-
-    <form class="" asp-controller="BookController" asp-action="showForm" method="post">
-        Name: <br> <input asp-for="Name" /> 
-        <br>
-        Author: <br> <input asp-for="Author" />
-        <br>
-        ISBN: <br> <input asp-for="ISBN" />
-        <br>
-        Erscheinungsahr: <br> <input asp-for="Erscheinungsjahr"/>
-        <br>
-        Auflage: <br> <input asp-for="Auflage"/>
-        <br><br>
-        
-        <button type="submit">Senden</button>
-    </form>
-
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
