@@ -1,17 +1,31 @@
-using src.Models;
+using src.Data;
 using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
+using ExampleApplication;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // add database
-builder.Services.AddTransient<MySqlConnection>(_ =>
-    new MySqlConnection(builder.Configuration.GetConnectionString("WatJibtsDB")));
+builder.Services.AddDbContext<WatDbContext>(options =>{
+        options.UseMySql(
+            builder.Configuration.GetConnectionString("WatJibtsDb"),
+            Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.34-mysql")
+        );
+    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+#if DEBUG
+{
+// watch for changes in css
+builder.Services.AddHostedService(sp => new NpmWatchHostedService(
+                enabled: sp.GetRequiredService<IWebHostEnvironment>().IsDevelopment(),
+                logger: sp.GetRequiredService<ILogger<NpmWatchHostedService>>()));
+}
+#endif
+
 var app = builder.Build();
+
 
 // seed db
 using (var scope = app.Services.CreateScope())

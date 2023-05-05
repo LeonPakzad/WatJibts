@@ -1,6 +1,8 @@
-namespace src.Models;
-
 using Microsoft.EntityFrameworkCore;
+
+namespace src.Data;
+
+using System;
 
 public static class SeedData
 {
@@ -10,17 +12,36 @@ public static class SeedData
             serviceProvider.GetRequiredService<
                 DbContextOptions<WatDbContext>>()))
         {
-            // Look for any users.
+            // Look for tables, if they are filled the db is seeded
             if (context.User.Any())
             {
-                return; // DB has been seeded
+                return;
             }
+            
             context.User.AddRange(
                 new User
                 {
-                    Name = "admin",
-                    Email = "pakzadleon@gmail.com",
-                    Password = "12345678",
+                    name = "admin",
+                    email = "pakzadleon@gmail.com",
+                    password = "12345678",
+                    preferredLunchTime = DateTime.Now
+                }
+            );
+
+            context.Location.AddRange(
+                new Location
+                {
+                    name = "GetFood",
+                    description = "Place to get Food from",
+                    isPlaceToEat = false,
+                    isPlaceToGetFood = true,
+                },
+                new Location
+                {
+                    name = "Dinner Table",
+                    description = "Place to eat",
+                    isPlaceToEat = true,
+                    isPlaceToGetFood = false,
                 }
             );
 

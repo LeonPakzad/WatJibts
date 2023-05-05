@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using src.Models;
 
-namespace src.Models
-
+namespace src.Data
 {
     public class WatDbContext : DbContext
     {
@@ -11,5 +9,12 @@ namespace src.Models
         }
 
         public DbSet<User> User { get; set; } = null!;
+        public DbSet<Location> Location { get; set; } = null!;
+        public DbSet<LunchTime> LunchTime { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // base.OnModelCreating(modelBuilder);
+        }
     }
 }
