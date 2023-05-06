@@ -13,20 +13,20 @@ public static class SeedData
                 DbContextOptions<WatDbContext>>()))
         {
             // Look for tables, if they are filled the db is seeded
-            if (context.User.Any())
+            if (context.Location.Any())
             {
                 return;
             }
             
-            context.User.AddRange(
-                new User
-                {
-                    name = "admin",
-                    email = "pakzadleon@gmail.com",
-                    password = "12345678",
-                    preferredLunchTime = DateTime.Now
-                }
-            );
+            // context.User.AddRange(
+            //     new User
+            //     {
+            //         name = "admin",
+            //         email = "pakzadleon@gmail.com",
+            //         password = "12345678",
+            //         preferredLunchTime = DateTime.Now
+            //     }
+            // );
 
             context.Location.AddRange(
                 new Location

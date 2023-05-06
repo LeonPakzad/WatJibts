@@ -15,7 +15,7 @@ namespace ExampleApplication
         private readonly bool _enabled;
         private readonly ILogger<NpmWatchHostedService> _logger;
 
-        private Process _process;
+        private Process? _process;
 
         public NpmWatchHostedService(bool enabled, ILogger<NpmWatchHostedService> logger)
         {

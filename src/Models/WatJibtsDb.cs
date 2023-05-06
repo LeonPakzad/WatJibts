@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace src.Data
 {
-    public class WatDbContext : DbContext
+    public class WatDbContext : IdentityDbContext
     {
         public WatDbContext(DbContextOptions<WatDbContext> options) : base(options)
         {
@@ -14,7 +15,7 @@ namespace src.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
