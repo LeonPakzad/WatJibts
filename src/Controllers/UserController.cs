@@ -1,14 +1,14 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 
 namespace src.Controllers;
 
-public class HomeController : Controller
+public class UserController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public UserController(ILogger<HomeController> logger)
     {
         _logger = logger;
     }
@@ -18,7 +18,22 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Impressum()
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    public IActionResult Profile()
+    {
+        return View();
+    }
+
+    public IActionResult Logout()
     {
         return View();
     }

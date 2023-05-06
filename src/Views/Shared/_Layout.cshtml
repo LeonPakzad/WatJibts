@@ -4,14 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - src</title>
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/menu-style.css" asp-append-version="true" />
 </head>
 <body>
     <header>
         <nav class="">
             <div class="navbar">
                 <div class="container nav-container">
-                    <input class="checkbox" type="checkbox" name="" id="" />
+                    <input class="nav-menu" type="checkbox" name="" id="" />
                     <div class="hamburger-lines">
                         <span class="line line1"></span>
                         <span class="line line2"></span>
@@ -20,28 +20,31 @@
                     <div class="logo">
                         <h1>WatJibts</h1>
                     </div>
-                    <div class="menu-items">
-                        <li class="">
-                            <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="">
-                            <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="">
-                            <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="">
-                            <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="">
-                            <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="">
-                            <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="">
-                            <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                    <div class="menu-item-container">
+                        <div class="menu-items">
+                            <h1>WatJibts</h1>
+                            <li class="">
+                                <a class="" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="">
+                                <a class="" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                            </li>
+                            <li class="">
+                                <a class="" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+                            </li>
+                            <li class="">
+                                <a class="" asp-area="" asp-controller="User" asp-action="Profile">Profile</a>
+                            </li>
+                            <li class="">
+                                <a class="" asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                            </li>
+                            <li class="">
+                                <a class="" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+                            </li>
+                            <li class="">
+                                <a class="" asp-area="" asp-controller="Home" asp-action="Impressum">Impressum</a>
+                            </li>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,7 +58,7 @@
 
     <footer class="">
         <div class="">
-            &copy; 2023 - src - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - src - <a asp-area="" asp-controller="Home" asp-action="Impressum">Impressum</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,16 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body {
-    font-family: "Poppins", sans-serif;
-}
+@import "basics.scss";
 
 .container {
     max-width: 1050px;
-    width: 90%;
     margin: auto;
 }
 
@@ -19,35 +11,36 @@ body {
     
     .logo {
         position: absolute;
-        top: 15px;
         left: 60px;
         font-size: 1.2rem;
-        color: #0e2431;
     }
 
-    .menu-items {
-        padding-top: 120px;
+    .menu-item-container {
         height: 100vh;
-        width: 100%;
-        transform: translate(-150%);
-        display: flex;
-        flex-direction: column;
-        margin-left: -40px;
-        padding-left: 50px;
-        transition: transform 0.5s ease-in-out;
-        text-align: center;
+        width: 100vw;
         position: absolute;
-        top: 20%;
-
-        li {
-            margin-bottom: 1.2rem;
-            font-size: 1.5rem;
-            font-weight: 500;
+        top: 0px;
+        left:0;
+        transform: translate(-100%);
+        transition: transform 0.5s ease-in-out;
+        background: $color-bg-dark;
+        
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            
+            text-align: center;
+            top: 20%;
+            
+            li {
+                margin: 10px auto;
+                font-size: 1.5rem;
+                font-weight: 500;
+            }
         }
     }
   
     .nav-container {
-        
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -69,7 +62,7 @@ body {
             font-weight: bolder;
         }
         
-        .checkbox {
+        .nav-menu {
             position: absolute;
             display: block;
             height: 32px;
@@ -81,7 +74,7 @@ body {
             cursor: pointer;
         }
 
-        input[type="checkbox"]:checked ~ .menu-items {
+        input[type="checkbox"]:checked ~ .menu-item-container {
             transform: translateX(0);
         }
           
@@ -106,7 +99,7 @@ body {
             height: 26px;
             width: 32px;
             position: absolute;
-            top: 17px;
+            top: 25px;
             left: 20px;
             z-index: 2;
             display: flex;
