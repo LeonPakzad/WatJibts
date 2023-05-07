@@ -11,6 +11,7 @@
     
     .logo {
         position: absolute;
+        top: -10px;
         left: 60px;
         font-size: 1.2rem;
     }
@@ -20,7 +21,7 @@
         width: 100vw;
         position: absolute;
         top: 0px;
-        left:0;
+        right: 0;
         transform: translate(-100%);
         transition: transform 0.5s ease-in-out;
         background: $color-bg-dark;
@@ -61,46 +62,25 @@
         a:hover {
             font-weight: bolder;
         }
-        
-        .nav-menu {
+
+        @mixin nav-toggle {
             position: absolute;
             display: block;
-            height: 32px;
-            width: 32px;
-            top: 20px;
-            left: 20px;
+            height: 44px;
+            width: 44px;
+            top: 10px;
+            right: 20px;
+        }
+
+        .nav-menu {
+            @include nav-toggle;
             z-index: 5;
             opacity: 0;
             cursor: pointer;
         }
-
-        input[type="checkbox"]:checked ~ .menu-item-container {
-            transform: translateX(0);
-        }
-          
-        input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
-            transform: rotate(45deg);
-        }
-          
-        input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
-            transform: scaleY(0);
-        }
-          
-        input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
-            transform: rotate(-45deg);
-        }
-          
-        input[type="checkbox"]:checked ~ .logo{
-            display: none;
-        }
         
         .hamburger-lines {
-            display: block;
-            height: 26px;
-            width: 32px;
-            position: absolute;
-            top: 25px;
-            left: 20px;
+            @include nav-toggle;
             z-index: 2;
             display: flex;
             flex-direction: column;
@@ -114,21 +94,51 @@
             }
             
             .line1 {
-                background: burlywood;
+                background: $color-bg-light;
                 transform-origin: 0% 0%;
                 transition: transform 0.4s ease-in-out;
             }
 
             .line2 {
-                background: red;
+                background: $color-success-light;
+                transition: transform 0.2s ease-in-out;
+            }
+
+            .line3 {
+                background: $color-highlight-light;
+                transition: transform 0.2s ease-in-out;
+            }
+
+            .line4 {
+                background: $color-warning-light;
                 transition: transform 0.2s ease-in-out;
             }
           
-            .line3 {
-                background: green;
+            .line5 {
+                background: $color-bg-light;
                 transform-origin: 0% 100%;
                 transition: transform 0.4s ease-in-out;
             }
+
+        }
+        input[type="checkbox"]:checked ~ .menu-item-container {
+            transform: translateX(0);
+        }
+          
+        input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+            transform: rotate(45deg) scaleX(1.3);
+        }
+          
+        input[type="checkbox"]:checked ~ .hamburger-lines .middle-line {
+            transform: scaleX(0);
+        }
+          
+        input[type="checkbox"]:checked ~ .hamburger-lines .line5 {
+            transform: rotate(-45deg) scaleX(1.3);
+        }
+          
+        input[type="checkbox"]:checked ~ .logo{
+            display: none;
         }
     }
 }

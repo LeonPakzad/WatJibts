@@ -62,7 +62,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
-
 // seed db
 using (var scope = app.Services.CreateScope())
 {

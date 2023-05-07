@@ -3,13 +3,18 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
+@{
+    ViewData["Title"] = "Wat Jibts";
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - src</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/menu-style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/body-style.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -19,8 +24,10 @@
                     <input class="nav-menu" type="checkbox" name="" id="" />
                     <div class="hamburger-lines">
                         <span class="line line1"></span>
-                        <span class="line line2"></span>
-                        <span class="line line3"></span>
+                        <span class="line line2 middle-line"></span>
+                        <span class="line line3 middle-line"></span>
+                        <span class="line line4 middle-line"></span>
+                        <span class="line line5"></span>
                     </div>  
                     <div class="logo">
                         <h1>WatJibts</h1>
@@ -62,7 +69,9 @@
     </header>
     <div class="">
         <main role="main" class="pb-3">
-            @RenderBody()
+            <div class="body-container">
+                @RenderBody()
+            </div>
         </main>
     </div>
 

@@ -11,3 +11,25 @@ $color-highlight-dark: #C49F2E;
 
 $color-warning-light: #AF4519;
 $color-warning-dark: #A33A0E;
+
+html {
+    background-color: $color-bg-light;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: $color-bg-dark;
+}
+
+footer {
+    background-color: $color-bg-dark;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}

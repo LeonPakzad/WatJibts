@@ -1,3 +1,23 @@
+html {
+  background-color: #E8C382;
+}
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #A9853B;
+}
+
+footer {
+  background-color: #A9853B;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
 
 /*# sourceMappingURL=basics.css.map */
