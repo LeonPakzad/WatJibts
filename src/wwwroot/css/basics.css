@@ -1,5 +1,5 @@
 html {
-  background-color: #E8C382;
+  background-color: #110220;
 }
 
 body {
@@ -8,16 +8,71 @@ body {
 }
 
 header {
-  background-color: #A9853B;
+  background-color: black;
 }
 
 footer {
-  background-color: #A9853B;
+  background-color: black;
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px;
+}
+
+@font-face {
+  font-family: "beonregular";
+  src: url("../assets/font/Beon-Regular.ttf") format("truetype"), url("../assets/font/Beon-Regular.woff") format("truetype"), url("../assets/font/Beon-Regular.woff2") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+h1 {
+  font-family: beonregular;
+  animation: pulsate 2.5s infinite alternate;
+  color: #E200F7;
+  text-shadow: 0 0 7px #E200F7, 0 0 10px #E200F7, 0 0 21px #E200F7, 0 0 42px #fff, 0 0 82px #fff, 0 0 92px #fff, 0 0 102px #fff, 0 0 151px #fff;
+}
+
+h2 {
+  color: #fff;
+}
+
+p {
+  color: #fff;
+}
+
+li {
+  color: white;
+}
+
+a {
+  color: white;
+}
+
+a.selected {
+  text-shadow: 0 0 7px white, 0 0 10px white, 0 0 21px white;
+}
+
+a:hover {
+  color: #E200F7 !important;
+  text-shadow: 0 0 7px white, 0 0 10px white, 0 0 21px white;
+}
+
+label {
+  color: white;
+}
+
+hr {
+  color: white;
+}
+
+@keyframes pulsate {
+  100% {
+    text-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 19px #E200F7, 0 0 40px #fff, 0 0 80px #fff, 0 0 100px #fff, 0 0 150px #fff;
+  }
+  0% {
+    text-shadow: 0 0 2px #E200F7, 0 0 4px #E200F7, 0 0 6px #E200F7, 0 0 10px #fff, 0 0 45px #fff, 0 0 55px #fff, 0 0 70px #fff, 0 0 80px #fff;
+  }
 }
 
 /*# sourceMappingURL=basics.css.map */
