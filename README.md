@@ -4,6 +4,7 @@ WatJibts is a planning tool for lunch sessions: - when does who eat what and whe
 ## Installation
 ###
 firstly connect your database. 
+
 _I used mysql, you might need further changes in the  Program.cs if you want to use a different database_
 
 change your connectionString in appsettings.json

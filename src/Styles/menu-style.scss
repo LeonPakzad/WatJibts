@@ -101,9 +101,9 @@
                 
                 box-shadow:
                 // primary color
-                0 0 7px $color-highlight-dark,
+                0 0 7px $color-glow,
                 // secondary color glow
-                0 0 10px $color-glow,
+                0 0 10px $color-highlight-dark,
                 0 0 82px $color-glow,
                 0 0 92px $color-glow;
 
@@ -121,7 +121,7 @@
                 // primary color
                 0 0 7px $color-success-light,
                 // secondary color glow
-                0 0 10px $color-glow,
+                0 0 10px $color-highlight-dark,
                 0 0 82px $color-glow,
                 0 0 92px $color-glow;
             }
@@ -134,7 +134,7 @@
                 // primary color
                 0 0 7px $color-highlight-light,
                 // secondary color glow
-                0 0 10px $color-glow,
+                0 0 10px $color-highlight-light,
                 0 0 82px $color-glow,
                 0 0 92px $color-glow;
             }

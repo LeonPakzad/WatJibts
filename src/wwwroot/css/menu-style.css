@@ -1,5 +1,6 @@
 html {
   background-color: #110220;
+  color: white;
 }
 
 body {
@@ -161,7 +162,7 @@ hr {
 }
 .navbar .nav-container .hamburger-lines .line1 {
   background: #FF901B;
-  box-shadow: 0 0 7px #FF901B, 0 0 10px white, 0 0 82px white, 0 0 92px white;
+  box-shadow: 0 0 7px white, 0 0 10px #FF901B, 0 0 82px white, 0 0 92px white;
   height: 10px;
   border-radius: 30px 30px 4px 4px;
   transform-origin: 0% 0%;
@@ -170,12 +171,12 @@ hr {
 .navbar .nav-container .hamburger-lines .line2 {
   background: #87C63A;
   transition: transform 0.2s ease-in-out;
-  box-shadow: 0 0 7px #87C63A, 0 0 10px white, 0 0 82px white, 0 0 92px white;
+  box-shadow: 0 0 7px #87C63A, 0 0 10px #FF901B, 0 0 82px white, 0 0 92px white;
 }
 .navbar .nav-container .hamburger-lines .line3 {
   background: #ffc640;
   transition: transform 0.2s ease-in-out;
-  box-shadow: 0 0 7px #ffc640, 0 0 10px white, 0 0 82px white, 0 0 92px white;
+  box-shadow: 0 0 7px #ffc640, 0 0 10px #ffc640, 0 0 82px white, 0 0 92px white;
 }
 .navbar .nav-container .hamburger-lines .line4 {
   background: #FF321A;
