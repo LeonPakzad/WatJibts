@@ -47,6 +47,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.AllowedUserNameCharacters =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.User.RequireUniqueEmail = false;
+
+    
 });
 
 builder.Services.ConfigureApplicationCookie(options =>
@@ -61,6 +63,16 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 var app = builder.Build();
+
+ app.Use(async (context, next) =>
+    {
+        await next();
+        if (context.Response.StatusCode == 404)
+        {
+            context.Request.Path = "/404";
+            await next();
+        }
+    });
 
 // seed db
 using (var scope = app.Services.CreateScope())

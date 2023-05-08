@@ -30,9 +30,11 @@
         background: $color-bg-dark;
         
         .menu-items {
+            width: 20%;
+            margin: auto auto;
             display: flex;
             flex-direction: column;
-            
+
             text-align: center;
             top: 20%;
             
