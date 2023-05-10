@@ -94,19 +94,20 @@ namespace src.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "LunchTime",
+                name: "LunchSession",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     day = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    lunchTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     participating = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     fk_location = table.Column<int>(type: "int", nullable: true),
                     fk_user = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LunchTime", x => x.id);
+                    table.PrimaryKey("PK_LunchSession", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -297,7 +298,7 @@ namespace src.Migrations
                 name: "Location");
 
             migrationBuilder.DropTable(
-                name: "LunchTime");
+                name: "LunchSession");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

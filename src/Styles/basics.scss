@@ -1,25 +1,5 @@
-// $color-bg-light: #E8C382;
-// $color-bg-dark: #A9853B;
-
-// $color-font: #120B04;
-
-// $color-success-light: #87C63A;
-// $color-success-dark: #3D5D14;
-
-// $color-highlight-light:#F2CF50;
-// $color-highlight-dark: #C49F2E;
-
-// $color-warning-light: #AF4519;
-// $color-warning-dark: #A33A0E;
-
 $color-header-primary: #E200F7;
 $color-glow: white;
-// $color-bg-light: #450EEF;
-// $color-bg-light: #210550;
-// $color-bg-light: #210550;
-// $color-bg-dark: #220070;
-// $color-bg-dark: #110220;
-// $color-bg-dark: #110220;
 
 $color-bg-dark: black;
 $color-bg-light: #110220;
@@ -40,6 +20,7 @@ $color-warning-dark: #A33A0E;
 html {
     background-color: $color-bg-light;
     color: white;
+    font-family: raleway;
 }
 
 body {
@@ -60,16 +41,6 @@ footer {
     line-height: 60px;
 }
 
-@font-face {
-	font-family: 'beonregular';
-	src: 
-		url('../assets/font/Beon-Regular.ttf') format('truetype'),
-		url('../assets/font/Beon-Regular.woff') format('truetype'),
-		url('../assets/font/Beon-Regular.woff2') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
 h1 {
     font-family: beonregular;
     animation: pulsate 2.5s infinite alternate; 
@@ -86,18 +57,6 @@ h1 {
     0 0 92px #fff,
     0 0 102px #fff,
     0 0 151px #fff;
-}
-
-h2 {
-    color: #fff;
-}
-
-p {
-    color: #fff;
-}
-
-li {
-    color: white;
 }
 
 a {
@@ -128,8 +87,6 @@ hr {
     color: white;
 }
 
-
-
 @keyframes pulsate {
     100% {
       // Larger blur radius */
@@ -154,4 +111,26 @@ hr {
         0 0 70px #fff,
         0 0 80px #fff;
     }
+}
+
+// font-faces except svg and eot, if someone demands those: navigate to the next trash can to get them new tech.
+
+@font-face {
+	font-family: 'beonregular';
+	src: 
+		url('../assets/font/Beon-Regular.ttf') format('truetype'),
+		url('../assets/font/Beon-Regular.woff') format('woff'),
+		url('../assets/font/Beon-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'raleway';
+	src: 
+		url('../assets/font/Raleway-Regular.ttf') format('truetype'),
+		url('../assets/font/Raleway-Regular.woff') format('woff'),
+		url('../assets/font/Raleway-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
 }

@@ -11,7 +11,7 @@ using src.Data;
 namespace src.Migrations
 {
     [DbContext(typeof(WatDbContext))]
-    [Migration("20230506130849_InitialMigrate")]
+    [Migration("20230509202046_InitialMigrate")]
     partial class InitialMigrate
     {
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace src.Migrations
                     b.ToTable("Location");
                 });
 
-            modelBuilder.Entity("LunchTime", b =>
+            modelBuilder.Entity("LunchSession", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -60,12 +60,15 @@ namespace src.Migrations
                     b.Property<int?>("fk_user")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("lunchTime")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("participating")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("id");
 
-                    b.ToTable("LunchTime");
+                    b.ToTable("LunchSession");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -117,7 +120,7 @@ namespace src.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
