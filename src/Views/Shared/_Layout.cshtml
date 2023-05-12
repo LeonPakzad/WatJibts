@@ -51,44 +51,42 @@
                     </div>  
                     <div class="logo">
                         <a class="" asp-area="" asp-controller="Home" asp-action="Index">
-                            <h1>
-                                WatJibts
-                            </h1>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                                <h1 class="@(@actionName == "Index" ? "selected" : "flickering-headline") ">WatJibts</h1>
+                            </a>
                         </a>
                     </div>
                     <div class="menu-item-container">
                         <div class="menu-items">
-                            <h1>WatJibts</h1>
                             <li>
-                                <a class="@(@actionName == "Index" ? "selected" : "@actionName")" asp-area="" asp-controller="Home" asp-action="Index">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a class="@(@displayName == "/Account/Login" ? "selected" : "")" id="login" asp-area="Identity" asp-page="/Account/Login">
-                                    Login
-                                </a>
-                            </li>
-                            <li>
-                                <a class="@(@displayName == "/Account/Register" ? "selected" : "")" id="register" asp-area="Identity" asp-page="/Account/Register">
-                                    Register
+                                <a asp-area="" asp-controller="Home" asp-action="Index">
+                                    <h1 class="@(@actionName == "Index" ? "selected" : "flickering-headline") ">WatJibts</h1>
                                 </a>
                             </li>
                             @{
                                 if (SignInManager.IsSignedIn(User))
                                 {
-                                    <li><a class="" asp-area="" asp-controller="User" asp-action="Profile">Profile</a></li>
-                                    <li><a class="" asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
+                                    <li><a class="@(@actionName == "Profile" ? "selected" : "")" asp-area="" asp-controller="User" asp-action="Profile">Profile</a></li>
+                                    <li><a class="@(@actionName == "UserIndex" ? "selected" : "")" asp-area="" asp-controller="User" asp-action="UserIndex">Users</a></li>
                                     <li>
                                         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+                                            <button id="logout" type="submit" class="logout-button">Logout</button>
                                         </form>
                                     </li>
                                 }
+                                else {
+                                    <li>
+                                        <a class="@(@displayName == "/Account/Login" ? "selected" : "")" id="login" asp-area="Identity" asp-page="/Account/Login">
+                                            Login
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="@(@displayName == "/Account/Register" ? "selected" : "")" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                            Register
+                                        </a>
+                                    </li>
+                                }
                             }
-                            <li class="">
-                                <a class="@(@actionName == "Impressum"? "selected" : "")" asp-area="" asp-controller="Home" asp-action="Impressum">Impressum</a>
-                            </li>
                         </div>
                     </div>
                 </div>

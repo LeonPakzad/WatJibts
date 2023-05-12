@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 namespace src.Data;
 
 using System;
+using src.Models;
 
 public static class SeedData
 {

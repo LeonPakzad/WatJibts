@@ -1,16 +1,27 @@
 ﻿@* @model src.Models.Location *@
+@using Microsoft.AspNetCore.Identity
 
-<div class="user-input-container">
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
-    <div class="time-container">
-        
-    </div>
+@if (SignInManager.IsSignedIn(User))
+{
+    <h2>Es scheint so als wären sie noch nicht angemeldet. Ohne anmeldung können sie sich</h2>
+}
+else
+{
+    <div class="user-input-container">
 
-        <div class="form-field">
-            <label class="label">Participating</label>
-            <input class="form-check-input" />
 
+
+        <div class="time-container">
+            
         </div>
 
-    <input type="checkbox"></input>
-</div>
+            <div class="form-field">
+                <label class="label">Participating</label>
+                <input type="checkbox"></input>
+            </div>
+
+    </div>
+}

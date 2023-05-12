@@ -1,11 +1,9 @@
 $color-header-primary: #E200F7;
+$color-font: white;
 $color-glow: white;
 
 $color-bg-dark: black;
 $color-bg-light: #110220;
-
-
-$color-font: #fff;
 
 $color-success-light: #87C63A;
 $color-success-dark: #3D5D14;
@@ -21,6 +19,8 @@ html {
     background-color: $color-bg-light;
     color: white;
     font-family: raleway;
+    hyphens: auto;
+    line-break: anywhere;
 }
 
 body {
@@ -43,31 +43,49 @@ footer {
 
 h1 {
     font-family: beonregular;
-    animation: pulsate 2.5s infinite alternate; 
-    // primary color
     color: $color-header-primary;
+}
+
+h1:not(.flickering-headline) {
+    animation: pulsate 2.5s infinite alternate; 
+
+    // primary color glow
     text-shadow:
     0 0 7px $color-header-primary,
     0 0 10px $color-header-primary,
     0 0 21px $color-header-primary,
 
     // secondary color glow
-    0 0 42px #fff,
-    0 0 82px #fff,
-    0 0 92px #fff,
-    0 0 102px #fff,
-    0 0 151px #fff;
+    0 0 42px $color-glow,
+    0 0 82px $color-glow,
+    0 0 102px $color-glow,
+}
+
+.flickering-headline {
+    color: $color-glow;
+    animation: flicker 1.5s infinite alternate;
 }
 
 a {
     color: white;
+    text-shadow:
+        0 0 4px $color-header-primary,
+        0 0 11px $color-header-primary,
+        0 0 17px $color-header-primary,
+        0 0 23px $color-glow,
+        0 0 27px $color-glow,
+        0 0 33px $color-glow,
 }
 
 a.selected {
+    color: $color-header-primary !important;
+
     text-shadow:
-    0 0 7px $color-glow,
-    0 0 10px $color-glow,
-    0 0 21px $color-glow,
+    0 0 7px $color-header-primary,
+    0 0 10px $color-header-primary,
+    0 0 21px $color-header-primary,
+    0 0 34px $color-glow,
+    0 0 42px $color-glow,
 }
 
 a:hover {
@@ -87,6 +105,7 @@ hr {
     color: white;
 }
 
+// Shoutout to Silvia O'Dwyer who made doing this easy https://css-tricks.com/how-to-create-neon-text-with-css/
 @keyframes pulsate {
     100% {
       // Larger blur radius */
@@ -94,27 +113,46 @@ hr {
         0 0 4px $color-header-primary,
         0 0 11px $color-header-primary,
         0 0 19px $color-header-primary,
-        0 0 40px #fff,
-        0 0 80px #fff,
-        0 0 100px #fff,
-        0 0 150px #fff;
+        0 0 40px $color-glow,
+        0 0 80px $color-glow,
+        0 0 100px $color-glow,
+        0 0 150px $color-glow;
     }
+
     0% {
       // Smaller blur radius 
       text-shadow:
         0 0 2px $color-header-primary,
         0 0 4px $color-header-primary,
         0 0 6px $color-header-primary,
-        0 0 10px #fff,
-        0 0 45px #fff,
-        0 0 55px #fff,
-        0 0 70px #fff,
-        0 0 80px #fff;
+        0 0 10px $color-glow,
+        0 0 45px $color-glow,
+        0 0 55px $color-glow,
+        0 0 70px $color-glow,
+        0 0 80px $color-glow;
+    }
+}
+
+@keyframes flicker {
+
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      text-shadow:
+        0 0 4px $color-header-primary,
+        0 0 11px $color-header-primary,
+        0 0 19px $color-header-primary,
+        0 0 40px $color-glow,
+        0 0 80px $color-glow,
+        0 0 90px $color-glow,
+        0 0 100px $color-glow,
+        0 0 150px $color-glow;
+    }
+
+    20%, 24%, 55% {       
+      text-shadow: none;
     }
 }
 
 // font-faces except svg and eot, if someone demands those: navigate to the next trash can to get them new tech.
-
 @font-face {
 	font-family: 'beonregular';
 	src: 

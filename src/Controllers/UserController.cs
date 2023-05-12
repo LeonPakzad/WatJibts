@@ -2,31 +2,31 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 
-namespace src.Controllers;
-
-public class UserController : Controller
-{
-    private readonly ILogger<HomeController> _logger;
-
-    public UserController(ILogger<HomeController> logger)
+namespace src.Controllers {
+    public class UserController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<HomeController> _logger;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        public UserController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
-    public IActionResult Profile()
-    {
-        return View();
-    }
+        public IActionResult UserIndex()
+        {
+            return View();
+        }
+
+        public IActionResult Profile()
+        {
+            return View();
+        }
 
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }

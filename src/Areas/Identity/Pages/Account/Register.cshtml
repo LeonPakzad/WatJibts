@@ -7,7 +7,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <p> 
-    Erstellen Sie hier einen Account, um sich zusammen mit den Anderen mit dem Essen abzustimmen
+    Erstellen Sie einen Account, um sich zusammen mit den Anderen mit dem Essen abzustimmen
 </p>
 
 <hr />
@@ -19,20 +19,20 @@
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
         <div class="form-field">
-            <input class="form-control" asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
             <label class="label"        asp-for="Input.Email">Email</label>
+            <input class="form-control" asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
             <span  class="form-error"   asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
 
         <div class="form-field">
-            <input class="form-control" asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="password" />
             <label class="label"        asp-for="Input.Password">Password</label>
+            <input class="form-control" asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="password" />
             <span  class="form-error"   asp-validation-for="Input.Password"></span>
         </div>
 
         <div class="form-field">
-            <input class="form-control" asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="password" />
             <label class="label"        asp-for="Input.ConfirmPassword">Confirm Password</label>
+            <input class="form-control" asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="password" />
             <span  class="form-error"   asp-validation-for="Input.ConfirmPassword"></span>
         </div>
 

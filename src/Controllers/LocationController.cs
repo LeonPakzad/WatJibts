@@ -1,4 +1,5 @@
 
+using System.Data.Entity;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Data;
@@ -7,11 +8,32 @@ namespace src.Controllers;
 
 public class LocationController : Controller
 {
-    // private Location db = new WatDbContext();
+    private readonly WatDbContext _context;
 
-    // GET: /Movies/
-    // public ActionResult Index()
-    // {
-        // return View(db.Location.ToList());
-    // }
+    public LocationController(WatDbContext context)
+    {
+        _context = context;
+    }
+
+    public ActionResult Index()
+    {
+        return View(_context.Location.ToList());
+    }
+
+    public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var location = await _context.Location
+            .FirstOrDefaultAsync(m => m.id == id);
+        if (location == null)
+        { 
+            return NotFound();
+        }
+
+        return View(location);
+    }
 }
