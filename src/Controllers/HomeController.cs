@@ -15,6 +15,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+
+        
         return View();
     }
 
@@ -27,7 +29,7 @@ public class HomeController : Controller
     [Route("404")]
     public IActionResult PageNotFound()
     {
-        string originalPath = "unknown";
+        string? originalPath = "unknown";
         if (HttpContext.Items.ContainsKey("originalPath"))
         {
             originalPath = HttpContext.Items["originalPath"] as string;

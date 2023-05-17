@@ -1,27 +1,43 @@
-﻿@* @model src.Models.Location *@
+﻿@model src.Models.Location
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-@if (SignInManager.IsSignedIn(User))
+@if (!SignInManager.IsSignedIn(User))
 {
-    <h2>Es scheint so als wären sie noch nicht angemeldet. Ohne anmeldung können sie sich</h2>
+    <h2>Es scheint so als wären sie noch nicht angemeldet.</h2>
 }
 else
 {
     <div class="user-input-container">
+        <form class="form-inline" asp-page="/Home/Confirm" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
 
-
-
-        <div class="time-container">
-            
-        </div>
+            <div class="time-container">
+                <div class="form-field">
+                    <label class="form-label">LunchTime</label>
+                    <input type="time" id="lunch-time" name="lunch-time" min="00:01" max="23:59" value="13:37"/>
+                </div>
+            </div>
 
             <div class="form-field">
                 <label class="label">Participating</label>
-                <input type="checkbox"></input>
+                @Html.CheckBox("participating", false)
             </div>
 
+            <select name="place-to-eat" class="place-to-eat-select">
+                @* @foreach (var placeToEat in PlaceToEat) {
+                    <option value="placeToEat.id">@placeToEat.name</option>
+                } *@
+            </select>
+
+            <select name="place-for-food" class="place-for-food-select">
+                @* @foreach (var placeForFood in PlaceForFood) {
+                    <option value="placeForFood.id">@placeForFood.name</option>
+                } *@
+            </select>
+
+            <button type="submit" class="">Submit</button>
+        </form>
     </div>
 }
