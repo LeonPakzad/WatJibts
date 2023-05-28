@@ -1,5 +1,20 @@
+@model List<User>;
+
 @{
     ViewData["Title"] = "User Index";
     ViewData["Active"] = "Home";
 }
+
 <h1>@ViewData["Title"]</h1>
+
+<hr />
+
+@for (int index = 0; index < Model.Count; index++)
+{
+    <dt>
+        @Model[index].UserName
+        @Model[index].Email
+        @Html.ActionLink("Edit", "Edit", new { id = Model[index].Id })
+    </dt>
+}
+

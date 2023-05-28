@@ -1,20 +1,21 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using src.Data;
 using src.Models;
 
 namespace src.Controllers {
     public class UserController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly WatDbContext _context;
 
-        public UserController(ILogger<HomeController> logger)
+        public UserController(WatDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult UserIndex()
         {
-            return View();
+            return View(_context.User.ToList());
         }
 
         public IActionResult Profile()

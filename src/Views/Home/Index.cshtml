@@ -4,6 +4,12 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
+<h1>Wilkommen zu WatJibts!</h1>
+
+<p>
+    Hier können Sie zusammen mit Freunden oder ihrem Team unterschiedliche arten von Essen organisieren.
+</p>
+
 @if (!SignInManager.IsSignedIn(User))
 {
     <h2>Es scheint so als wären sie noch nicht angemeldet.</h2>

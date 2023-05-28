@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace src.Models {
     public class Location
@@ -5,7 +6,11 @@ namespace src.Models {
         public int id {get;set;}
         public string? name {get;set;}
         public string? description {get;set;}
+
+        [ForeignKey("Location")]
         public bool isPlaceToEat {get; set;}
+
+        [ForeignKey("Location")]
         public bool isPlaceToGetFood {get; set;}
     }
 }
