@@ -20,3 +20,14 @@
         }
     }
 }
+
+.table-wrapper {
+    
+    display: flex;
+    flex-wrap: wrap;
+    
+    .table-item {
+        
+        flex: 1 1 auto;
+    }
+}

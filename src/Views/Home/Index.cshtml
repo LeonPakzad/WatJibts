@@ -1,4 +1,4 @@
-﻿@model src.Models.Location
+﻿@model dynamic
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<User> SignInManager
@@ -32,15 +32,15 @@ else
             </div>
 
             <select name="place-to-eat" class="place-to-eat-select">
-                @* @foreach (var placeToEat in PlaceToEat) {
+                @foreach (var placeToEat in Model.LocationToEat) {
                     <option value="placeToEat.id">@placeToEat.name</option>
-                } *@
+                }
             </select>
 
             <select name="place-for-food" class="place-for-food-select">
-                @* @foreach (var placeForFood in PlaceForFood) {
+                @foreach (var placeForFood in Model.LocationToGetFood) {
                     <option value="placeForFood.id">@placeForFood.name</option>
-                } *@
+                }
             </select>
 
             <button type="submit" class="">Submit</button>

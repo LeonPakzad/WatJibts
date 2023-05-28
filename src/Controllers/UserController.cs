@@ -1,3 +1,4 @@
+using System.Data.Entity;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Data;
@@ -23,6 +24,25 @@ namespace src.Controllers {
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Edit(string Id)
+        {
+            var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(User user)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.Update(user);
+                _context.SaveChanges();
+                return RedirectToAction("UserIndex");
+            }
+
+            return View(user);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

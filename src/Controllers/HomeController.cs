@@ -1,23 +1,29 @@
 ﻿using System.Diagnostics;
+using System.Dynamic;
 using Microsoft.AspNetCore.Mvc;
+using src.Data;
 using src.Models;
 
 namespace src.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly WatDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(WatDbContext context)
     {
-        _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
     {
+        dynamic homeModel = new ExpandoObject();
+        homeModel.LunchSession = _context.LunchSession.ToList();
+        homeModel.LocationToEat = _context.Location.Where(p => p.isPlaceToEat == true);
+        homeModel.LocationToGetFood = _context.Location.Where(p => p.isPlaceToGetFood == true);
 
-        
-        return View();
+
+        return View(homeModel);
     }
 
     public IActionResult Impressum()
