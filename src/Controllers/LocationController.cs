@@ -15,7 +15,7 @@ public class LocationController : Controller
         _context = context;
     }
 
-    public ActionResult Index()
+    public ActionResult LocationIndex()
     {
         return View(_context.Location.ToList());
     }
@@ -28,7 +28,7 @@ public class LocationController : Controller
         }
 
         var location = await _context.Location
-            .FirstOrDefaultAsync(m => m.id == id);
+            .FirstOrDefaultAsync(l => l.Id == id);
         if (location == null)
         { 
             return NotFound();
@@ -36,6 +36,14 @@ public class LocationController : Controller
 
         return View(location);
     }
+
+    [HttpGet]
+    public ActionResult Edit(int Id)
+    {
+        var location = _context.Location.Where(l => l.Id == Id).FirstOrDefault();
+        return View(location);
+    }
+
 
     public async Task<IActionResult> LocationsForFood(int? id)
     {
@@ -45,7 +53,7 @@ public class LocationController : Controller
         }
 
         var location = await _context.Location
-            .FirstOrDefaultAsync(m => m.id == id);
+            .FirstOrDefaultAsync(l => l.Id == id);
         if (location == null)
         { 
             return NotFound();

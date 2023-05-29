@@ -115,6 +115,7 @@ hr {
   transform: translate(-100%);
   transition: transform 0.5s ease-in-out;
   background: black;
+  z-index: 1;
 }
 .navbar .menu-item-container .menu-items {
   max-width: 200px;

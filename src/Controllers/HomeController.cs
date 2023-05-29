@@ -22,7 +22,6 @@ public class HomeController : Controller
         homeModel.LocationToEat = _context.Location.Where(p => p.isPlaceToEat == true);
         homeModel.LocationToGetFood = _context.Location.Where(p => p.isPlaceToGetFood == true);
 
-
         return View(homeModel);
     }
 

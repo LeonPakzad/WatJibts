@@ -19,7 +19,7 @@
                 <p>
                     @Model[index].Email
                 </p>
-                @Html.ActionLink("Edit", "Edit", new { id = Model[index].Id })
+                @Html.ActionLink("Edit", "Edit", new {user = Model[index]})
         </div>
     }
 </div>

@@ -1,0 +1,36 @@
+@model List<Location>;
+
+@{
+    ViewData["Title"] = "Locations";
+    ViewData["Active"] = "Home";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+
+<div class="table-wrapper">
+    @for (int index = 0; index < Model.Count; index++)
+    {
+        <div class="table-item">
+                <p>
+                    @Model[index].name
+                </p>
+
+                <p>
+                    @Model[index].description
+                </p>
+
+                <p>
+                    @Model[index].isPlaceToEat
+                </p>
+
+                <p>
+                    @Model[index].isPlaceToGetFood
+                </p>
+
+                @Html.ActionLink("Edit", "Edit", new {location = Model[index]})
+        </div>
+    }
+</div>
+

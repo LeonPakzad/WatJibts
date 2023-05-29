@@ -1,9 +1,175 @@
+html {
+  background-color: #110220;
+  color: white;
+  font-family: raleway;
+  hyphens: auto;
+  line-break: anywhere;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: black;
+}
+
+footer {
+  background-color: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+h1 {
+  font-family: beonregular;
+  color: #E200F7;
+}
+
+h1:not(.flickering-headline) {
+  animation: pulsate 2.5s infinite alternate;
+  text-shadow: 0 0 7px #E200F7, 0 0 10px #E200F7, 0 0 21px #E200F7, 0 0 42px white, 0 0 82px white, 0 0 102px white;
+}
+
+.flickering-headline {
+  color: white;
+  animation: flicker 1.5s infinite alternate;
+}
+
+a {
+  color: white;
+  text-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
+}
+
+a.selected {
+  color: #E200F7 !important;
+  text-shadow: 0 0 7px #E200F7, 0 0 10px #E200F7, 0 0 21px #E200F7, 0 0 34px white, 0 0 42px white;
+}
+
+a:hover {
+  color: #E200F7 !important;
+  text-shadow: 0 0 7px white, 0 0 10px white, 0 0 21px white;
+}
+
+label {
+  color: white;
+}
+
+hr {
+  color: white;
+}
+
+@keyframes pulsate {
+  100% {
+    text-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 19px #E200F7, 0 0 40px white, 0 0 80px white, 0 0 100px white, 0 0 150px white;
+  }
+  0% {
+    text-shadow: 0 0 2px #E200F7, 0 0 4px #E200F7, 0 0 6px #E200F7, 0 0 10px white, 0 0 45px white, 0 0 55px white, 0 0 70px white, 0 0 80px white;
+  }
+}
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 19px #E200F7, 0 0 40px white, 0 0 80px white, 0 0 90px white, 0 0 100px white, 0 0 150px white;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+@font-face {
+  font-family: "beonregular";
+  src: url("../assets/font/Beon-Regular.ttf") format("truetype"), url("../assets/font/Beon-Regular.woff") format("woff"), url("../assets/font/Beon-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "raleway";
+  src: url("../assets/font/Raleway-Regular.ttf") format("truetype"), url("../assets/font/Raleway-Regular.woff") format("woff"), url("../assets/font/Raleway-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+legend,
+fieldset,
+select,
+textarea,
+input,
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input,
+select,
+textarea {
+  border: 2px solid white;
+  background-color: none;
+  border-radius: 0.25rem;
+}
+
+textarea {
+  min-height: 10rem;
+}
+
+.line {
+  stroke: white;
+  stroke-width: 2;
+  fill: white;
+}
+
+input[type=checkbox]:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 200'%3E%3Cpath d='M10 10h123v123H10z'/%3E%3C/svg%3E");
+}
+
+select {
+  background: url("images/down-arrow.svg") no-repeat center right 0.75rem;
+}
+
 .body-container {
   width: 80%;
   margin: 0 auto;
   text-align: center;
 }
 
+input {
+  background: none;
+  color: white;
+  padding: 8px;
+  border-radius: 15%;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+button {
+  color: white;
+  background: none;
+  border: solid 2px white;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  font-size: 1rem;
+  text-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.text-wrapper {
+  text-align: left;
+}
+
+.form-container .form-field {
+  position: relative;
+}
+.form-container .form-field .form-label {
+  position: absolute;
+  top: 0%;
+}
 .table-wrapper {
   display: flex;
   flex-wrap: wrap;

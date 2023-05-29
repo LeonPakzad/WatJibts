@@ -73,7 +73,7 @@ namespace src.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             [Display(Name = "Username")]
-            public string Username { get; set; }
+            public string UserName { get; set; }
             
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used

@@ -1,14 +1,99 @@
+@import "basics.scss";
+
+legend,
+fieldset,
+select,
+textarea,
+input,
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input,
+select,
+textarea {
+  border: 2px solid $color-glow;
+  background-color: none;
+  border-radius: 0.25rem;
+}
+
+textarea {
+    min-height: 10rem;
+}
+
+.line {
+    stroke: $color-glow;
+    stroke-width: 2;
+    fill: $color-glow;
+}
+
+input[type="checkbox"]:checked {
+    background-image: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 200'%3E%3Cpath d='M10 10h123v123H10z'/%3E%3C/svg%3E" );
+    // background: url('data:image/svg+xml;utf8,<svg> <polygon class="line" points="0,0 10,44 44,0" </polygon></svg>');
+    // background: white;
+}
+
+select {
+    background: url("images/down-arrow.svg") no-repeat center right 0.75rem;
+}
+
 .body-container {
     width: 80%;
     margin: 0 auto;
     text-align: center;
 }
 
+input {
+    background: none;
+    color: $color-font;
+    padding: 8px;
+
+    border-radius:15%;
+
+    min-width:44px;
+    min-height:44px;
+    padding: 8px;
+    font-size:1rem;
+
+}
+
+button {
+    color: $color-font;
+    background:none;
+    border: solid 2px $color-glow;
+    
+    min-width:44px;
+    min-height:44px;
+    padding: 8px;
+    font-size:1rem;
+
+    text-shadow:
+    0 0 4px $color-header-primary,
+    0 0 11px $color-header-primary,
+    0 0 17px $color-header-primary,
+    0 0 23px $color-glow,
+    0 0 27px $color-glow,
+    0 0 33px $color-glow,
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.text-wrapper {
+    text-align:left;
+}
+
 .form-container {
     .form-field {
         
-        .form-label {
+        position: relative;
 
+        .form-label {
+            position: absolute;
+            top:0%;
         }
         
         .form-control {

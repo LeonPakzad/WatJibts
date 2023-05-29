@@ -1,4 +1,5 @@
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Data;
@@ -32,16 +33,26 @@ namespace src.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Edit(User user)
+        public async Task<IActionResult> Edit(User user)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Update(user);
-                _context.SaveChanges();
-                return RedirectToAction("UserIndex");
+                await _context.SaveChangesAsync();
+        
+                return RedirectToAction(nameof(Index));
             }
-
             return View(user);
+
+
+            // if(ModelState.IsValid)
+            // {
+            //     _context.Update(user);
+            //     _context.SaveChanges();
+            //     return RedirectToAction("UserIndex");
+            // }
+
+            // return View(user);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
