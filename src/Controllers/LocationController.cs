@@ -69,8 +69,10 @@ public class LocationController : Controller
         {
             return NotFound();
         }
+        
         _context.Location.Remove(location);
         _context.SaveChanges();
+
         return RedirectToAction("LocationIndexs");
     }
 }

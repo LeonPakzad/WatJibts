@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Data;
 using src.Models;
+using Microsoft.Identity;
 
 namespace src.Controllers {
     public class UserController : Controller
@@ -57,13 +58,15 @@ namespace src.Controllers {
 
         public ActionResult Delete(string id)
         {
-            var user = _context.Location.Find(id);
+            var user = _context.User.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
-            _context.Location.Remove(user);
+
+            _context.User.Remove(user);
             _context.SaveChanges();
+            
             return RedirectToAction("UserIndex");
         }
 
