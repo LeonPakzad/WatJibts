@@ -14,9 +14,9 @@ button {
 input,
 select,
 textarea {
-  border: 2px solid $color-glow;
   background-color: none;
-  border-radius: 0.25rem;
+  color: white;
+box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
 }
 
 textarea {
@@ -30,9 +30,13 @@ textarea {
 }
 
 input[type="checkbox"]:checked {
-    background-image: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 200'%3E%3Cpath d='M10 10h123v123H10z'/%3E%3C/svg%3E" );
-    // background: url('data:image/svg+xml;utf8,<svg> <polygon class="line" points="0,0 10,44 44,0" </polygon></svg>');
-    // background: white;
+    background: white;
+    background: white;
+box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
+}
+
+input[type="checkbox"]:checked {
+    background: white;
 }
 
 select {
@@ -48,15 +52,29 @@ select {
 input {
     background: none;
     color: $color-font;
+
+    padding: 8px;
+    min-width:44px;
+    min-height:44px;
+
+    margin:10px;
     padding: 8px;
 
-    border-radius:15%;
+    font-size:1rem;
+}
 
+.custom-input {
+    background: none;
+    color: $color-font;
+    padding: 8px;
     min-width:44px;
     min-height:44px;
     padding: 8px;
     font-size:1rem;
 
+    background-color: none;
+    color: white;
+    box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px  white, 0 0 27px  white;
 }
 
 button {
@@ -112,7 +130,6 @@ button:hover {
     flex-wrap: wrap;
     
     .table-item {
-        
         flex: 1 1 auto;
     }
 }

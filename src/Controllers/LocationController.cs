@@ -62,16 +62,15 @@ public class LocationController : Controller
         return View(location);
     }
 
-    public ActionResult Delete(int id = 0)
+    public ActionResult Delete(int id)
     {
-        var movie = _context.Location.Find(id);
-        if (movie == null)
+        var location = _context.Location.Find(id);
+        if (location == null)
         {
             return NotFound();
         }
-        _context.Location.Remove(movie);
+        _context.Location.Remove(location);
         _context.SaveChanges();
-        return RedirectToAction("LocationIndex");
+        return RedirectToAction("LocationIndexs");
     }
-
 }

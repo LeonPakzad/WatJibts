@@ -20,6 +20,7 @@
                     @Model[index].Email
                 </p>
                 @Html.ActionLink("Edit", "Edit", new {user = Model[index]})
+                @Html.ActionLink("Delete", "Delete", new {id = Model[index].Id})
         </div>
     }
 </div>

@@ -41,6 +41,10 @@ h1:not(.flickering-headline) {
 
 a {
   color: white;
+  text-shadow: 0 0 4px #E200F7, 0 0 23px white;
+}
+
+.menu-items a {
   text-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
 }
 

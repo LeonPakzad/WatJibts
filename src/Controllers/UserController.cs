@@ -55,6 +55,18 @@ namespace src.Controllers {
             // return View(user);
         }
 
+        public ActionResult Delete(string id)
+        {
+            var user = _context.Location.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _context.Location.Remove(user);
+            _context.SaveChanges();
+            return RedirectToAction("UserIndex");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

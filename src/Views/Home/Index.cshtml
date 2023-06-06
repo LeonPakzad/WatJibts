@@ -31,17 +31,21 @@ else
                 @Html.CheckBox("participating", false)
             </div>
 
-            <select name="place-to-eat" class="place-to-eat-select">
-                @foreach (var placeToEat in Model.LocationToEat) {
-                    <option value="placeToEat.id">@placeToEat.name</option>
-                }
-            </select>
+            <div class="form-öwrapper">
+                <label class="form-label">Place to Eat</label>
+                <select name="place-to-eat" class="place-to-eat-select">
+                    @foreach (var placeToEat in Model.LocationToEat) {
+                        <option value="placeToEat.id">@placeToEat.name</option>
+                    }
+                </select>
 
-            <select name="place-for-food" class="place-for-food-select">
-                @foreach (var placeForFood in Model.LocationToGetFood) {
-                    <option value="placeForFood.id">@placeForFood.name</option>
-                }
-            </select>
+                <label class="form-label">Place for Food</label>
+                <select name="place-for-food" class="place-for-food-select">
+                    @foreach (var placeForFood in Model.LocationToGetFood) {
+                        <option value="placeForFood.id">@placeForFood.name</option>
+                    }
+                </select>
+            </div>
 
             <button type="submit" class="">Submit</button>
         </form>
