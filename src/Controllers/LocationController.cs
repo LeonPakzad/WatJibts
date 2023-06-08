@@ -73,6 +73,6 @@ public class LocationController : Controller
         _context.Location.Remove(location);
         _context.SaveChanges();
 
-        return RedirectToAction("LocationIndexs");
+        return RedirectToAction("LocationIndex");
     }
 }
