@@ -3,19 +3,37 @@
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-
+@using System.Linq;
 <h1>Wilkommen zu WatJibts!</h1>
 
-<p>
-    Hier können Sie zusammen mit Freunden oder ihrem Team unterschiedliche arten von Essen organisieren.
-</p>
-
+<hr>
 @if (!SignInManager.IsSignedIn(User))
 {
+    <p>
+        Hier können Sie zusammen mit Freunden oder ihrem Team unterschiedliche arten von Essen organisieren.
+    </p>
+
     <h2>Es scheint so als wären sie noch nicht angemeldet.</h2>
 }
 else
 {
+    @if(Model.LunchSessions == null) 
+    {
+        <p>Heute wurde noch keine Session hinzugefügt</p>
+    }
+    else 
+    {
+        @foreach(var lunchSession in Model.LunchSessions)
+        {
+            <div class="table-item">
+                @lunchSession.lunchTime
+                @lunchSession.fk_location
+                @lunchSession.fk_user
+            </div>
+        }
+    }
+
+    <hr>
     <div class="user-input-container">
         <form class="form-inline" asp-page="/Home/Confirm" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
 

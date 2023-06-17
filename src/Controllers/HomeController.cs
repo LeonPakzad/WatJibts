@@ -15,10 +15,31 @@ public class HomeController : Controller
         _context = context;
     }
 
+    [HttpGet]
     public IActionResult Index()
     {
         dynamic homeModel = new ExpandoObject();
-        homeModel.LunchSession = _context.LunchSession.ToList();
+
+        // get lunchsessions which were added today
+        var today = new DateTime();
+        homeModel.LunchSessions = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => l.lunchTime == today);
+
+        // get locations
+        homeModel.LocationToEat = _context.Location.Where(p => p.isPlaceToEat == true);
+        homeModel.LocationToGetFood = _context.Location.Where(p => p.isPlaceToGetFood == true);
+
+        return View(homeModel);
+    }
+
+    [HttpPost]
+    public IActionResult Index(LunchSession lunchSession)
+    {
+        _context.Add(lunchSession);
+        _context.SaveChanges();
+
+        dynamic homeModel = new ExpandoObject();
+        homeModel.LunchSession = lunchSession;
+
         homeModel.LocationToEat = _context.Location.Where(p => p.isPlaceToEat == true);
         homeModel.LocationToGetFood = _context.Location.Where(p => p.isPlaceToGetFood == true);
 
