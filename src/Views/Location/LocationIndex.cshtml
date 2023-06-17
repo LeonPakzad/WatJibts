@@ -24,13 +24,17 @@
                     @Model[index].description
                 </p>
 
-                <p>
-                    @Model[index].isPlaceToEat
-                </p>
+                @if(@Model[index].isPlaceToEat){
+                    <p>
+                       Ort zum essen 
+                    </p>
+                }
 
-                <p>
-                    @Model[index].isPlaceToGetFood
-                </p>
+                @if(@Model[index].isPlaceToGetFood){
+                    <p>
+                       Ort für Essen 
+                    </p>
+                }
 
                 @Html.ActionLink("Edit", "Edit", new {location = Model[index]})
                 @Html.ActionLink("Delete", "Delete", new {id = Model[index].Id})

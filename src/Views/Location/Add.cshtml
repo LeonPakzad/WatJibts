@@ -1,7 +1,7 @@
 @model Location;
 
 @{
-    ViewData["Title"] = "Edit Location";
+    ViewData["Title"] = "Add Location";
     ViewData["Active"] = "Home";
 }
 
@@ -37,7 +37,6 @@
             @Html.LabelFor(model => model.isPlaceToGetFood, htmlAttributes: new { @class = "form-label " })
             <div class="col-md-10">
                 @Html.CheckBoxFor(model=> model.isPlaceToGetFood, "")
-                @Html.EditorFor(model => model.isPlaceToGetFood)
                 @Html.ValidationMessageFor(model => model.isPlaceToGetFood, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -39,15 +39,16 @@ namespace src.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(User user)
+        public ActionResult Edit(User user)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Update(user);
-                await _context.SaveChangesAsync();
+            _context.SaveChanges();
+            // if (ModelState.IsValid)
+            // {
+            //     _context.Update(user);
+            //     await _context.SaveChangesAsync();
         
-                return RedirectToAction(nameof(Index));
-            }
+            //     return RedirectToAction(nameof(Index));
+            // }
             return View(user);
 
 

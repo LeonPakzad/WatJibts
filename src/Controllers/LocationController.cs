@@ -1,6 +1,7 @@
 
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 using src.Data;
 using src.Models;
@@ -21,9 +22,18 @@ public class LocationController : Controller
         return View(_context.Location.ToList());
     }
 
+    [HttpGet]
     public ActionResult Add()
     {
         var location = new Location();
+        return View(location);
+    }
+
+    [HttpPost]
+    public ActionResult Add(Location location)
+    {
+        _context.Add(location);
+        _context.SaveChanges();
         return View(location);
     }
 
@@ -48,6 +58,13 @@ public class LocationController : Controller
     public ActionResult Edit(int Id)
     {
         var location = _context.Location.Where(l => l.Id == Id).FirstOrDefault();
+        return View(location);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Location location)
+    {
+        _context.SaveChanges();
         return View(location);
     }
 
