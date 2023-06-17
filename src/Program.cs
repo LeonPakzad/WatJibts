@@ -27,7 +27,6 @@ builder.Services.AddHostedService(sp => new NpmWatchHostedService(
                 logger: sp.GetRequiredService<ILogger<NpmWatchHostedService>>()));
 }
 #endif
-
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings.
@@ -41,7 +40,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     // User settings.
     options.User.AllowedUserNameCharacters =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-    options.User.RequireUniqueEmail = false;
+
+    options.User.RequireUniqueEmail = true;
 });
 
 builder.Services.ConfigureApplicationCookie(options =>

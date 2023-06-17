@@ -23,7 +23,12 @@ namespace src.Controllers {
 
         public IActionResult Profile()
         {
-            return View();
+            string userId = HttpContext.User.Identity.Name;
+
+            if(userId == null) {
+                return NotFound();
+            }
+            return View(_context.User.Find(userId));
         }
 
         [HttpGet]

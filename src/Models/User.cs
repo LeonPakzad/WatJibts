@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class User : IdentityUser
 {
-    public DateTime? preferredLunchTime {get;set;}
+
+    public TimeOnly? preferredLunchTime {get;set;}
 
     [ForeignKey("Location")]
     public int? fk_defaultPlaceToEat {get; set;}
