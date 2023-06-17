@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Data;
+using src.Models;
 
 namespace src.Controllers;
 
@@ -18,6 +19,12 @@ public class LocationController : Controller
     public ActionResult LocationIndex()
     {
         return View(_context.Location.ToList());
+    }
+
+    public ActionResult Add()
+    {
+        var location = new Location();
+        return View(location);
     }
 
     public async Task<IActionResult> LocationById(int? id)
