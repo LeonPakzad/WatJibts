@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace src.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,7 +42,7 @@ namespace src.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Discriminator = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    preferredLunchTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    preferredLunchTime = table.Column<TimeOnly>(type: "time(6)", nullable: true),
                     fk_defaultPlaceToEat = table.Column<int>(type: "int", nullable: true),
                     fk_defaultPlaceToGetFood = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -78,7 +78,7 @@ namespace src.Migrations
                 name: "Location",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -89,7 +89,7 @@ namespace src.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Location", x => x.id);
+                    table.PrimaryKey("PK_Location", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -97,17 +97,19 @@ namespace src.Migrations
                 name: "LunchSession",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     day = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     lunchTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     participating = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    fk_location = table.Column<int>(type: "int", nullable: true),
-                    fk_user = table.Column<int>(type: "int", nullable: true)
+                    fk_foodPlace = table.Column<int>(type: "int", nullable: true),
+                    fk_eatingPlace = table.Column<int>(type: "int", nullable: true),
+                    fk_user = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LunchSession", x => x.id);
+                    table.PrimaryKey("PK_LunchSession", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

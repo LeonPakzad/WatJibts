@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using src.Data;
 using src.Models;
 using Microsoft.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace src.Controllers {
     public class UserController : Controller
@@ -35,12 +36,35 @@ namespace src.Controllers {
         public ActionResult Edit(string Id)
         {
             var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
-            return View(user);
+            // get locations
+            // var locationsToEat  = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+            var locationsToGetFood = _context.Location.ToList();
+            var locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+
+            // locationToGetFood.Select(m => new SelectListItem { Text = m, Value = m })
+            // ViewBag.LocationToEat = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
+            // ViewBag.LoctionToGetFood = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
+            // return View(user);
+
+
+            ViewBag.locationsToGetFood = _context.Location.ToList();
+
+
+            return View( 
+                // new UserEdit
+                // {
+                //     User = _context.User.Where(u => u.Id == Id).FirstOrDefault(), 
+                //     LocationsToEat = (List<SelectListItem>)locationsToEat, 
+                //     LocationsToGetFood = (List<SelectListItem>)locationsToGetFood 
+                // }
+            );
         }
 
         [HttpPost]
         public ActionResult Edit(User user)
         {
+            ViewBag.LocationToEat = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
+            ViewBag.LoctionToGetFood = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
             _context.SaveChanges();
             // if (ModelState.IsValid)
             // {

@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Dynamic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using src.Data;
 using src.Models;
 
@@ -15,6 +16,8 @@ public class HomeController : Controller
         _context = context;
     }
 
+
+    // todo: doublicated code 
     [HttpGet]
     public IActionResult Index()
     {
@@ -22,24 +25,59 @@ public class HomeController : Controller
 
         // get lunchsessions which were added today
         var today = new DateTime();
-        homeModel.LunchSessions = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => l.lunchTime == today);
+
+        var lunchSessions = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => System.Data.Entity.DbFunctions.TruncateTime(l.lunchTime) == DateTime.Today);
+
+        ViewBag.LocationToEat = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => l.lunchTime == today);
+        if(lunchSessions == null)
+        {
+            homeModel.hasLunchSessions = true;
+            homeModel.LunchSessions = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => l.lunchTime == today);
+        }
+        {
+            homeModel.hasLunchSessions = false;
+        }
 
         // get locations
-        homeModel.LocationToEat = _context.Location.Where(p => p.isPlaceToEat == true);
-        homeModel.LocationToGetFood = _context.Location.Where(p => p.isPlaceToGetFood == true);
+        homeModel.LocationToEat = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true));
+        homeModel.LocationToGetFood = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToGetFood == true));
 
         return View(homeModel);
     }
 
     [HttpPost]
-    public IActionResult Index(LunchSession lunchSession)
+    public IActionResult Index(bool participating, int placeForFood, int placeToEat, DateTime lunchTime)
     {
+ 
+        LunchSession lunchSession = new LunchSession();
+        // save new lunchsession
+        lunchSession.fk_user = HttpContext.User.Identity.Name;
+        lunchSession.participating = participating;
+        lunchSession.fk_foodPlace = placeForFood;
+        lunchSession.fk_eatingPlace = placeToEat;
+        lunchSession.lunchTime = lunchTime;
+
         _context.Add(lunchSession);
         _context.SaveChanges();
 
-        dynamic homeModel = new ExpandoObject();
-        homeModel.LunchSession = lunchSession;
 
+        dynamic homeModel = new ExpandoObject();
+        
+        // get lunchsessions which were added today
+        var today = new DateTime();
+        var lunchSessions = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => System.Data.Entity.DbFunctions.TruncateTime(l.lunchTime) == DateTime.Today);
+
+        if(lunchSessions != null)
+        {
+            homeModel.hasLunchSessions = true;
+            ViewBag.LocationToEat = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => l.lunchTime == today);
+        }
+        {
+            homeModel.hasLunchSessions = false;
+        }
+
+
+        // get locations
         homeModel.LocationToEat = _context.Location.Where(p => p.isPlaceToEat == true);
         homeModel.LocationToGetFood = _context.Location.Where(p => p.isPlaceToGetFood == true);
 

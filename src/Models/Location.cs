@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace src.Models {
     public class Location
@@ -12,5 +13,10 @@ namespace src.Models {
 
         [ForeignKey("Location")]
         public bool isPlaceToGetFood {get; set;}
+
+        public static implicit operator Location(SelectList v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

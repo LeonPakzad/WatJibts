@@ -11,8 +11,8 @@ using src.Data;
 namespace src.Migrations
 {
     [DbContext(typeof(WatDbContext))]
-    [Migration("20230509202046_InitialMigrate")]
-    partial class InitialMigrate
+    [Migration("20230617155454_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,43 +22,23 @@ namespace src.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0-preview.3.23174.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Location", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("description")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("isPlaceToEat")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("isPlaceToGetFood")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("name")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Location");
-                });
-
             modelBuilder.Entity("LunchSession", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("day")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("fk_location")
+                    b.Property<int?>("fk_eatingPlace")
                         .HasColumnType("int");
 
-                    b.Property<int?>("fk_user")
+                    b.Property<int?>("fk_foodPlace")
                         .HasColumnType("int");
+
+                    b.Property<string>("fk_user")
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("lunchTime")
                         .HasColumnType("datetime(6)");
@@ -66,7 +46,7 @@ namespace src.Migrations
                     b.Property<bool>("participating")
                         .HasColumnType("tinyint(1)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("LunchSession");
                 });
@@ -276,6 +256,29 @@ namespace src.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("src.Models.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("description")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("isPlaceToEat")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("isPlaceToGetFood")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Location");
+                });
+
             modelBuilder.Entity("User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -286,8 +289,8 @@ namespace src.Migrations
                     b.Property<int?>("fk_defaultPlaceToGetFood")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("preferredLunchTime")
-                        .HasColumnType("datetime(6)");
+                    b.Property<TimeOnly?>("preferredLunchTime")
+                        .HasColumnType("time(6)");
 
                     b.HasDiscriminator().HasValue("User");
                 });

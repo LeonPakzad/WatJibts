@@ -34,7 +34,7 @@ public class LocationController : Controller
     {
         _context.Add(location);
         _context.SaveChanges();
-        return View(location);
+        return View("LocationIndex", _context.Location.ToList());
     }
 
     public async Task<IActionResult> LocationById(int? id)
