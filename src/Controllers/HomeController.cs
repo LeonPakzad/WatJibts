@@ -53,7 +53,7 @@ public class HomeController : Controller
 
 
         // get lunchsessions which were added today
-        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.participating == true ).ToList();
+        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
 
         IndexModel.passiveLunchSessions = todaysLunchSessions.Where(l => l.participating == true).ToList();
         IndexModel.activeLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
