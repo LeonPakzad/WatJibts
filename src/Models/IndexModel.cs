@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 public class IndexModel
 {
-    public IEnumerable<LunchSession>? LunchSessions{get;set;}
+    public IEnumerable<LunchSession>? activeLunchSessions{get;set;}
+    public IEnumerable<LunchSession>? passiveLunchSessions{get;set;}
     public LunchSession? LunchSession {get;set;}
 }

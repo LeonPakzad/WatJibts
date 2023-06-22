@@ -22,7 +22,11 @@ public class HomeController : Controller
     {
         IndexModel IndexModel = new IndexModel();
         // get lunchsessions which were added today
-        IndexModel.LunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
+        // IndexModel.LunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
+        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
+
+        IndexModel.passiveLunchSessions = todaysLunchSessions.Where(l => l.participating == true).ToList();
+        IndexModel.activeLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
 
         // get locations
         ViewBag.LocationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
@@ -34,7 +38,9 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Index(DateTime lunchTime, bool participating, int fk_foodPlace, int fk_eatingPlace)
     {
+        IndexModel IndexModel = new IndexModel();
         LunchSession lunchSession = new LunchSession();
+
         // save new lunchsession
         lunchSession.fk_user = HttpContext.User.Identity.Name;
         lunchSession.participating = participating;
@@ -45,10 +51,12 @@ public class HomeController : Controller
         _context.Add(lunchSession);
         _context.SaveChanges();
 
-      IndexModel IndexModel = new IndexModel();
-        // get lunchsessions which were added today
-        IndexModel.LunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
 
+        // get lunchsessions which were added today
+        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.participating == true ).ToList();
+
+        IndexModel.passiveLunchSessions = todaysLunchSessions.Where(l => l.participating == true).ToList();
+        IndexModel.activeLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
         // get locations
         ViewBag.LocationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
         ViewBag.LocationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
