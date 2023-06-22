@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model IndexModel
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<User> SignInManager
@@ -17,15 +17,15 @@
 }
 else
 {
-    @if(Model.hasLunchSessions) 
+    @if(Model.LunchSessions.Count() > 0) 
     {
         @foreach(var lunchSession in Model.LunchSessions)
         {
             <div class="table-item">
-                @lunchSession.lunchTime
+                @lunchSession.lunchTime.ToString("hh:mm")
                 @lunchSession.fk_foodPlace
                 @lunchSession.fk_eatingPlace
-                @Html.ActionLink("Anschließen", "", new {id = lunchSession.Id})
+                @Html.ActionLink("Anschließen", "QuickAdd", new {id = lunchSession.Id})
             </div>
         }
     }
@@ -36,7 +36,11 @@ else
 
     <hr>
     <div class="user-input-container">
-        <form class="form-inline" asp-page="/Home/Confirm" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+        
             <div class="time-container">
                 <div class="form-field">
                     <label class="form-label">LunchTime</label>
@@ -51,30 +55,17 @@ else
 
             <div class="form-wrapper">
                 <label class="form-label">Place to Eat</label>
-                @* <select name="placeToEat" class="place-to-eat-select"> *@
-                    <select id="location-to-eat" asp-items="@Model.LocationToEat" class="form-select" style="max-width: 128px">
-                        <option value="-1">keine Angabe</option>
-                    </select>
-                    @* @Html.DropDownList(Model.LocationToEat, new SelectList(Model.LocationToEat.name), "Ort", new { @class = "form-control" }); *@
-                    @* @foreach (var placeToEat in Model.LocationToEat) {
-                        <option value="placeToEat.id">@placeToEat.name</option>
-                    } *@
-                @* </select> *@
+                <select class="form-select" asp-for="LunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
+                    <option value="-1">kein Ort</option>
+                </select>
 
                 <label class="form-label">Place for Food</label>
-                <select id="location-to-get-food" asp-items="@Model.LocationToGetFood" class="form-select" style="max-width: 128px">
+                <select class="form-select" asp-for="LunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
                         <option value="-1">keine Angabe</option>
                 </select>
-                @* @Html.DropDownList("Id", new SelectList(ViewBag.LocationToEat, "Id", "name"),"Auswählen",  new { htmlAttributes = new { @class = "form-control" } }) *@
-
-                @* <select name="placeForFood" class="place-for-food-select">
-                    @foreach (var placeForFood in Model.LocationToGetFood) {
-                        <option value="placeForFood.id">@placeForFood.name</option>
-                    }
-                </select> *@
             </div>
 
             <button type="submit" class="">Submit</button>
-        </form>
+        }
     </div>
 }

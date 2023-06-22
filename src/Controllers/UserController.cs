@@ -38,8 +38,8 @@ namespace src.Controllers {
             var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
             // get locations
             // var locationsToEat  = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
-            var locationsToGetFood = _context.Location.ToList();
-            var locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+            // var locationsToGetFood = _context.Location.ToList();
+            // var locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
 
             // locationToGetFood.Select(m => new SelectListItem { Text = m, Value = m })
             // ViewBag.LocationToEat = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
@@ -47,7 +47,8 @@ namespace src.Controllers {
             // return View(user);
 
 
-            ViewBag.locationsToGetFood = _context.Location.ToList();
+            ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
+            ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
 
 
             return View( 
@@ -63,8 +64,6 @@ namespace src.Controllers {
         [HttpPost]
         public ActionResult Edit(User user)
         {
-            ViewBag.LocationToEat = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
-            ViewBag.LoctionToGetFood = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
             _context.SaveChanges();
             // if (ModelState.IsValid)
             // {
@@ -73,6 +72,9 @@ namespace src.Controllers {
         
             //     return RedirectToAction(nameof(Index));
             // }
+         
+            ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
+            ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
             return View(user);
 
 

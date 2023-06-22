@@ -36,18 +36,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.fk_defaultPlaceToEat, htmlAttributes: new { @class = "control-label" })
             <div class="col-md-10">
-                @* @Html.DropDownListFor(model => model.fk_defaultPlaceToEat, Model.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } }) *@
-                @* @Html.DropDownList("Id", ViewBag.LocationToEat,"Auswählen", new { htmlAttributes = new { @class = "form-control" } }) *@
-                @* <select asp-for="Model.User.fk_defaultPlaceToEat" asp-items="Model.LocationToEat"></select> *@
-
-                @* <select asp-for="Id" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
-                        <option value="-1">keine Angabe</option>
-                </select> *@
-
-                <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
-                    <option value="">-- Select Department --</option>
+                <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
+                    <option value="-1">kein Ort</option>
                 </select>
-
                 @Html.ValidationMessageFor(model => model.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -55,9 +46,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.fk_defaultPlaceToGetFood, htmlAttributes: new { @class = "control-label" })
             <div class="col-md-10">
-                @* @Html.EditorFor(model => model.fk_defaultPlaceToGetFood, new { htmlAttributes = new { @class = "form-control" } }) *@
-                @* @Html.DropDownList("Id", ViewBag.LocationToGetFood,"Auswählen", new { htmlAttributes = new { @class = "form-control" } }) *@
-                
+                <select asp-for="fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
+                    <option value="-1">kein Ort</option>
+                </select>
                 @Html.ValidationMessageFor(model => model.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
             </div>
         </div>

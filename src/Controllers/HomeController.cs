@@ -16,72 +16,44 @@ public class HomeController : Controller
         _context = context;
     }
 
-
     // todo: doublicated code 
     [HttpGet]
     public IActionResult Index()
     {
-        dynamic homeModel = new ExpandoObject();
-
+        IndexModel IndexModel = new IndexModel();
         // get lunchsessions which were added today
-        var today = new DateTime();
-
-        var lunchSessions = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => System.Data.Entity.DbFunctions.TruncateTime(l.lunchTime) == DateTime.Today);
-
-        ViewBag.LocationToEat = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => l.lunchTime == today);
-        if(lunchSessions == null)
-        {
-            homeModel.hasLunchSessions = true;
-            homeModel.LunchSessions = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => l.lunchTime == today);
-        }
-        {
-            homeModel.hasLunchSessions = false;
-        }
+        IndexModel.LunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
 
         // get locations
-        homeModel.LocationToEat = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true));
-        homeModel.LocationToGetFood = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToGetFood == true));
+        ViewBag.LocationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+        ViewBag.LocationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
-        return View(homeModel);
+        return View(IndexModel);
     }
 
     [HttpPost]
-    public IActionResult Index(bool participating, int placeForFood, int placeToEat, DateTime lunchTime)
+    public IActionResult Index(DateTime lunchTime, bool participating, int fk_foodPlace, int fk_eatingPlace)
     {
- 
         LunchSession lunchSession = new LunchSession();
         // save new lunchsession
         lunchSession.fk_user = HttpContext.User.Identity.Name;
         lunchSession.participating = participating;
-        lunchSession.fk_foodPlace = placeForFood;
-        lunchSession.fk_eatingPlace = placeToEat;
+        lunchSession.fk_foodPlace = fk_foodPlace;
+        lunchSession.fk_eatingPlace = fk_eatingPlace;
         lunchSession.lunchTime = lunchTime;
 
         _context.Add(lunchSession);
         _context.SaveChanges();
 
-
-        dynamic homeModel = new ExpandoObject();
-        
+      IndexModel IndexModel = new IndexModel();
         // get lunchsessions which were added today
-        var today = new DateTime();
-        var lunchSessions = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => System.Data.Entity.DbFunctions.TruncateTime(l.lunchTime) == DateTime.Today);
-
-        if(lunchSessions != null)
-        {
-            homeModel.hasLunchSessions = true;
-            ViewBag.LocationToEat = _context.LunchSession.DefaultIfEmpty().ToList().Where(l => l.lunchTime == today);
-        }
-        {
-            homeModel.hasLunchSessions = false;
-        }
-
+        IndexModel.LunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
 
         // get locations
-        homeModel.LocationToEat = _context.Location.Where(p => p.isPlaceToEat == true);
-        homeModel.LocationToGetFood = _context.Location.Where(p => p.isPlaceToGetFood == true);
+        ViewBag.LocationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+        ViewBag.LocationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
-        return View(homeModel);
+        return View(IndexModel);
     }
 
     public IActionResult Impressum()
