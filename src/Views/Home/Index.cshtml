@@ -52,17 +52,18 @@ else
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-        
-            <div class="time-container">
-                <div class="form-field">
-                    <label class="form-label">LunchTime</label>
-                    <input type="datetime" id="lunchTime" name="lunchTime" min="00:01" max="23:59" value="13:37"/>
+            <div class="form-horizontal">
+                <div class="time-container">
+                    <div class="form-field">
+                        <label class="form-label">LunchTime</label>
+                        <input type="datetime" id="lunchTime" name="lunchTime" min="00:01" max="23:59" value="13:37"/>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-field">
-                <label class="form-label">Participating</label>
-                @Html.CheckBox("participating", false)
+                <div class="form-field">
+                    <label class="form-label">Participating</label>
+                    @Html.CheckBox("participating", false)
+                </div>
             </div>
 
             <div class="form-wrapper">

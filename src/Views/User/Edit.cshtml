@@ -19,44 +19,34 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "form-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.preferredLunchTime, htmlAttributes: new { @class = "form-label " })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.preferredLunchTime, "", new { @class = "text-danger" })
-            </div>
+            @Html.EditorFor(model => model.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.preferredLunchTime, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.fk_defaultPlaceToEat, htmlAttributes: new { @class = "control-label" })
-            <div class="col-md-10">
-                <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
-                    <option value="-1">kein Ort</option>
-                </select>
-                @Html.ValidationMessageFor(model => model.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
-            </div>
+            <label class="form-label">Place to Eat</label>
+            <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
+                <option value="-1">kein Ort</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.fk_defaultPlaceToGetFood, htmlAttributes: new { @class = "control-label" })
-            <div class="col-md-10">
-                <select asp-for="fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
-                    <option value="-1">kein Ort</option>
-                </select>
-                @Html.ValidationMessageFor(model => model.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
-            </div>
+            <label class="form-label">Place for Food</label>
+            <select asp-for="fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
+                <option value="-1">kein Ort</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
 }

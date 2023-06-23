@@ -135,6 +135,8 @@ input[type=checkbox]:checked {
 
 select {
   background: url("images/down-arrow.svg") no-repeat center right 0.75rem;
+  min-width: 200px;
+  min-height: 44px;
 }
 
 .body-container {
@@ -143,14 +145,14 @@ select {
   text-align: center;
 }
 
-input {
+input, select {
   background: none;
   color: white;
-  padding: 8px;
   min-width: 44px;
   min-height: 44px;
+  padding: 0 5px;
   margin: 10px;
-  padding: 8px;
+  text-align: center;
   font-size: 1rem;
 }
 
@@ -186,6 +188,12 @@ button:hover {
   text-align: left;
 }
 
+.form-horizontal {
+  display: flex;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
 .form-container .form-field {
   position: relative;
 }
@@ -193,6 +201,11 @@ button:hover {
   position: absolute;
   top: 0%;
 }
+.form-container .form-field .form-select select option {
+  background-color: #110220;
+  background-color: white;
+}
+
 .table-wrapper {
   display: flex;
   flex-wrap: wrap;

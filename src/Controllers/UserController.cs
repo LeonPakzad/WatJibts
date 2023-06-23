@@ -29,6 +29,10 @@ namespace src.Controllers {
             if(userId == null) {
                 return NotFound();
             }
+            
+            ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
+            ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+
             return View(_context.User.Find(userId));
         }
 
@@ -46,10 +50,8 @@ namespace src.Controllers {
             // ViewBag.LoctionToGetFood = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
             // return View(user);
 
-
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
             ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
-
 
             return View( 
                 // new UserEdit
@@ -76,7 +78,6 @@ namespace src.Controllers {
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
             ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
             return View(user);
-
 
             // if(ModelState.IsValid)
             // {

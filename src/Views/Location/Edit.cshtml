@@ -18,40 +18,30 @@
 
        <div class="form-group">
             @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "form-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-            </div>
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "form-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-            </div>
+            @Html.TextBoxFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.isPlaceToGetFood, htmlAttributes: new { @class = "form-label " })
-            <div class="col-md-10">
-                @Html.CheckBoxFor(model=> model.isPlaceToGetFood, "")
-                @Html.ValidationMessageFor(model => model.isPlaceToGetFood, "", new { @class = "text-danger" })
-            </div>
+            @Html.CheckBoxFor(model=> model.isPlaceToGetFood, "")
+            @Html.ValidationMessageFor(model => model.isPlaceToGetFood, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.isPlaceToEat, htmlAttributes: new { @class = "form-label" })
-            <div class="col-md-10">
-                @Html.CheckBoxFor(model => model.isPlaceToEat, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.isPlaceToEat, "", new { @class = "text-danger" })
-            </div>
+            @Html.CheckBoxFor(model => model.isPlaceToEat, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.isPlaceToEat, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
 }
