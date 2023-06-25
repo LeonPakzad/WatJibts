@@ -31,7 +31,7 @@ h1 {
 
 h1:not(.flickering-headline) {
   animation: pulsate 2.5s infinite alternate;
-  text-shadow: 0 0 7px #E200F7, 0 0 10px #E200F7, 0 0 21px #E200F7, 0 0 42px white, 0 0 82px white, 0 0 102px white;
+  text-shadow: 0 0 7px #E200F7, 0 0 10px #E200F7, 0 0 21px #E200F7, 0 0 42px white, 0 0 82px white;
 }
 
 .flickering-headline {

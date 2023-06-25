@@ -31,7 +31,7 @@ h1 {
 
 h1:not(.flickering-headline) {
   animation: pulsate 2.5s infinite alternate;
-  text-shadow: 0 0 7px #E200F7, 0 0 10px #E200F7, 0 0 21px #E200F7, 0 0 42px white, 0 0 82px white, 0 0 102px white;
+  text-shadow: 0 0 7px #E200F7, 0 0 10px #E200F7, 0 0 21px #E200F7, 0 0 42px white, 0 0 82px white;
 }
 
 .flickering-headline {
@@ -123,10 +123,10 @@ textarea {
   fill: white;
 }
 
-input[type=checkbox]:checked {
-  background: white;
-  background: white;
+input[type=checkbox] {
   box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
+  height: 75px;
+  width: 75px;
 }
 
 input[type=checkbox]:checked {
@@ -135,7 +135,6 @@ input[type=checkbox]:checked {
 
 select {
   background: url("images/down-arrow.svg") no-repeat center right 0.75rem;
-  min-height: 44px;
 }
 
 .body-container {
@@ -147,7 +146,8 @@ select {
 input, select {
   background: black;
   color: white;
-  min-height: 44px;
+  height: 75px;
+  box-sizing: border-box;
   padding: 10px;
   margin: 10px;
   text-align: center;
