@@ -33,12 +33,13 @@ else
     @if (Model.passiveLunchSessions.Count() > 0)
     {
         <h2>Folgende Menschen essen heute nicht oder privat:</h2>
-        @foreach(var lunchSession in Model.activeLunchSessions)
+        <div class="table-item">
+        @foreach(var lunchSession in Model.passiveLunchSessions)
         {
-            <div class="table-item">
-                @lunchSession.fk_user
-            </div>
+            @lunchSession.fk_user
+            <span>, </span> 
         }
+        </div>
     }
     
     @if(Model.activeLunchSessions.Count() < 1 && Model.passiveLunchSessions.Count() < 1)

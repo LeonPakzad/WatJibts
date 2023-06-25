@@ -14,7 +14,7 @@ button {
 input,
 select,
 textarea {
-  background-color: none;
+  background-color: black;
   color: white;
 box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
 }
@@ -41,7 +41,7 @@ input[type="checkbox"]:checked {
 
 select {
     background: url("images/down-arrow.svg") no-repeat center right 0.75rem;
-    min-width:200px;
+    // min-width:200px;
     min-height:44px;
 }
 
@@ -52,12 +52,12 @@ select {
 }
 
 input, select {
-    background: none;
+    background: $color-bg-dark;
     color: $color-font;
 
-    min-width:44px;
+    // min-width:44px;
     min-height:44px;
-    padding: 0 5px;
+    padding: 10px;
     margin:10px;
     text-align: center;
 
@@ -106,33 +106,37 @@ button:hover {
 
 .form-horizontal {
     display: flex;
-    max-width: 300px;
+    max-width: 400px;
     margin: 0 auto;
 }
 
-.form-container {
-    .form-field {
+.form-field {
+    position: relative;
+
+    .form-label {
+        position: absolute;
+        top:0%;
+
+        min-width: 100px;
+        padding: 5px;
+
+        background: $color-bg-dark;
+        border: solid 1px;
+        border-radius: 0;
+    }
+    
+    .form-control {
+
+    }
+
+    .form-error {
         
-        position: relative;
+    }
 
-        .form-label {
-            position: absolute;
-            top:0%;
-        }
-        
-        .form-control {
+    .form-select select option {
 
-        }
-
-        .form-error {
-            
-        }
-
-        .form-select select option {
-
-            background-color: $color-bg-light;
-            background-color: $color-glow;
-        }
+        background-color: $color-bg-light;
+        background-color: $color-glow;
     }
 }
 

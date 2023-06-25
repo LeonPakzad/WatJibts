@@ -17,19 +17,21 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
+        <div class="form-field">
             @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "form-label" })
             @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
+        <div class="form-field">
             @Html.LabelFor(model => model.preferredLunchTime, htmlAttributes: new { @class = "form-label " })
             @Html.EditorFor(model => model.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.preferredLunchTime, "", new { @class = "text-danger" })
         </div>
+    </div>
+    <div class="form-horizontal">
 
-        <div class="form-group">
+        <div class="form-field">
             <label class="form-label">Place to Eat</label>            
             <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
                 <option value="-1">kein Ort</option>
@@ -37,7 +39,7 @@
             @Html.ValidationMessageFor(model => model.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
+        <div class="form-field">
             <label class="form-label">Place for Food</label>
             <select asp-for="fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
                 <option value="-1">kein Ort</option>
@@ -45,10 +47,12 @@
             @Html.ValidationMessageFor(model => model.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
     </div>
+   
+    <div class="form-field">
+        <input type="submit" value="Save" class="btn btn-default" />
+    </div>
+
     <a id="forgot-password" href="../Identity/Account/ForgotPassword">Passwort zurücksetzen</a>
 }
 
