@@ -35,12 +35,20 @@ input[type="checkbox"] {
     width: 75px;
 }
 
+.lunchtime-details {
+    display: none;
+}
+
+.participating-wrapper input[type="checkbox"]:checked + .lunchtime-details {
+    display: flex !important;
+}
+
 input[type="checkbox"]:checked {
     background: white;
 }
 
 select {
-    background: url("images/down-arrow.svg") no-repeat center right 0.75rem;
+    background: url("../assets/img/arrow-down.png") no-repeat center right 0.75rem;
 }
 
 .body-container {

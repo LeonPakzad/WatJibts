@@ -36,8 +36,8 @@
                     </p>
                 }
 
-                @Html.ActionLink("Edit", "Edit", new {location = Model[index]})
-                @Html.ActionLink("Delete", "Delete", new {id = Model[index].Id})
+                @Html.ActionLink("Edit", "Edit", new {Id = Model[index].Id})
+                @Html.ActionLink("Delete", "Delete", new {Id = Model[index].Id})
         </div>
     }
 </div>

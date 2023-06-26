@@ -49,37 +49,46 @@ else
 
     <hr>
 
-    <div class="user-input-container">
+    <div class="lunchtime-form">
 
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <div class="form-horizontal">
-                <div class="time-container">
-                    <div class="form-field">
-                        <label class="form-label">LunchTime</label>
-                        <input type="datetime" id="lunchTime" name="lunchTime" min="00:01" max="23:59" value="13:37"/>
+            
+            <div class="form-field participating-wrapper">
+                <label class="form-label">Participating</label>
+                @Html.CheckBox("participating", false)
+            
+                <div class="lunchtime-details">
+                    <div class="form-horizontal">
+                        <div class="form-field"> 
+                            <div class="time-container">
+                                <div class="form-field">
+                                    <label class="form-label">LunchTime</label>
+                                    <input type="datetime" id="lunchTime" name="lunchTime" min="00:01" max="23:59" value="13:37"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">Place to Eat</label>
+                            <select class="form-select" name="fk_eatingPlace" asp-for="LunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
+                                <option value="-1">kein Ort</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">Place for Food</label>
+                            <select class="form-select" name="fk_foodPlace" asp-for="LunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
+                                    <option value="-1">keine Angabe</option>
+                            </select>
+                        </div>
+
+                        <a id="add-location" href="../Location/Add">Ort hinzufügen</a>
+
                     </div>
                 </div>
-
-                <div class="form-field">
-                    <label class="form-label">Participating</label>
-                    @Html.CheckBox("participating", false)
-                </div>
             </div>
-
-            <div class="form-field">
-                <label class="form-label">Place to Eat</label>
-                <select class="form-select" name="fk_eatingPlace" asp-for="LunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
-                    <option value="-1">kein Ort</option>
-                </select>
-
-                <label class="form-label">Place for Food</label>
-                <select class="form-select" name="fk_foodPlace" asp-for="LunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
-                        <option value="-1">keine Angabe</option>
-                </select>
-            </div>
-
             <button type="submit" class="">Submit</button>
         }
     </div>
