@@ -17,9 +17,9 @@
 }
 else
 {
-    @if(Model.activeLunchSessions.Count() > 0) 
+    @if(Model.publicLunchSessions.Count() > 0) 
     {
-        @foreach(var lunchSession in Model.activeLunchSessions)
+        @foreach(var lunchSession in Model.publicLunchSessions)
         {
             <div class="table-item">
                 @lunchSession.lunchTime.ToString("hh:mm")
@@ -30,11 +30,11 @@ else
         }
     }
 
-    @if (Model.passiveLunchSessions.Count() > 0)
+    @if (Model.privateLunchSessions.Count() > 0)
     {
         <h2>Folgende Menschen essen heute nicht oder privat:</h2>
         <div class="table-item">
-        @foreach(var lunchSession in Model.passiveLunchSessions)
+        @foreach(var lunchSession in Model.privateLunchSessions)
         {
             @lunchSession.fk_user
             <span>, </span> 
@@ -42,12 +42,13 @@ else
         </div>
     }
     
-    @if(Model.activeLunchSessions.Count() < 1 && Model.passiveLunchSessions.Count() < 1)
+    @if(Model.publicLunchSessions.Count() < 1 && Model.privateLunchSessions.Count() < 1)
     {
         <p>Heute wurde noch keine Session hinzugefügt</p>
     }
 
     <hr>
+
     <div class="user-input-container">
 
         @using (Html.BeginForm())

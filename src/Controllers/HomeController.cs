@@ -22,11 +22,10 @@ public class HomeController : Controller
     {
         IndexModel IndexModel = new IndexModel();
         // get lunchsessions which were added today
-        // IndexModel.LunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
         IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
 
-        IndexModel.passiveLunchSessions = todaysLunchSessions.Where(l => l.participating == true).ToList();
-        IndexModel.activeLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
+        IndexModel.publicLunchSessions = todaysLunchSessions.Where(l => l.participating == true).ToList();
+        IndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
 
         // get locations
         ViewBag.LocationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
@@ -51,12 +50,11 @@ public class HomeController : Controller
         _context.Add(lunchSession);
         _context.SaveChanges();
 
-
         // get lunchsessions which were added today
         IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
 
-        IndexModel.passiveLunchSessions = todaysLunchSessions.Where(l => l.participating == true).ToList();
-        IndexModel.activeLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
+        IndexModel.publicLunchSessions = todaysLunchSessions.Where(l => l.participating == true).ToList();
+        IndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
         // get locations
         ViewBag.LocationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
         ViewBag.LocationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
