@@ -63,7 +63,7 @@ public class LocationController : Controller
     [HttpPost]
     public ActionResult Edit(Location location)
     {
-        var oldLocation = _context.Location.Where(l=> l.Id == location.Id).FirstOrDefault();
+        var oldLocation = _context.Location.Where(l => l.Id == location.Id).FirstOrDefault();
         _context.Location.Remove(oldLocation);
         _context.Location.Add(location);
         _context.SaveChanges();

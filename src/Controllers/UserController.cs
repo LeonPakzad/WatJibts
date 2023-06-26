@@ -36,57 +36,31 @@ namespace src.Controllers {
             return View(_context.User.Find(userId));
         }
 
-        [HttpGet]
         public ActionResult Edit(string Id)
         {
             var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
-            // get locations
-            // var locationsToEat  = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
-            // var locationsToGetFood = _context.Location.ToList();
-            // var locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
-
-            // locationToGetFood.Select(m => new SelectListItem { Text = m, Value = m })
-            // ViewBag.LocationToEat = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
-            // ViewBag.LoctionToGetFood = new SelectList(_context.Location.ToList().Where(p => p.isPlaceToEat == true), "Id", "name");
-            // return View(user);
 
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
             ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
 
-            return View( 
-                // new UserEdit
-                // {
-                //     User = _context.User.Where(u => u.Id == Id).FirstOrDefault(), 
-                //     LocationsToEat = (List<SelectListItem>)locationsToEat, 
-                //     LocationsToGetFood = (List<SelectListItem>)locationsToGetFood 
-                // }
-            );
+            return View(user);
         }
 
         [HttpPost]
         public ActionResult Edit(User user)
         {
+            var currentUser = _context.User.Where(u => u.Id == user.Id).FirstOrDefault();
+            
+            currentUser.UserName = user.UserName;
+            currentUser.fk_defaultPlaceToEat = user.fk_defaultPlaceToEat;
+            currentUser.fk_defaultPlaceToGetFood = user.fk_defaultPlaceToGetFood;
+            currentUser.preferredLunchTime = user.preferredLunchTime;
+            
             _context.SaveChanges();
-            // if (ModelState.IsValid)
-            // {
-            //     _context.Update(user);
-            //     await _context.SaveChangesAsync();
-        
-            //     return RedirectToAction(nameof(Index));
-            // }
-         
+
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
             ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
             return View(user);
-
-            // if(ModelState.IsValid)
-            // {
-            //     _context.Update(user);
-            //     _context.SaveChanges();
-            //     return RedirectToAction("UserIndex");
-            // }
-
-            // return View(user);
         }
 
         public ActionResult Delete(string id)
