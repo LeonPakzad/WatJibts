@@ -17,21 +17,24 @@ public class HomeController : Controller
         _context = context;
     }
 
-    // todo: doublicated code 
+    private IEnumerable<LunchSession> getTodaysLunchSessions()
+    {
+        return  _context.LunchSession.Where
+                (l => l.lunchTime.Date == DateTime.Today)
+                .OrderBy(l => l.participating)
+                .ThenByDescending(l => l.lunchTime)
+                .ThenByDescending(l => l.fk_eatingPlace)
+                .ThenByDescending(l => l.fk_foodPlace)
+                .ToList();
+    }
+
     [HttpGet]
     public IActionResult Index()
     {
         IndexModel IndexModel = new IndexModel();
 
-        // get a ordered lunchsessions which were added today
-        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where
-            (l => l.lunchTime.Date == DateTime.Today)
-            .OrderBy(l => l.participating)
-            .ThenByDescending(l => l.lunchTime)
-            .ThenByDescending(l => l.fk_eatingPlace)
-            .ThenByDescending(l => l.fk_foodPlace)
-            .ToList();
-
+        //get grouped lists of todays lunchsessions
+        IEnumerable<LunchSession> todaysLunchSessions = getTodaysLunchSessions();
         IndexModel.publicLunchSessions = IndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
         IndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
 
@@ -58,15 +61,8 @@ public class HomeController : Controller
         _context.Add(lunchSession);
         _context.SaveChanges();
 
-        // get a ordered lunchsessions which were added today
-        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where
-            (l => l.lunchTime.Date == DateTime.Today)
-            .OrderBy(l => l.participating)
-            .ThenByDescending(l => l.lunchTime)
-            .ThenByDescending(l => l.fk_eatingPlace)
-            .ThenByDescending(l => l.fk_foodPlace)
-            .ToList();
-
+        //get grouped lists of todays lunchsessions
+        IEnumerable<LunchSession> todaysLunchSessions = getTodaysLunchSessions();
         IndexModel.publicLunchSessions = IndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
         IndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
 
