@@ -22,6 +22,7 @@ else
         @foreach(var lunchSession in Model.publicLunchSessions)
         {
             <div class="table-item">
+                @lunchSession.fk_user
                 @lunchSession.lunchTime.ToString("hh:mm")
                 @lunchSession.fk_foodPlace
                 @lunchSession.fk_eatingPlace

@@ -36,6 +36,24 @@ namespace src.Controllers {
             return View(_context.User.Find(userId));
         }
 
+        [HttpPost]
+        public IActionResult Profile(User user)
+        {
+            var currentUser = _context.User.Where(u => u.Id == user.Id).FirstOrDefault();
+            
+            currentUser.UserName = user.UserName;
+            currentUser.fk_defaultPlaceToEat = user.fk_defaultPlaceToEat;
+            currentUser.fk_defaultPlaceToGetFood = user.fk_defaultPlaceToGetFood;
+            currentUser.preferredLunchTime = user.preferredLunchTime;
+
+            _context.SaveChanges();
+            
+            ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
+            ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+
+            return View(user);
+        }
+
         public ActionResult Edit(string Id)
         {
             var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
@@ -55,7 +73,7 @@ namespace src.Controllers {
             currentUser.fk_defaultPlaceToEat = user.fk_defaultPlaceToEat;
             currentUser.fk_defaultPlaceToGetFood = user.fk_defaultPlaceToGetFood;
             currentUser.preferredLunchTime = user.preferredLunchTime;
-            
+
             _context.SaveChanges();
 
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);

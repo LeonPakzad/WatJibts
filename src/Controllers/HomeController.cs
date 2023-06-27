@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.Diagnostics;
 using System.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,10 +22,17 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         IndexModel IndexModel = new IndexModel();
-        // get lunchsessions which were added today
-        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
 
-        IndexModel.publicLunchSessions = todaysLunchSessions.Where(l => l.participating == true).ToList();
+        // get a ordered lunchsessions which were added today
+        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where
+            (l => l.lunchTime.Date == DateTime.Today)
+            .OrderBy(l => l.participating)
+            .ThenByDescending(l => l.lunchTime)
+            .ThenByDescending(l => l.fk_eatingPlace)
+            .ThenByDescending(l => l.fk_foodPlace)
+            .ToList();
+
+        IndexModel.publicLunchSessions = IndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
         IndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
 
         // get locations
@@ -50,11 +58,18 @@ public class HomeController : Controller
         _context.Add(lunchSession);
         _context.SaveChanges();
 
-        // get lunchsessions which were added today
-        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today).ToList();
+        // get a ordered lunchsessions which were added today
+        IEnumerable<LunchSession> todaysLunchSessions = _context.LunchSession.Where
+            (l => l.lunchTime.Date == DateTime.Today)
+            .OrderBy(l => l.participating)
+            .ThenByDescending(l => l.lunchTime)
+            .ThenByDescending(l => l.fk_eatingPlace)
+            .ThenByDescending(l => l.fk_foodPlace)
+            .ToList();
 
-        IndexModel.publicLunchSessions = todaysLunchSessions.Where(l => l.participating == true).ToList();
+        IndexModel.publicLunchSessions = IndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
         IndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
+
         // get locations
         ViewBag.LocationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
         ViewBag.LocationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
