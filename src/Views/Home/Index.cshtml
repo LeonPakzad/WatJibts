@@ -7,6 +7,7 @@
 <h1>Wilkommen zu WatJibts!</h1>
 
 <hr>
+
 @if (!SignInManager.IsSignedIn(User))
 {
     <p>
@@ -17,6 +18,8 @@
 }
 else
 {
+
+
     @if(Model.publicLunchSessions.Count() > 0) 
     {
         @foreach(var lunchSession in Model.publicLunchSessions)
@@ -94,3 +97,4 @@ else
         }
     </div>
 }
+@Html.ActionLink("clear todays lunch sessions","clearTodaysLunchSessions")

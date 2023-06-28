@@ -52,11 +52,11 @@ public class HomeController : Controller
         LunchSession lunchSession = new LunchSession();
 
         // save new lunchsession
-        lunchSession.fk_user = HttpContext.User.Identity.Name;
-        lunchSession.participating = participating;
-        lunchSession.fk_foodPlace = fk_foodPlace;
+        lunchSession.fk_user        = HttpContext.User.Identity.Name;
+        lunchSession.participating  = participating;
+        lunchSession.fk_foodPlace   = fk_foodPlace;
         lunchSession.fk_eatingPlace = fk_eatingPlace;
-        lunchSession.lunchTime = lunchTime;
+        lunchSession.lunchTime      = lunchTime;
 
         _context.Add(lunchSession);
         _context.SaveChanges();
@@ -87,6 +87,7 @@ public class HomeController : Controller
         {
             originalPath = HttpContext.Items["originalPath"] as string;
         }
+
         return View();
     }
 
@@ -94,5 +95,14 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public IActionResult clearTodaysLunchSessions()
+    {
+        _context.LunchSession.RemoveRange(_context.LunchSession.Where
+                (l => l.lunchTime.Date == DateTime.Today));
+        _context.SaveChanges();
+        
+        return RedirectToAction("Index");
     }
 }

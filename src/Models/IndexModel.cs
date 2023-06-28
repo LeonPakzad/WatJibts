@@ -10,11 +10,12 @@ public class IndexModel
     public IEnumerable<LunchSession>? privateLunchSessions{get;set;}
     public LunchSession? LunchSession {get;set;}
 
+    // gets an icollection of publicsessions and returns a icollection in which lunchsessions with same parameters are 
     public ICollection<LunchSession> groupPublicLunchSessions(ICollection<LunchSession> publicLunchSessions)
     {
         for (int index = 0; index < publicLunchSessions.Count(); index++)
         {
-            for (int indexTwo = index; indexTwo < publicLunchSessions.Count(); indexTwo++)
+            for (int indexTwo = index+1; indexTwo < publicLunchSessions.Count(); indexTwo++)
             {
                 if ( 
                     publicLunchSessions.ElementAt(index).lunchTime         == publicLunchSessions.ElementAt(indexTwo).lunchTime  
