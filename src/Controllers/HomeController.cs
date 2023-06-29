@@ -120,6 +120,38 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    public IActionResult JoinSession(int lunchSessionId)
+    {
+        LunchSession lunchSession = new LunchSession();
+        LunchSession joinedSession = _context.LunchSession.Where(l => l.Id == lunchSessionId).FirstOrDefault();
+        // check if the user already has a lunch Session
+        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
+        
+        _context.LunchSession.Where
+                (l => l.lunchTime.Date == DateTime.Today);
+
+        if(lunchSessionExists)
+        {
+            lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+            lunchSession.participating  = joinedSession.participating;
+            lunchSession.fk_foodPlace   = joinedSession.fk_foodPlace;
+            lunchSession.fk_eatingPlace = joinedSession.fk_eatingPlace;
+            lunchSession.lunchTime      = joinedSession.lunchTime;
+        }
+        else
+        {
+            lunchSession.fk_user        = User.Identity.Name;
+            lunchSession.participating  = joinedSession.participating;
+            lunchSession.fk_foodPlace   = joinedSession.fk_foodPlace;
+            lunchSession.fk_eatingPlace = joinedSession.fk_eatingPlace;
+            lunchSession.lunchTime      = joinedSession.lunchTime;
+            
+            _context.Add(lunchSession);
+        }
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+
     public IActionResult clearTodaysLunchSessions()
     {
         _context.LunchSession.RemoveRange(_context.LunchSession.Where

@@ -70,7 +70,6 @@ public class LocationController : Controller
         return View(location);
     }
 
-
     public async Task<IActionResult> LocationsForFood(int? id)
     {
         if (id == null)

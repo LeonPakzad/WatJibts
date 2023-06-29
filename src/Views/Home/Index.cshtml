@@ -29,7 +29,10 @@ else
                 @lunchSession.lunchTime.ToString("hh:mm")
                 @lunchSession.fk_foodPlace
                 @lunchSession.fk_eatingPlace
-                @Html.ActionLink("Anschließen", "QuickAdd", new {id = lunchSession.Id})
+                @if(!@lunchSession.fk_user.Contains(User.Identity.Name))
+                {
+                    @Html.ActionLink("Anschließen", "JoinSession", new {lunchSessionId = lunchSession.Id})
+                }
             </div>
         }
     }
