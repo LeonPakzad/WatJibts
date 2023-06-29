@@ -34,16 +34,17 @@ public class HomeController : Controller
         IndexModel IndexModel = new IndexModel();
         LunchSession lunchSession = new LunchSession();
 
-        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
+        // bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
 
-        //check if user already added a lunchsession
-        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any())
-        {
-            lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
-        }
+        // //check if user already added a lunchsession
+        // if(lunchSessionExists).Any())
+        // {
+        //     lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+        // }
 
         //get grouped lists of todays lunchsessions
         IEnumerable<LunchSession> todaysLunchSessions = getTodaysLunchSessions();
+
         IndexModel.publicLunchSessions = IndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
         IndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
 
@@ -51,7 +52,7 @@ public class HomeController : Controller
         ViewBag.LocationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
         ViewBag.LocationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
-        return View( );
+        return View(IndexModel);
     }
 
     [HttpPost]
@@ -62,7 +63,7 @@ public class HomeController : Controller
 
         bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
 
-        //check if user already added a lunchsession
+        // check if user already added a lunchsession
         if(lunchSessionExists)
         {
             lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
@@ -80,7 +81,7 @@ public class HomeController : Controller
             
             _context.Add(lunchSession);
         }
-	
+
         _context.SaveChanges();
 
         //get grouped lists of todays lunchsessions
