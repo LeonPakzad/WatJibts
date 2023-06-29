@@ -32,6 +32,15 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         IndexModel IndexModel = new IndexModel();
+        LunchSession lunchSession = new LunchSession();
+
+        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
+
+        //check if user already added a lunchsession
+        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any())
+        {
+            lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+        }
 
         //get grouped lists of todays lunchsessions
         IEnumerable<LunchSession> todaysLunchSessions = getTodaysLunchSessions();
@@ -42,7 +51,7 @@ public class HomeController : Controller
         ViewBag.LocationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
         ViewBag.LocationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
-        return View(IndexModel);
+        return View( );
     }
 
     [HttpPost]
@@ -51,14 +60,27 @@ public class HomeController : Controller
         IndexModel IndexModel = new IndexModel();
         LunchSession lunchSession = new LunchSession();
 
-        // save new lunchsession
-        lunchSession.fk_user        = HttpContext.User.Identity.Name;
-        lunchSession.participating  = participating;
-        lunchSession.fk_foodPlace   = fk_foodPlace;
-        lunchSession.fk_eatingPlace = fk_eatingPlace;
-        lunchSession.lunchTime      = lunchTime;
+        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
 
-        _context.Add(lunchSession);
+        //check if user already added a lunchsession
+        if(lunchSessionExists)
+        {
+            lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+            lunchSession.participating  = participating;
+            lunchSession.fk_foodPlace   = fk_foodPlace;
+            lunchSession.fk_eatingPlace = fk_eatingPlace;
+            lunchSession.lunchTime      = lunchTime;
+        }
+        else{
+            lunchSession.fk_user        = User.Identity.Name;
+            lunchSession.participating  = participating;
+            lunchSession.fk_foodPlace   = fk_foodPlace;
+            lunchSession.fk_eatingPlace = fk_eatingPlace;
+            lunchSession.lunchTime      = lunchTime;
+            
+            _context.Add(lunchSession);
+        }
+	
         _context.SaveChanges();
 
         //get grouped lists of todays lunchsessions
