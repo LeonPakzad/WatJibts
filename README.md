@@ -21,6 +21,13 @@ dotnet ef migrations add InitialMigration
 dotnet ef database update
 ```
 
+### email via sendgrid
+add sendgrid api key, go to https://sendgrid.com and set the user-secrets as follows::
+```
+dotnet user-serets init
+dotnet user-secrets set SendGridKey <key>
+```
+
 ### run
 ```
 dotnet run

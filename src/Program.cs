@@ -2,6 +2,11 @@ using src.Data;
 using Microsoft.EntityFrameworkCore;
 using ExampleApplication;
 using Microsoft.AspNetCore.Identity;
+using SendGrid.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using WebPWrecover.Services;
+using WebAppIdentity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // add database
@@ -53,6 +58,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
+
+// builder.Services.AddSendGrid(options => {
+//     options.ApiKey = builder.Configuration.GetSection("EmailSettings:ApiKey").Value!;
+// });
+builder.Services.AddTransient<IEmailSender, SendGridEmailSender>();
+// builder.Services.AddTransient<IEmailSender, EmailSender>();
+// builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
 var app = builder.Build();
 
