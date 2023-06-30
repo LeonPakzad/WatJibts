@@ -225,4 +225,11 @@ button:hover {
   flex: 1 1 auto;
 }
 
+.lunchtime-card {
+  border: solid white 1px;
+  min-width: 50%;
+  margin: 10px;
+  padding: 10px;
+}
+
 /*# sourceMappingURL=body-style.css.map */
