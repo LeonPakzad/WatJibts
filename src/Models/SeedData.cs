@@ -32,17 +32,24 @@ public static class SeedData
             context.Location.AddRange(
                 new Location
                 {
-                    name = "GetFood",
-                    description = "Place to get Food from",
+                    name = "Marks Supermarkt",
+                    description = "Der Perfekte Ort um Speisen zu besorgen",
                     isPlaceToEat = false,
                     isPlaceToGetFood = true,
                 },
                 new Location
                 {
-                    name = "Dinner Table",
-                    description = "Place to eat",
+                    name = "Stammtisch",
+                    description = "Der Perfekte Ort um seine Mahlzeiten zu verzehren",
                     isPlaceToEat = true,
                     isPlaceToGetFood = false,
+                },
+                new Location
+                {
+                    name = "Dimars Döner",
+                    description = "Ein schönes Lokal in der Nähe zum Essen holen sowie verspeisen",
+                    isPlaceToEat = true,
+                    isPlaceToGetFood = true,
                 }
             );
 
