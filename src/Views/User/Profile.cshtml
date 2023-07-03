@@ -15,7 +15,7 @@
     
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        @* @Html.HiddenFor(model => model.Id) *@
 
         <div class="form-field">
             @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "form-label" })
@@ -49,13 +49,12 @@
 
     </div>
    
-    <div class="form-field">
+    <div class="form-field submit-button">
         <input type="submit" value="Save" class="btn btn-default" />
     </div>
 
     <a id="forgot-password" href="../Identity/Account/ForgotPassword">Passwort zurücksetzen</a>
 }
-
 <div>
     @Html.ActionLink("Back to List", "UserIndex")
 </div>

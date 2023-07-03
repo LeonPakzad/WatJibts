@@ -18,16 +18,6 @@ public static class SeedData
             {
                 return;
             }
-            
-            // context.User.AddRange(
-            //     new User
-            //     {
-            //         name = "admin",
-            //         email = "pakzadleon@gmail.com",
-            //         password = "12345678",
-            //         preferredLunchTime = DateTime.Now
-            //     }
-            // );
 
             context.Location.AddRange(
                 new Location

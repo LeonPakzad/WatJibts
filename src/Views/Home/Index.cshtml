@@ -21,6 +21,7 @@ else
 {
     @if(Model.publicLunchSessions.Count() > 0) 
     {
+        <div class="lunchtime-wrapper">
         @foreach(var lunchSession in Model.publicLunchSessions)
         {
             if(lunchSession.fk_user != null)
@@ -62,23 +63,23 @@ else
                         <div class="lunchtime-join">
                             @Html.ActionLink("Anschließen", "JoinSession", new {lunchSessionId = lunchSession.Id})
                         </div>
-                    }
-                    
+                    }  
                 </div>
             }
         }
+        </div>
     }
 
     @if (Model.privateLunchSessions.Count() > 0)
     {
         <h2>Folgende Menschen essen heute nicht oder privat:</h2>
-        <div class="table-item">
         @foreach(var lunchSession in Model.privateLunchSessions)
         {
-            @lunchSession.fk_user
-            <span>, </span> 
+            <div class="table-item">
+                @lunchSession.fk_user
+                <span>, </span> 
+            </div>
         }
-        </div>
     }
     
     @if(Model.publicLunchSessions.Count() < 1 && Model.privateLunchSessions.Count() < 1)
@@ -86,8 +87,7 @@ else
         <p>Heute wurde noch keine Session hinzugefügt</p>
     }
 
-    <br>
-    <hr>
+    <br><hr>
 
     <div class="lunchtime-form">
 

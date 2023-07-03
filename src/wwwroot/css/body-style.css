@@ -110,6 +110,13 @@ select,
 textarea {
   background-color: black;
   color: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  background-color: black;
+  color: white;
   box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
 }
 
@@ -124,9 +131,13 @@ textarea {
 }
 
 input[type=checkbox] {
-  box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
   height: 75px;
   width: 75px;
+  border: solid 1px white;
+}
+
+input [type=checkbox]:focus {
+  box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
 }
 
 .lunchtime-details {
@@ -190,6 +201,10 @@ button:hover {
   cursor: pointer;
 }
 
+.submit-button input {
+  height: auto;
+}
+
 .text-wrapper {
   text-align: left;
 }
@@ -217,19 +232,20 @@ button:hover {
   background-color: white;
 }
 
-.table-wrapper {
+.table-wrapper, .lunchtime-wrapper {
   display: flex;
   flex-wrap: wrap;
 }
-.table-wrapper .table-item {
+.table-wrapper .table-item, .lunchtime-wrapper .table-item, .lunchtime-wrapper .lunchtime-card {
   flex: 1 1 auto;
-}
-
-.lunchtime-card {
-  border: solid white 1px;
-  min-width: 50%;
+  border: solid 2px white;
   margin: 10px;
   padding: 10px;
+}
+
+.refdata-head a {
+  text-decoration: none;
+  font-size: 40px;
 }
 
 /*# sourceMappingURL=body-style.css.map */

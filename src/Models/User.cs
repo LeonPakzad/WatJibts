@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class User : IdentityUser
 {
 
-    public TimeOnly? preferredLunchTime {get;set;}
+    public TimeOnly? preferredLunchTime {get;set;} = new TimeOnly(12,0,0); 
 
     [ForeignKey("Location")]
     public int? fk_defaultPlaceToEat {get; set;}
