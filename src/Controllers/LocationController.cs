@@ -67,7 +67,8 @@ public class LocationController : Controller
         _context.Location.Remove(oldLocation);
         _context.Location.Add(location);
         _context.SaveChanges();
-        return View(location);
+
+        return RedirectToAction("LocationIndex");
     }
 
     public async Task<IActionResult> LocationsForFood(int? id)

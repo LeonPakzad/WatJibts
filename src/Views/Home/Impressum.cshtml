@@ -1,5 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Impressum";
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<User> l
+
+@{
+
+    ViewData["Title"] = @l["impressum"];
 }
 <h1>@ViewData["Title"]</h1>
 

@@ -1,7 +1,9 @@
 @model User
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<User> l
 
 @{
-    ViewData["Title"] = "Edit User";
+    ViewData["Title"] = @l["edit_user"];
     ViewData["Active"] = "Home";
 }
 
@@ -18,13 +20,13 @@
 
     <div class="form-horizontal">
         <div class="form-field">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "form-label" })
+            <label class="form-label">@l["user_name"]</label>
             @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field">
-            @Html.LabelFor(model => model.preferredLunchTime, htmlAttributes: new { @class = "form-label " })
+            <label class="form-label"> @l["preferred_lunch_time"]</label>
             @Html.EditorFor(model => model.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.preferredLunchTime, "", new { @class = "text-danger" })
         </div>
@@ -32,27 +34,27 @@
 
     <div class="form-horizontal">
         <div class="form-field">
-            <label class="form-label">Place to Eat</label>
+            <label class="form-label">@l["place_to_eat"]</label>
             <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
-                <option value="-1">kein Ort</option>
+                <option value="-1">@l["no_place"]</option>
             </select>
             @Html.ValidationMessageFor(model => model.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field">
-            <label class="form-label">Place for Food</label>
+            <label class="form-label">@l["place_for_food"]</label>
             <select asp-for="fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
-                <option value="-1">kein Ort</option>
+                <option value="-1">@l["no_place"]</option>
             </select>
             @Html.ValidationMessageFor(model => model.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
         </div>
     </div>
     
     <div class="form-field submit-button">
-        <input type="submit" value="Save" class="btn btn-default" />
+        <input type="submit" value="@l["save"]" class="btn btn-default" />
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "UserIndex")
+    @Html.ActionLink(@l["back_to_list"], "UserIndex")
 </div>

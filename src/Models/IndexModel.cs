@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Collections;
 
-public class IndexModel
+public class HomeIndexModel
 {
     public ICollection<LunchSession>? publicLunchSessions{get;set;}
     public IEnumerable<LunchSession>? privateLunchSessions{get;set;}

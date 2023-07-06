@@ -1,14 +1,15 @@
 @model List<Location>;
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<User> l
 
 @{
-    ViewData["Title"] = "Locations";
+    ViewData["Title"] = @l["locations"];
     ViewData["Active"] = "Home";
 }
 
-
 <div class="refdata-head">
     <h1>@ViewData["Title"]</h1>
-    @Html.ActionLink("Add", "Add", new {})
+    @Html.ActionLink("+", "Add", new {})
 </div>
 
 <hr />
@@ -29,18 +30,18 @@
 
                 @if(@Model[index].isPlaceToEat){
                     <p>
-                       Ort zum essen 
+                       @l["place_to_eat"]
                     </p>
                 }
 
                 @if(@Model[index].isPlaceToGetFood){
                     <p>
-                       Ort für Essen 
+                       @l["place_for_food"] 
                     </p>
                 }
 
-                @Html.ActionLink("Edit", "Edit", new {Id = Model[index].Id})
-                @Html.ActionLink("Delete", "Delete", new {Id = Model[index].Id})
+                @Html.ActionLink(@l["edit"], "Edit", new {Id = Model[index].Id})
+                @Html.ActionLink(@l["delete"], "Delete", new {Id = Model[index].Id})
         </div>
     }
 </div>

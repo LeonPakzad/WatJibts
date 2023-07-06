@@ -228,7 +228,20 @@
         //     transform: scaleY(0);
         // }
     }
+
+    .language-select-wrapper {
+        position: absolute;
+        bottom: 0;
+        
+        select {
+            max-width: 200px;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+    }
 }
+
+
 
 @media (min-width: 768px) {
 

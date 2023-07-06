@@ -1,21 +1,18 @@
-﻿@model IndexModel
+﻿@model HomeIndexModel
 @using Microsoft.AspNetCore.Identity
-
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-<h1>Wilkommen zu WatJibts!</h1>
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<User> l
 
-<hr>
-<br>
+<h1>@l["welcome_to_watjibts"]</h1>
+
+<hr><br>
 
 @if (!SignInManager.IsSignedIn(User))
 {
-    <p>
-        Hier können Sie zusammen mit Freunden oder ihrem Team unterschiedliche arten von Essen organisieren.
-    </p>
-
-    <h2>Es scheint so als wären sie noch nicht angemeldet.</h2>
+    <h2>@l["not_logged_in"]</h2>
 }
 else
 {
@@ -40,7 +37,7 @@ else
                         {
                         }
                         else{
-                            <span>holt essen von:</span>
+                            <span>@l["get_food_from"]</span>
                             @lunchSession.fk_foodPlace
                         }
 
@@ -49,19 +46,19 @@ else
                             
                         }
                         else{
-                            <span>isst bei: </span>
+                            <span>@l["eats_at"]</span>
                             @lunchSession.fk_eatingPlace
                         }
                     </div>
 
                     @if(@lunchSession.fk_user.Contains(User.Identity.Name))
                     {
-                        <span>Das Jibts!</span>
+                        <span>@l["joined"]</span>
                     }
                     else
                     {
                         <div class="lunchtime-join">
-                            @Html.ActionLink("Anschließen", "JoinSession", new {lunchSessionId = lunchSession.Id})
+                            @Html.ActionLink(@l["join"], "JoinSession", new {lunchSessionId = lunchSession.Id})
                         </div>
                     }  
                 </div>
@@ -72,7 +69,7 @@ else
 
     @if (Model.privateLunchSessions.Count() > 0)
     {
-        <h2>Folgende Menschen essen heute nicht oder privat:</h2>
+        <h2>@l["private_lunchsession_heading"]</h2>
         @foreach(var lunchSession in Model.privateLunchSessions)
         {
             <div class="table-item">
@@ -84,7 +81,7 @@ else
     
     @if(Model.publicLunchSessions.Count() < 1 && Model.privateLunchSessions.Count() < 1)
     {
-        <p>Heute wurde noch keine Session hinzugefügt</p>
+        <p>@l["no_lunchsession_heading"]</p>
     }
 
     <br><hr>
@@ -96,39 +93,34 @@ else
             @Html.AntiForgeryToken()
             
             <div class="form-field participating-wrapper">
-                <label class="form-label">Participating</label>
+                <label class="form-checkbox-label">@l["participating"]</label>
                 @Html.CheckBox("participating", false)
             
                 <div class="lunchtime-details">
                     <div class="form-horizontal">
                         <div class="form-field-section">
                             <div class="form-field">
-                                <label class="form-label">Place to Eat</label>
+                                <label class="form-label">@l["place_to_eat"]</label>
                                 <select class="form-select" name="fk_eatingPlace" asp-for="LunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
-                                    <option value="-1">kein Ort</option>
+                                    <option value="-1">@l["no_place"]</option>
                                 </select>
                             </div>
 
                             <div class="form-field">
-                                <label class="form-label">Place for Food</label>
+                                <label class="form-label">@l["place_for_food"]</label>
                                 <select class="form-select" name="fk_foodPlace" asp-for="LunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
-                                        <option value="-1">keine Angabe</option>
+                                        <option value="-1">@l["no_place"]</option>
                                 </select>
                             </div>
 
-                            <a id="add-location" href="../Location/Add">Neuer Ort</a>
+                            <a id="add-location" href="../Location/Add">@l["new_place"]</a>
                         </div>
 
                         <div class="form-field-section">
                             <div class="form-field"> 
                                 <div class="time-container">
                                     <div class="form-field">
-                                        @* @Html.LabelFor(model => model.LunchSession.lunchTime, htmlAttributes: new { @class = "form-label " })
-                                        @Html.EditorFor(model => model.LunchSession.lunchTime, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.LunchSession.lunchTime, "", new { @class = "text-danger" }) *@
-                                        @* @Html.EditorFor(model => model.LunchSession.lunchTime, new { htmlAttributes = new { @class = "form-control", @min = "00:01", @max = "23:59",  } }) *@
-
-                                        <label class="form-label">LunchTime</label>
+                                        <label class="form-label">@l["lunch_time"]</label>
                                         <input type="datetime" id="lunchTime" name="lunchTime" min="00:01" max="23:59" value="@Model.LunchSession.lunchTime"/>
                                     </div>
                                 </div>
@@ -137,9 +129,9 @@ else
                     </div>
                 </div>
             </div>
-            <button type="submit" class="">Submit</button>
+            <button type="submit" class="">
+                @l["submit"]
+            </button>
         }
     </div>
 }
-
-@Html.ActionLink("clear todays lunch sessions","clearTodaysLunchSessions")

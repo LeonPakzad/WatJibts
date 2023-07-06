@@ -1,7 +1,9 @@
 @model Location;
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<User> l
 
 @{
-    ViewData["Title"] = "Add Location";
+    ViewData["Title"] = @l["add_location"];
     ViewData["Active"] = "Home";
 }
 
@@ -32,13 +34,13 @@
 
     <div class="form-horizontal">
         <div class="form-field">
-            @Html.LabelFor(model => model.isPlaceToGetFood, htmlAttributes: new { @class = "form-label " })
+            @Html.LabelFor(model => model.isPlaceToGetFood, htmlAttributes: new { @class = "form-checkbox-label " })
             @Html.CheckBoxFor(model=> model.isPlaceToGetFood, "")
             @Html.ValidationMessageFor(model => model.isPlaceToGetFood, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field">
-            @Html.LabelFor(model => model.isPlaceToEat, htmlAttributes: new { @class = "form-label" })
+            @Html.LabelFor(model => model.isPlaceToEat, htmlAttributes: new { @class = "form-checkbox-label" })
             @Html.EditorFor(model => model.isPlaceToEat, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.isPlaceToEat, "", new { @class = "text-danger" })
         </div>
@@ -46,10 +48,10 @@
     </div>
 
     <div class="form-field submit-button">
-        <input type="submit" value="Save" class="btn btn-default" />
+        <input type="submit" value=@l["save"] class="btn btn-default" />
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "LocationIndex")
+    @Html.ActionLink(@l["back_to_list"], "LocationIndex")
 </div>

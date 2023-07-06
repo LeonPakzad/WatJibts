@@ -149,6 +149,11 @@ button:hover {
         border: solid 1px;
         border-radius: 0;
     }
+
+    .form-checkbox-label {
+        @extend .form-label;
+        left: 35%;
+    }
     
     .form-control {
 
@@ -166,7 +171,6 @@ button:hover {
 }
 
 .table-wrapper {
-    
     display: flex;
     flex-wrap: wrap;
     
@@ -179,10 +183,22 @@ button:hover {
 }
 
 .refdata-head {
-    a{
+    a {
+        position: absolute;
+        right: 20px;
+        bottom: 75px;
+
+        width: 55px;
+        font-size: 50px;
         text-decoration: none;
-        font-size: 40px;
+        
+        border: 2px solid white;
+        background: black;
     }
+}
+
+.form-field.table-item {
+    border: none !important;
 }
 
 .lunchtime-wrapper {
@@ -194,7 +210,7 @@ button:hover {
     .lunchtime-card {
 
         @extend .table-item;
-        // border: solid white 1px;
+
         // margin: 10px;
         // padding: 10px;
         

@@ -218,7 +218,7 @@ button:hover {
 .form-field {
   position: relative;
 }
-.form-field .form-label {
+.form-field .form-label, .form-field .form-checkbox-label {
   position: absolute;
   top: 0%;
   min-width: 100px;
@@ -226,6 +226,9 @@ button:hover {
   background: black;
   border: solid 1px;
   border-radius: 0;
+}
+.form-field .form-checkbox-label {
+  left: 35%;
 }
 .form-field .form-select select option {
   background-color: #110220;
@@ -244,8 +247,18 @@ button:hover {
 }
 
 .refdata-head a {
+  position: absolute;
+  right: 20px;
+  bottom: 75px;
+  width: 55px;
+  font-size: 50px;
   text-decoration: none;
-  font-size: 40px;
+  border: 2px solid white;
+  background: black;
+}
+
+.form-field.table-item, .lunchtime-wrapper .form-field.lunchtime-card {
+  border: none !important;
 }
 
 /*# sourceMappingURL=body-style.css.map */

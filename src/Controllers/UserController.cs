@@ -78,7 +78,8 @@ namespace src.Controllers {
 
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
             ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
-            return View(user);
+
+            return RedirectToAction("UserIndex");
         }
 
         public ActionResult Delete(string id)

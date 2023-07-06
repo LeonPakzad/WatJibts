@@ -235,5 +235,14 @@ hr {
 .navbar .nav-container input[type=checkbox]:checked ~ .hamburger-lines {
   justify-content: space-between;
 }
+.navbar .language-select-wrapper {
+  position: absolute;
+  bottom: 0;
+}
+.navbar .language-select-wrapper select {
+  max-width: 200px;
+  margin: 0;
+  margin-bottom: 5px;
+}
 
 /*# sourceMappingURL=menu-style.css.map */

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Diagnostics;
 using System.Dynamic;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using src.Data;
@@ -17,6 +18,17 @@ public class HomeController : Controller
         _context = context;
     }
 
+    [HttpPost]
+    public IActionResult SetLanguage(string culture, string returnUrl)
+    {
+        Response.Cookies.Append(
+            CookieRequestCultureProvider.DefaultCookieName,
+            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMinutes(10) });
+
+        return LocalRedirect(returnUrl);
+    }
+
     private IEnumerable<LunchSession> getTodaysLunchSessions()
     {
         return  _context.LunchSession.Where
@@ -31,14 +43,14 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        IndexModel IndexModel       = new IndexModel();
-        LunchSession lunchSession   = new LunchSession();
+        HomeIndexModel HomeIndexModel   = new HomeIndexModel();
+        LunchSession lunchSession       = new LunchSession();
 
         // If there is already a lunchsession from the user, fill the data of this lunch session into the form. 
         // If not, fill the form with the user preferred setings 
         if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any())
         {
-            IndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+            HomeIndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
         }
         else if (_context.User.Where(u => u.Email == User.Identity.Name).Any())
         {
@@ -51,17 +63,17 @@ public class HomeController : Controller
             
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
-            IndexModel.LunchSession = new LunchSession();
-            IndexModel.LunchSession.fk_eatingPlace = currentUser.fk_defaultPlaceToEat;
-            IndexModel.LunchSession.fk_foodPlace = currentUser.fk_defaultPlaceToGetFood;
+            HomeIndexModel.LunchSession = new LunchSession();
+            HomeIndexModel.LunchSession.fk_eatingPlace = currentUser.fk_defaultPlaceToEat;
+            HomeIndexModel.LunchSession.fk_foodPlace = currentUser.fk_defaultPlaceToGetFood;
 
-            IndexModel.LunchSession.lunchTime = DateTime.Now.AddHours(currentUser.preferredLunchTime.Value.Hour);
-            IndexModel.LunchSession.lunchTime = DateTime.Now.AddMinutes(currentUser.preferredLunchTime.Value.Minute);
+            HomeIndexModel.LunchSession.lunchTime = DateTime.Now.AddHours(currentUser.preferredLunchTime.Value.Hour);
+            HomeIndexModel.LunchSession.lunchTime = DateTime.Now.AddMinutes(currentUser.preferredLunchTime.Value.Minute);
         }
         else
         {
-            IndexModel.LunchSession = new LunchSession(); 
-            IndexModel.LunchSession.lunchTime = DateTime.UtcNow;  
+            HomeIndexModel.LunchSession = new LunchSession(); 
+            HomeIndexModel.LunchSession.lunchTime = DateTime.UtcNow;  
         }
 
         // get locations
@@ -71,16 +83,16 @@ public class HomeController : Controller
         //get grouped lists of todays lunchsessions
         IEnumerable<LunchSession> todaysLunchSessions = getTodaysLunchSessions();
 
-        IndexModel.publicLunchSessions  = IndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
-        IndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
+        HomeIndexModel.publicLunchSessions  = HomeIndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
+        HomeIndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
 
-        return View(IndexModel);
+        return View(HomeIndexModel);
     }
 
     [HttpPost]
     public IActionResult Index(DateTime lunchTime, bool participating, int fk_foodPlace, int fk_eatingPlace)
     {
-        IndexModel IndexModel       = new IndexModel();
+        HomeIndexModel HomeIndexModel       = new HomeIndexModel();
         LunchSession lunchSession   = new LunchSession();
 
         bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
@@ -108,15 +120,15 @@ public class HomeController : Controller
 
         //get grouped lists of todays lunchsessions
         IEnumerable<LunchSession> todaysLunchSessions = getTodaysLunchSessions();
-        IndexModel.publicLunchSessions  = IndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
-        IndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
-        IndexModel.LunchSession = lunchSession;
+        HomeIndexModel.publicLunchSessions  = HomeIndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
+        HomeIndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
+        HomeIndexModel.LunchSession = lunchSession;
 
         // If there is already a lunchsession from the user, fill the data of this lunch session into the form. 
         // If not, fill the form with the user preferred setings 
         if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any())
         {
-            IndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+            HomeIndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
         }
         else if (_context.User.Where(u => u.Email == User.Identity.Name).Any())
         {
@@ -129,26 +141,26 @@ public class HomeController : Controller
             
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
-            IndexModel.LunchSession = new LunchSession();
-            IndexModel.LunchSession.fk_eatingPlace = currentUser.fk_defaultPlaceToEat;
-            IndexModel.LunchSession.fk_foodPlace = currentUser.fk_defaultPlaceToGetFood;
+            HomeIndexModel.LunchSession = new LunchSession();
+            HomeIndexModel.LunchSession.fk_eatingPlace = currentUser.fk_defaultPlaceToEat;
+            HomeIndexModel.LunchSession.fk_foodPlace = currentUser.fk_defaultPlaceToGetFood;
 
-            IndexModel.LunchSession.lunchTime = DateTime.Now.AddHours(currentUser.preferredLunchTime.Value.Hour);
-            IndexModel.LunchSession.lunchTime = DateTime.Now.AddMinutes(currentUser.preferredLunchTime.Value.Minute);
+            HomeIndexModel.LunchSession.lunchTime = DateTime.Now.AddHours(currentUser.preferredLunchTime.Value.Hour);
+            HomeIndexModel.LunchSession.lunchTime = DateTime.Now.AddMinutes(currentUser.preferredLunchTime.Value.Minute);
         }
         else
         {
-            IndexModel.LunchSession = new LunchSession(); 
-            IndexModel.LunchSession.lunchTime = DateTime.Now;  
+            HomeIndexModel.LunchSession = new LunchSession(); 
+            HomeIndexModel.LunchSession.lunchTime = DateTime.Now;  
         }
         
-        IndexModel.LunchSession     = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+        HomeIndexModel.LunchSession     = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
 
         // get locations
         ViewBag.LocationsToEat      = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
         ViewBag.LocationsToGetFood  = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
-        return View(IndexModel);
+        return View(HomeIndexModel);
     }
 
     public IActionResult Impressum()

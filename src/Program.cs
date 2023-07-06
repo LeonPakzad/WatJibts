@@ -6,6 +6,9 @@ using SendGrid.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using WebPWrecover.Services;
 using WebAppIdentity;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,31 +55,59 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
     options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
 
     options.LoginPath = "/Identity/Account/Login";
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
 
-// builder.Services.AddSendGrid(options => {
-//     options.ApiKey = builder.Configuration.GetSection("EmailSettings:ApiKey").Value!;
-// });
+
 builder.Services.AddTransient<IEmailSender, SendGridEmailSender>();
-// builder.Services.AddTransient<IEmailSender, EmailSender>();
-// builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
+
+builder.Services.AddLocalization(options=>
+{
+    options.ResourcesPath = "Resources";
+});
+
+builder.Services
+      .AddMvc()
+      .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    // var supportedCultures = new[]
+    // {
+    //     new CultureInfo("de-DE"),
+    //     new CultureInfo("en-US")
+    // };
+
+    // options.DefaultRequestCulture = new RequestCulture("en-US");
+    // options.SupportedCultures = supportedCultures;
+    // options.SupportedUICultures = supportedCultures;
+
+    var supportedCultures = new[] { "en-US", "de-DE" };
+    options.SetDefaultCulture(supportedCultures[0])
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures);
+});
+
+//todo: add code to safe localisation between requests
+// builder.Services.AddScoped<RequestLocalizationCookiesMiddleWear>();
 
 var app = builder.Build();
 
- app.Use(async (context, next) =>
+app.UseRequestLocalization();
+
+app.Use(async (context, next) =>
+{
+    await next();
+    if (context.Response.StatusCode == 404)
     {
+        context.Request.Path = "/404";
         await next();
-        if (context.Response.StatusCode == 404)
-        {
-            context.Request.Path = "/404";
-            await next();
-        }
-    });
+    }
+});
 
 // seed db
 using (var scope = app.Services.CreateScope())
@@ -90,7 +121,6 @@ using (var scope = app.Services.CreateScope())
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
