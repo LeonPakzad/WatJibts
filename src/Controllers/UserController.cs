@@ -33,7 +33,11 @@ namespace src.Controllers {
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
             ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
 
-            return View(_context.User.Find(userId));
+            UserProfile userProfile = new UserProfile();
+            userProfile.User = _context.User.Find(userId);
+            userProfile.userLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == userId);
+
+            return View(userProfile);
         }
 
         [HttpPost]
@@ -50,6 +54,8 @@ namespace src.Controllers {
             
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
             ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+
+
 
             return View(user);
         }

@@ -1,4 +1,4 @@
-@model User;
+@model UserProfile;
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<User> l
     
@@ -12,7 +12,6 @@
 
 @using (Html.BeginForm())
 {
-    
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
@@ -20,32 +19,32 @@
 
         <div class="form-field">
             <label class="form-label">@l["user_name"]</label>
-            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.User.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field">
             <label class="form-label"> @l["preferred_lunch_time"]</label>
-            @Html.EditorFor(model => model.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.preferredLunchTime, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.User.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.preferredLunchTime, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-horizontal">
 
         <div class="form-field">
             <label class="form-label">@l["place_to_eat"]</label>            
-            <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
+            <select asp-for="User.fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
                 <option value="-1">@l["no_place"]</option>
             </select>
-            @Html.ValidationMessageFor(model => model.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.User.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field">
             <label class="form-label">@l["place_for_food"]</label>
-            <select asp-for="fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
+            <select asp-for="User.fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
                 <option value="-1">@l["no_place"]</option>
             </select>
-            @Html.ValidationMessageFor(model => model.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.User.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
         </div>
 
     </div>
@@ -56,6 +55,44 @@
 
     <a id="forgot-password" href="../Identity/Account/ForgotPassword">@l["reset_password"]</a>
 }
+
+@if(Model.userLunchSessions.Count() > 0) 
+{
+    <div class="lunchtime-wrapper">
+    @foreach(var lunchSession in Model.userLunchSessions)
+    {
+        if(lunchSession.fk_user != null)
+        {
+            <div class="lunchtime-card">
+
+                <div class="lunchtime-time">
+                    @lunchSession.lunchTime
+                </div>
+
+                <div class="lunchtime-places">
+                    @if(@lunchSession.fk_foodPlace == -1)
+                    {
+                    }
+                    else{
+                        <span>@l["get_food_from"]</span>
+                        @lunchSession.fk_foodPlace
+                    }
+
+                    @if(@lunchSession.fk_eatingPlace == -1)
+                    {
+                        
+                    }
+                    else{
+                        <span>@l["eats_at"]</span>
+                        @lunchSession.fk_eatingPlace
+                    }
+                </div>
+            </div>
+        }
+    }
+    </div>
+}
+
 <div>
     @Html.ActionLink(@l["back_to_list"], "UserIndex")
 </div>

@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using src.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-public class UserEdit
+public class UserProfile
 {
     public User? User{get;set;}
-    public List<SelectListItem> LocationsToEat { get; set; }
-    public List<SelectListItem> LocationsToGetFood { get; set; }
+    public IEnumerable<LunchSession>? userLunchSessions {get;set;}
+
 }

@@ -15,15 +15,6 @@ header {
   background-color: black;
 }
 
-footer {
-  background-color: black;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
-}
-
 h1 {
   font-family: beonregular;
   color: #E200F7;

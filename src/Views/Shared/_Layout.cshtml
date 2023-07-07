@@ -102,6 +102,8 @@
                                     <div class="menu-items">
                                         @Html.ActionLink(@l["clear_todays_lunch_sessions"],"clearTodaysLunchSessions")
                                     </div>
+
+
                                 }
                                 else 
                                 {
@@ -116,6 +118,12 @@
                                         </a>
                                     </li>
                                 }
+                                
+                                <br><br><hr><br>
+                                
+                                <div class="">
+                                    &copy; 2023 - src - <a asp-area="" asp-controller="Home" asp-action="Impressum">@l["imprint"]</a>
+                                </div>
                             }
                         </div>
                     </div>
@@ -131,12 +139,6 @@
         </main>
     </div>
 
-    <footer class="">
-        <div class="">
-            &copy; 2023 - src - <a asp-area="" asp-controller="Home" asp-action="Impressum">@l["imprint"]</a>
-        </div>
-    </footer>
-    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
