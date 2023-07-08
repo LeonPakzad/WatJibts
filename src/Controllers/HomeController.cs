@@ -48,9 +48,9 @@ public class HomeController : Controller
 
         // If there is already a lunchsession from the user, fill the data of this lunch session into the form. 
         // If not, fill the form with the user preferred setings 
-        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any())
+        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == User.Identity.Name).Any())
         {
-            HomeIndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+            HomeIndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == User.Identity.Name).FirstOrDefault();
         }
         else if (_context.User.Where(u => u.Email == User.Identity.Name).Any())
         {

@@ -24,18 +24,18 @@ namespace src.Controllers {
 
         public IActionResult Profile()
         {
-            string userId = HttpContext.User.Identity.Name;
+            UserProfile userProfile = new UserProfile();
+            string user = User.Identity.Name;
 
-            if(userId == null) {
+            if(user == null) {
                 return NotFound();
             }
             
-            ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
-            ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+            ViewBag.locationsToEat      = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
+            ViewBag.locationsToGetFood  = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
-            UserProfile userProfile = new UserProfile();
-            userProfile.User = _context.User.Find(userId);
-            userProfile.userLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == userId);
+            userProfile.user = _context.User.Where(p => p.Email == user).First();
+            userProfile.userLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == user);
 
             return View(userProfile);
         }
@@ -43,7 +43,7 @@ namespace src.Controllers {
         [HttpPost]
         public IActionResult Profile(User user)
         {
-            var currentUser = _context.User.Where(u => u.Id == user.Id).FirstOrDefault();
+            var currentUser = _context.User.Where(u => u.Email == User.Identity.Name).First();
             
             currentUser.UserName = user.UserName;
             currentUser.fk_defaultPlaceToEat = user.fk_defaultPlaceToEat;
@@ -51,13 +51,8 @@ namespace src.Controllers {
             currentUser.preferredLunchTime = user.preferredLunchTime;
 
             _context.SaveChanges();
-            
-            ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
-            ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
 
-
-
-            return View(user);
+            return RedirectToAction("Profile");
         }
 
         public ActionResult Edit(string Id)
@@ -106,6 +101,22 @@ namespace src.Controllers {
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public ActionResult DeleteProfileLunchSession(int id)
+        {
+            _context.LunchSession.Remove(_context.LunchSession.Where(l=>l.Id == id).First());
+            _context.SaveChanges();
+
+            return RedirectToAction("Profile");
+        }
+
+        public ActionResult DeleteProfileLunchSessions()
+        {
+            _context.LunchSession.RemoveRange(_context.LunchSession.Where(l=> l.fk_user == User.Identity.Name));
+            _context.SaveChanges();
+        
+            return RedirectToAction("Profile");
         }
     }
 }

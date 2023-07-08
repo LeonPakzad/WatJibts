@@ -25,9 +25,6 @@ namespace src.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("day")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<int?>("fk_eatingPlace")
                         .HasColumnType("int");
 

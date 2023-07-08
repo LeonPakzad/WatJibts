@@ -19,32 +19,32 @@
 
         <div class="form-field">
             <label class="form-label">@l["user_name"]</label>
-            @Html.EditorFor(model => model.User.UserName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.user.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.user.UserName, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field">
             <label class="form-label"> @l["preferred_lunch_time"]</label>
-            @Html.EditorFor(model => model.User.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.User.preferredLunchTime, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.user.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.user.preferredLunchTime, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-horizontal">
 
         <div class="form-field">
             <label class="form-label">@l["place_to_eat"]</label>            
-            <select asp-for="User.fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
+            <select asp-for="user.fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
                 <option value="-1">@l["no_place"]</option>
             </select>
-            @Html.ValidationMessageFor(model => model.User.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.user.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field">
             <label class="form-label">@l["place_for_food"]</label>
-            <select asp-for="User.fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
+            <select asp-for="user.fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
                 <option value="-1">@l["no_place"]</option>
             </select>
-            @Html.ValidationMessageFor(model => model.User.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.user.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
         </div>
 
     </div>
@@ -66,7 +66,7 @@
             <div class="lunchtime-card">
 
                 <div class="lunchtime-time">
-                    @lunchSession.lunchTime
+                    @lunchSession.lunchTime.ToString("dd.mm.yyyy, hh:mm tt")
                 </div>
 
                 <div class="lunchtime-places">
@@ -87,10 +87,15 @@
                         @lunchSession.fk_eatingPlace
                     }
                 </div>
+
+                @Html.ActionLink(@l["delete_session"], "DeleteProfileLunchSession", new {id = lunchSession.Id})
             </div>
         }
     }
     </div>
+
+    @Html.ActionLink(@l["delete_profile_sessions"], "DeleteProfileLunchSessions")
+
 }
 
 <div>

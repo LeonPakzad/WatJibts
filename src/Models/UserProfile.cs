@@ -5,7 +5,6 @@ using src.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 public class UserProfile
 {
-    public User? User{get;set;}
+    public User? user {get;set;}
     public IEnumerable<LunchSession>? userLunchSessions {get;set;}
-
 }

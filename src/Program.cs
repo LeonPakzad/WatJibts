@@ -12,6 +12,15 @@ using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#if DEBUG
+{
+// watch for changes in css
+builder.Services.AddHostedService(sp => new NpmWatchHostedService(
+                enabled: sp.GetRequiredService<IWebHostEnvironment>().IsDevelopment(),
+                logger: sp.GetRequiredService<ILogger<NpmWatchHostedService>>()));
+}
+#endif
+
 // add database
 builder.Services.AddDbContext<WatDbContext>(options =>{
         options.UseMySql(
@@ -26,14 +35,6 @@ builder.Services.AddDefaultIdentity<User>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-#if DEBUG
-{
-// watch for changes in css
-builder.Services.AddHostedService(sp => new NpmWatchHostedService(
-                enabled: sp.GetRequiredService<IWebHostEnvironment>().IsDevelopment(),
-                logger: sp.GetRequiredService<ILogger<NpmWatchHostedService>>()));
-}
-#endif
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings.
@@ -76,24 +77,11 @@ builder.Services
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    // var supportedCultures = new[]
-    // {
-    //     new CultureInfo("de-DE"),
-    //     new CultureInfo("en-US")
-    // };
-
-    // options.DefaultRequestCulture = new RequestCulture("en-US");
-    // options.SupportedCultures = supportedCultures;
-    // options.SupportedUICultures = supportedCultures;
-
     var supportedCultures = new[] { "en-US", "de-DE" };
     options.SetDefaultCulture(supportedCultures[0])
         .AddSupportedCultures(supportedCultures)
         .AddSupportedUICultures(supportedCultures);
 });
-
-//todo: add code to safe localisation between requests
-// builder.Services.AddScoped<RequestLocalizationCookiesMiddleWear>();
 
 var app = builder.Build();
 

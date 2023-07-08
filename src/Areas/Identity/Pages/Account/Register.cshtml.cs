@@ -70,7 +70,7 @@ namespace src.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
+            // [Required]
             [Display(Name = "Username")]
             public string UserName { get; set; }
             
