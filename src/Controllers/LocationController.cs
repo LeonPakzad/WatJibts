@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Dynamic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using src.Data;
 using src.Models;
@@ -17,12 +18,14 @@ public class LocationController : Controller
         _context = context;
     }
 
+    [Authorize]
     public ActionResult LocationIndex()
     {
         return View(_context.Location.ToList());
     }
 
     [HttpGet]
+    [Authorize]
     public ActionResult Add()
     {
         var location = new Location();
@@ -30,6 +33,7 @@ public class LocationController : Controller
     }
 
     [HttpPost]
+    [Authorize]
     public ActionResult Add(Location location)
     {
         _context.Add(location);
@@ -37,6 +41,7 @@ public class LocationController : Controller
         return View("LocationIndex", _context.Location.ToList());
     }
 
+    [Authorize]
     public async Task<IActionResult> LocationById(int? id)
     {
         if (id == null)
@@ -54,6 +59,7 @@ public class LocationController : Controller
         return View(location);
     }
 
+    [Authorize]
     public ActionResult Edit(int Id)
     {
         var location = _context.Location.Where(l => l.Id == Id).FirstOrDefault();
@@ -61,6 +67,7 @@ public class LocationController : Controller
     }
 
     [HttpPost]
+    [Authorize]
     public ActionResult Edit(Location location)
     {
         var oldLocation = _context.Location.Where(l => l.Id == location.Id).FirstOrDefault();
@@ -71,6 +78,7 @@ public class LocationController : Controller
         return RedirectToAction("LocationIndex");
     }
 
+    [Authorize]
     public async Task<IActionResult> LocationsForFood(int? id)
     {
         if (id == null)
@@ -88,6 +96,8 @@ public class LocationController : Controller
         return View(location);
     }
 
+    [HttpPost]
+    [Authorize]
     public ActionResult Delete(int id)
     {
         var location = _context.Location.Find(id);

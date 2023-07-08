@@ -6,6 +6,7 @@ using src.Data;
 using src.Models;
 using Microsoft.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace src.Controllers {
     public class UserController : Controller
@@ -17,11 +18,19 @@ namespace src.Controllers {
             _context = context;
         }
 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Authorize]
         public IActionResult UserIndex()
         {
             return View(_context.User.ToList());
         }
 
+        [Authorize]
         public IActionResult Profile()
         {
             UserProfile userProfile = new UserProfile();
@@ -41,6 +50,7 @@ namespace src.Controllers {
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Profile(User user)
         {
             var currentUser = _context.User.Where(u => u.Email == User.Identity.Name).First();
@@ -55,6 +65,7 @@ namespace src.Controllers {
             return RedirectToAction("Profile");
         }
 
+        [Authorize]
         public ActionResult Edit(string Id)
         {
             var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
@@ -66,6 +77,7 @@ namespace src.Controllers {
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(User user)
         {
             var currentUser = _context.User.Where(u => u.Id == user.Id).FirstOrDefault();
@@ -83,6 +95,8 @@ namespace src.Controllers {
             return RedirectToAction("UserIndex");
         }
 
+        [HttpPost]
+        [Authorize]
         public ActionResult Delete(string id)
         {
             var user = _context.User.Find(id);
@@ -97,12 +111,8 @@ namespace src.Controllers {
             return RedirectToAction("UserIndex");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
+        [HttpPost]
+        [Authorize]
         public ActionResult DeleteProfileLunchSession(int id)
         {
             _context.LunchSession.Remove(_context.LunchSession.Where(l=>l.Id == id).First());
@@ -111,6 +121,8 @@ namespace src.Controllers {
             return RedirectToAction("Profile");
         }
 
+        [HttpPost]
+        [Authorize]
         public ActionResult DeleteProfileLunchSessions()
         {
             _context.LunchSession.RemoveRange(_context.LunchSession.Where(l=> l.fk_user == User.Identity.Name));

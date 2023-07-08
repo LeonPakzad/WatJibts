@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Dynamic;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using src.Data;
@@ -90,6 +91,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
+    [Authorize]
     public IActionResult Index(DateTime lunchTime, bool participating, int fk_foodPlace, int fk_eatingPlace)
     {
         HomeIndexModel HomeIndexModel       = new HomeIndexModel();
@@ -187,6 +189,8 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    [HttpPost]
+    [Authorize]
     public IActionResult JoinSession(int lunchSessionId)
     {
         LunchSession lunchSession = new LunchSession();
@@ -195,9 +199,6 @@ public class HomeController : Controller
         // check if the user already has a lunch Session
         bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
         
-        _context.LunchSession.Where
-                (l => l.lunchTime.Date == DateTime.Today);
-
         if(lunchSessionExists)
         {
             lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
@@ -220,6 +221,8 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
+    [HttpPost]
+    [Authorize]
     public IActionResult clearTodaysLunchSessions()
     {
         _context.LunchSession.RemoveRange(_context.LunchSession.Where
