@@ -96,7 +96,6 @@ public class LocationController : Controller
         return View(location);
     }
 
-    [HttpPost]
     [Authorize]
     public ActionResult Delete(int id)
     {

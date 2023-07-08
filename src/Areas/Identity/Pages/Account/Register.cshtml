@@ -1,13 +1,16 @@
 ﻿@page
 @model RegisterModel
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<LoginModel> l
+
 @{
-    ViewData["Title"] = "Registrierung";
+    ViewData["Title"] = @l["register"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <p> 
-    Erstellen Sie einen Account, um sich zusammen mit den Anderen mit dem Essen abzustimmen
+    @l["register_intro"]
 </p>
 
 <hr />
@@ -18,7 +21,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
         <div class="form-field">
-            <label class="form-label"   asp-for="Input.Email">Email</label>
+            <label class="form-label"   asp-for="Input.Email">@l["email"]</label>
             <input class="form-control" asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
             <span  class="form-error"   asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
@@ -30,17 +33,17 @@
         </div> *@
 
         <div class="form-field">
-            <label class="form-label"   asp-for="Input.Password">Password</label>
+            <label class="form-label"   asp-for="Input.Password">@l["password"]</label>
             <input class="form-control" asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="password" />
             <span  class="form-error"   asp-validation-for="Input.Password"></span>
         </div>
 
         <div class="form-field">
-            <label class="form-label"   asp-for="Input.ConfirmPassword">Confirm Password</label>
+            <label class="form-label"   asp-for="Input.ConfirmPassword">@l["confirm_password"]</label>
             <input class="form-control" asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="password" />
             <span  class="form-error"   asp-validation-for="Input.ConfirmPassword"></span>
         </div>
 
-        <button id="registerSubmit" type="submit" class="submit">Register</button>
+        <button id="registerSubmit" type="submit" class="submit">@l["register"]</button>
     </form>
 </div>

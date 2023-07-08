@@ -125,7 +125,7 @@
     <value>Benutzer</value>
     <comment/>
   </data>
-  <data name="Login" xml:space="preserve">
+  <data name="log_in" xml:space="preserve">
     <value>Anmelden</value>
     <comment/>
   </data>
@@ -207,6 +207,10 @@
   </data>
   <data name="user_name" xml:space="preserve">
     <value>Nutzername</value>
+    <comment/>
+  </data>
+  <data name="register_intro" xml:space="preserve">
+    <value>Erstellen Sie einen Account, um sich zusammen mit den Anderen mit dem Essen abzustimmen</value>
     <comment/>
   </data>
 </root>

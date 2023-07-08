@@ -95,7 +95,6 @@ namespace src.Controllers {
             return RedirectToAction("UserIndex");
         }
 
-        [HttpPost]
         [Authorize]
         public ActionResult Delete(string id)
         {
@@ -111,7 +110,6 @@ namespace src.Controllers {
             return RedirectToAction("UserIndex");
         }
 
-        [HttpPost]
         [Authorize]
         public ActionResult DeleteProfileLunchSession(int id)
         {
@@ -121,7 +119,6 @@ namespace src.Controllers {
             return RedirectToAction("Profile");
         }
 
-        [HttpPost]
         [Authorize]
         public ActionResult DeleteProfileLunchSessions()
         {

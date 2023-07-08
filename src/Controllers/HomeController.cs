@@ -189,7 +189,6 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    [HttpPost]
     [Authorize]
     public IActionResult JoinSession(int lunchSessionId)
     {
@@ -199,6 +198,9 @@ public class HomeController : Controller
         // check if the user already has a lunch Session
         bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
         
+        _context.LunchSession.Where
+                (l => l.lunchTime.Date == DateTime.Today);
+
         if(lunchSessionExists)
         {
             lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
