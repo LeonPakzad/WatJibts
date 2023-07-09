@@ -14,6 +14,17 @@ namespace src.Models {
         [ForeignKey("Location")]
         public bool isPlaceToGetFood {get; set;}
 
+        // optional vars
+        public string? diet {get; set;}
+        public string? dish {get; set;}
+        public string? amenity {get; set;}
+        public string? cuisine {get; set;}        
+        public double? latitude {get; set;}
+        public double? longditude {get; set;}
+        public string? website_adress {get; set;}
+        public string? address_number {get; set;}
+        public string? address_street {get; set;}
+
         public static implicit operator Location(SelectList v)
         {
             throw new NotImplementedException();

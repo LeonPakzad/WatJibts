@@ -256,7 +256,25 @@ namespace src.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("address_number")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("address_street")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("amenity")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("cuisine")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("description")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("diet")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("dish")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("isPlaceToEat")
@@ -265,7 +283,16 @@ namespace src.Migrations
                     b.Property<bool>("isPlaceToGetFood")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<double?>("latitude")
+                        .HasColumnType("double");
+
+                    b.Property<double?>("longditude")
+                        .HasColumnType("double");
+
                     b.Property<string>("name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("website_adress")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
