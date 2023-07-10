@@ -33,7 +33,6 @@ else
                     </div>
 
                     <div class="lunchtime-places">
-
                         @if(@lunchSession.fk_foodPlace == -1)
                         {
                         }
@@ -44,11 +43,17 @@ else
 
                         @if(@lunchSession.fk_eatingPlace == -1)
                         {
-                            
                         }
                         else{
-                            <span>@l["eats_at"]</span>
-                            @lunchSession.fk_eatingPlace
+                            @if(@lunchSession.fk_foodPlace == @lunchSession.fk_eatingPlace)
+                            {
+                                <span>@l["and_eat_there"]</span>
+                            }
+                            else
+                            {
+                                <span>@l["eats_at"]</span>
+                                @lunchSession.fk_eatingPlace
+                            }
                         }
                     </div>
 

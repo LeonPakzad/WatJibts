@@ -223,7 +223,6 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
-    [HttpPost]
     [Authorize]
     public IActionResult clearTodaysLunchSessions()
     {
