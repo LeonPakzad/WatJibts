@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ExampleApplication
+namespace SassCheck
 {
 #if DEBUG
     internal sealed class NpmWatchHostedService : IHostedService, IDisposable
