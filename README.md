@@ -31,7 +31,7 @@ dotnet ef database update
 add sendgrid api key, go to https://sendgrid.com and set the user-secrets as follows:
 
 ```
-dotnet user-serets init
+dotnet user-secrets init
 dotnet user-secrets set SendGridKey <key>
 ```
 

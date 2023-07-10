@@ -33,19 +33,19 @@
 
     <div class="form-horizontal">
         <div class="form-field">
-            <label class="form-label">@l["place_to_eat"]</label>
-            <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
-                <option value="-1">@l["no_place"]</option>
-            </select>
-            @Html.ValidationMessageFor(model => model.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-field">
             <label class="form-label">@l["place_for_food"]</label>
             <select asp-for="fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
                 <option value="-1">@l["no_place"]</option>
             </select>
             @Html.ValidationMessageFor(model => model.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
+        </div>
+        
+        <div class="form-field">
+            <label class="form-label">@l["place_to_eat"]</label>
+            <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
+                <option value="-1">@l["no_place"]</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
         </div>
     </div>
     

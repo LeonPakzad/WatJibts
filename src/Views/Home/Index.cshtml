@@ -105,17 +105,18 @@ else
                 <div class="lunchtime-details">
                     <div class="form-horizontal">
                         <div class="form-field-section">
-                            <div class="form-field">
-                                <label class="form-label">@l["place_to_eat"]</label>
-                                <select class="form-select" name="fk_eatingPlace" asp-for="LunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
-                                    <option value="-1">@l["no_place"]</option>
-                                </select>
-                            </div>
 
                             <div class="form-field">
                                 <label class="form-label">@l["place_for_food"]</label>
                                 <select class="form-select" name="fk_foodPlace" asp-for="LunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
                                         <option value="-1">@l["no_place"]</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label class="form-label">@l["place_to_eat"]</label>
+                                <select class="form-select" name="fk_eatingPlace" asp-for="LunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
+                                    <option value="-1">@l["no_place"]</option>
                                 </select>
                             </div>
 
