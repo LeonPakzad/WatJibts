@@ -1,9 +1,9 @@
 @model User
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<User> l
+@inject IStringLocalizer<Localizer> l
 
 @{
-    ViewData["Title"] = @l["edit_user"];
+    ViewData["Title"] = @l["edit user"];
     ViewData["Active"] = "Home";
 }
 
@@ -19,13 +19,13 @@
 
     <div class="form-horizontal">
         <div class="form-field">
-            <label class="form-label">@l["user_name"]</label>
+            <label class="form-label">@l["username"]</label>
             @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field">
-            <label class="form-label"> @l["preferred_lunch_time"]</label>
+            <label class="form-label"> @l["preferred lunch time"]</label>
             @Html.EditorFor(model => model.preferredLunchTime, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.preferredLunchTime, "", new { @class = "text-danger" })
         </div>
@@ -33,15 +33,15 @@
 
     <div class="form-horizontal">
         <div class="form-field">
-            <label class="form-label">@l["place_for_food"]</label>
+            <label class="form-label">@l["place for food"]</label>
             <select asp-for="fk_defaultPlaceToGetFood" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToGetFood, "Id", "name"))">
-                <option value="-1">@l["no_place"]</option>
+                <option value="-1">@l["no place"]</option>
             </select>
             @Html.ValidationMessageFor(model => model.fk_defaultPlaceToGetFood, "", new { @class = "text-danger" })
         </div>
         
         <div class="form-field">
-            <label class="form-label">@l["place_to_eat"]</label>
+            <label class="form-label">@l["place to eat"]</label>
             <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
                 <option value="-1">@l["no_place"]</option>
             </select>
@@ -50,10 +50,10 @@
     </div>
     
     <div class="form-field submit-button">
-        <input type="submit" value="@l["save"]" class="btn btn-default" />
+        <input type="submit" value="@l["submit"]" class="btn btn-default" />
     </div>
 }
 
 <div>
-    @Html.ActionLink(@l["back_to_list"], "UserIndex")
+    @Html.ActionLink(@l["back to list"], "UserIndex")
 </div>

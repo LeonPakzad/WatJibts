@@ -9,6 +9,7 @@ using WebAppIdentity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,11 +82,19 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SetDefaultCulture(supportedCultures[0])
         .AddSupportedCultures(supportedCultures)
         .AddSupportedUICultures(supportedCultures);
+
+    options.RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new QueryStringRequestCultureProvider(),
+        new CookieRequestCultureProvider()
+    };
 });
+
 
 var app = builder.Build();
 
-app.UseRequestLocalization();
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+// app.UseRequestLocalization();
 
 app.Use(async (context, next) =>
 {

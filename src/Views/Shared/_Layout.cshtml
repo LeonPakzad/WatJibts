@@ -5,7 +5,7 @@
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<User> l
+@inject IStringLocalizer<Localizer> l
     
 @{
     ViewData["Title"] = "Wat Jibts";
@@ -100,7 +100,7 @@
                                      <br><br><hr><br>
                             
                                     <div class="menu-items">
-                                        @Html.ActionLink(@l["clear_todays_lunch_sessions"],"clearTodaysLunchSessions")
+                                        @Html.ActionLink(@l["clear todays lunch sessions"],"clearTodaysLunchSessions")
                                     </div>
 
 

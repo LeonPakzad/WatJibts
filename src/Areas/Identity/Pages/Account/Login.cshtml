@@ -1,10 +1,10 @@
 ﻿@page
 @model LoginModel
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<LoginModel> l
+@inject IStringLocalizer<Localizer> l
 
 @{
-    ViewData["Title"] = @l["log_in"].Value;
+    ViewData["Title"] = @l["login"].Value;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -20,29 +20,29 @@
 
         <div class="form-field">
             <label class="form-label"   asp-for="Input.Email" >@l["email"]</label>
-            <input class="form-control" asp-for="Input.Email" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+            <input class="form-control" asp-for="Input.Email" autocomplete="username" aria-required="true" placeholder="@l["example@mail.com"]" />
             <span  class="form-error"   asp-validation-for="Input.Email"></span>
         </div>
 
         <div class="form-field">
             <label class="form-label"   asp-for="Input.Password">@l["password"]</label>
-            <input class="form-control" asp-for="Input.Password" autocomplete="current-password" aria-required="true" placeholder="password" />
+            <input class="form-control" asp-for="Input.Password" autocomplete="current-password" aria-required="true" placeholder="@l["password"]" />
             <span  class="form-error"   asp-validation-for="Input.Password"></span>
         </div>
 
         <div>
-            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">@l["log_in"]</button>
+            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">@l["login"]</button>
         </div>
 
         <div>
             <p>
-                <a id="forgot-password" asp-page="./ForgotPassword">@l["forgot_password"]</a>
+                <a id="forgot-password" asp-page="./ForgotPassword">@l["forgot password?"]</a>
             </p>
             <p>
-                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@l["register_as_new"]</a>
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@l["register as new user"]</a>
             </p>
             <p>
-                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">@l["resend_email_confirmation"]</a>
+                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">@l["resend email confirmation"]</a>
             </p>
         </div>
     </form>

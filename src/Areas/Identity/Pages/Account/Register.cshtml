@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<LoginModel> l
+@inject IStringLocalizer<Localizer> l
 
 @{
     ViewData["Title"] = @l["register"];
@@ -10,7 +10,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <p> 
-    @l["register_intro"]
+    @l["Please register a new Account, to plan your next lunchsession"]
 </p>
 
 <hr />
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-field">
-            <label class="form-label"   asp-for="Input.ConfirmPassword">@l["confirm_password"]</label>
+            <label class="form-label"   asp-for="Input.ConfirmPassword">@l["confirm password"]</label>
             <input class="form-control" asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="password" />
             <span  class="form-error"   asp-validation-for="Input.ConfirmPassword"></span>
         </div>

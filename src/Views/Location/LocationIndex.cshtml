@@ -1,6 +1,6 @@
 @model List<Location>;
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<User> l
+@inject IStringLocalizer<Localizer> l
 
 @{
     ViewData["Title"] = @l["locations"];
@@ -29,13 +29,13 @@
 
                 @if(@Model[index].isPlaceToEat){
                     <p>
-                       @l["place_to_eat"]
+                       @l["place to eat"]
                     </p>
                 }
 
                 @if(@Model[index].isPlaceToGetFood){
                     <p>
-                       @l["place_for_food"] 
+                       @l["place for food"] 
                     </p>
                 }
 

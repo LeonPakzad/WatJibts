@@ -4,15 +4,15 @@
 @inject UserManager<User> UserManager
 
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<User> l
+@inject IStringLocalizer<Localizer> l
 
-<h1>@l["welcome_to_watjibts"]</h1>
+<h1>@l["welcome to watjibts"]</h1>
 
 <br>
 
 @if (!SignInManager.IsSignedIn(User))
 {
-    <h2>@l["not_logged_in"]</h2>
+    <h2>@l["you are not logged in"]</h2>
 }
 else
 {
@@ -37,7 +37,7 @@ else
                         {
                         }
                         else{
-                            <span>@l["get_food_from"]</span>
+                            <span>@l["get food from"]</span>
                             @lunchSession.fk_foodPlace
                         }
 
@@ -47,11 +47,11 @@ else
                         else{
                             @if(@lunchSession.fk_foodPlace == @lunchSession.fk_eatingPlace)
                             {
-                                <span>@l["and_eat_there"]</span>
+                                <span>@l["and eats it there"]</span>
                             }
                             else
                             {
-                                <span>@l["eats_at"]</span>
+                                <span>@l["eats at"]</span>
                                 @lunchSession.fk_eatingPlace
                             }
                         }
@@ -75,7 +75,7 @@ else
 
     @if (Model.privateLunchSessions.Count() > 0)
     {
-        <h2>@l["private_lunchsession_heading"]</h2>
+        <h2>@l["The following people will eat privately today:"]</h2>
         @foreach(var lunchSession in Model.privateLunchSessions)
         {
             <div class="table-item">
@@ -87,7 +87,7 @@ else
     
     @if(Model.publicLunchSessions.Count() < 1 && Model.privateLunchSessions.Count() < 1)
     {
-        <p>@l["no_lunchsession_heading"]</p>
+        <p>@l["No Lunchsession has been added yet"]</p>
     }
 
     <br><hr>
@@ -107,27 +107,27 @@ else
                         <div class="form-field-section">
 
                             <div class="form-field">
-                                <label class="form-label">@l["place_for_food"]</label>
+                                <label class="form-label">@l["place for food"]</label>
                                 <select class="form-select" name="fk_foodPlace" asp-for="LunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
-                                        <option value="-1">@l["no_place"]</option>
+                                        <option value="-1">@l["no place"]</option>
                                 </select>
                             </div>
 
                             <div class="form-field">
-                                <label class="form-label">@l["place_to_eat"]</label>
+                                <label class="form-label">@l["place to eat"]</label>
                                 <select class="form-select" name="fk_eatingPlace" asp-for="LunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
-                                    <option value="-1">@l["no_place"]</option>
+                                    <option value="-1">@l["no place"]</option>
                                 </select>
                             </div>
 
-                            <a id="add-location" href="../Location/Add">@l["new_place"]</a>
+                            <a id="add-location" href="../Location/Add">@l["new place"]</a>
                         </div>
 
                         <div class="form-field-section">
                             <div class="form-field"> 
                                 <div class="time-container">
                                     <div class="form-field">
-                                        <label class="form-label">@l["lunch_time"]</label>
+                                        <label class="form-label">@l["lunch time"]</label>
                                         <input type="datetime" id="lunchTime" name="lunchTime" min="00:01" max="23:59" value="@Model.LunchSession.lunchTime.ToString("hh:mm tt")"/>
                                     </div>
                                 </div>

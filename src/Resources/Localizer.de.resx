@@ -117,28 +117,228 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Location" xml:space="preserve">
-    <value>Ort</value>
-    <comment/>
-  </data>
-  <data name="User" xml:space="preserve">
-    <value>Benutzer</value>
-    <comment/>
-  </data>
-  <data name="Login" xml:space="preserve">
+  <data name="login" xml:space="preserve">
     <value>Anmelden</value>
     <comment/>
   </data>
-  <data name="Register" xml:space="preserve">
+
+  <data name="name" xml:space="preserve">
+    <value>Name</value>
+    <comment/>
+  </data>
+
+  <data name="back to list" xml:space="preserve">
+    <value>Zurück zur Listenansicht</value>
+    <comment/>
+  </data>
+
+  <data name="description" xml:space="preserve">
+    <value>Beschreibung</value>
+    <comment/>
+  </data>
+
+  <data name="more infos" xml:space="preserve">
+    <value>weitere Angaben </value>
+    <comment/>
+  </data>
+
+  <data name="welcome to watjibts" xml:space="preserve">
+    <value>Wilkommen bei WatJibts!</value>
+    <comment/>
+  </data>
+    <data name="users" xml:space="preserve">
+    <value>Benutzer</value>
+    <comment/>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Anmelden</value>
+    <comment/>
+  </data>
+  <data name="register" xml:space="preserve">
     <value>Registrieren</value>
     <comment/>
   </data>
-  <data name="Forgot Password?" xml:space="preserve">
+
+  <data name="imprint" xml:space="preserve">
+    <value>Impressum</value>
+    <comment/>
+  </data>
+
+  <data name="forgot password?" xml:space="preserve">
     <value>Passwort vergessen?</value>
     <comment/>
   </data>
-  <data name="Logout" xml:space="preserve">
+  <data name="logout" xml:space="preserve">
     <value>Abmelden</value>
     <comment/>
   </data>
+  <data name="register as new user" xml:space="preserve">
+    <value>Als neuer Nutzer amelden</value>
+    <comment/>
+  </data>
+  <data name="resend email confirmation" xml:space="preserve">
+    <value>Email-Berstätigung erneut senden</value>
+    <comment/>
+  </data>
+  <data name="participating" xml:space="preserve">
+    <value>mitessen</value>
+    <comment/>
+  </data>
+
+   <data name="new place" xml:space="preserve">
+    <value>Neuer Ort</value>
+    <comment/>
+  </data>
+
+
+  <data name="example@mail.com" xml:space="preserve">
+    <value>Beispiel@mail.com</value>
+    <comment/>
+  </data>
+
+  <data name="password" xml:space="preserve">
+    <value>Passwort</value>
+    <comment/>
+  </data>
+
+  <data name="email" xml:space="preserve">
+    <value>E-Mail</value>
+    <comment/>
+  </data>
+
+  <data name="place to eat" xml:space="preserve">
+    <value>Ort zum Essen</value>
+    <comment/>
+  </data>
+  <data name="place for food" xml:space="preserve">
+    <value>Ort für Essen</value>
+    <comment/>
+  </data>
+  <data name="lunch time" xml:space="preserve">
+    <value>Esszeit</value>
+    <comment/>
+  </data>
+  <data name="newLocation" xml:space="preserve">
+    <value>neuer Ort</value>
+    <comment/>
+  </data>
+  <data name="profile" xml:space="preserve">
+    <value>Profil</value>
+    <comment/>
+  </data>
+  <data name="locations" xml:space="preserve">
+    <value>Orte</value>
+    <comment/>
+  </data>
+  <data name="The following people will eat privately today:" xml:space="preserve">
+    <value>Folgende Menschen essen heute nicht oder privat:</value>
+    <comment/>
+  </data>
+  <data name="No Lunchsession has been added yet" xml:space="preserve">
+    <value>Heute wurde noch keine Session hinzugefügt</value>
+    <comment/>
+  </data>
+  <data name="join" xml:space="preserve">
+    <value>Anschließen</value>
+    <comment/>
+  </data>
+  <data name="joined" xml:space="preserve">
+    <value>Das Jibts!</value>
+    <comment/>
+  </data>
+  <data name="get food from" xml:space="preserve">
+    <value>holt essen von:</value>
+    <comment/>
+  </data>
+  <data name="eats at" xml:space="preserve">
+    <value>isst bei:</value>
+    <comment/>
+  </data>
+  <data name="and eats it there" xml:space="preserve">
+    <value>und dort wirds auch gegessen</value>
+    <comment/>
+  </data>
+  <data name="you are not logged in" xml:space="preserve">
+    <value>Es scheint so als wären sie noch nicht angemeldet.</value>
+    <comment/>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Nutzername</value>
+    <comment/>
+  </data>
+  <data name="Please register a new Account, to plan your next lunchsession" xml:space="preserve">
+    <value>Erstellen Sie einen Account, um sich zusammen mit den Anderen mit dem Essen abzustimmen</value>
+    <comment/>
+  </data>
+
+   <data name="confirm password" xml:space="preserve">
+    <value>Passwort bestätigen</value>
+    <comment/>
+  </data>
+
+  <data name="delete session" xml:space="preserve">
+    <value>Session löschen</value>
+    <comment/>
+  </data>
+
+  <data name="delete" xml:space="preserve">
+    <value>entfernen</value>
+    <comment/>
+  </data>
+
+  <data name="edit" xml:space="preserve">
+    <value>bearbeiten</value>
+    <comment/>
+  </data>
+
+  <data name="edit user" xml:space="preserve">
+    <value>Nutzer bearbeiten</value>
+    <comment/>
+  </data>
+
+  <data name="edit location" xml:space="preserve">
+    <value>Ort bearbeiten</value>
+    <comment/>
+  </data>
+
+  <data name="submit" xml:space="preserve">
+    <value>Absenden</value>
+    <comment/>
+  </data>
+
+  <data name="no place" xml:space="preserve">
+    <value>kein Ort</value>
+    <comment/>
+  </data>
+
+  <data name="delete profile sessions" xml:space="preserve">
+    <value>Alle meine Sessions löschen</value>
+    <comment/>
+  </data>
+
+  <data name="preferred lunch time" xml:space="preserve">
+    <value>Typische Esszeit</value>
+    <comment/>
+  </data>
+
+  <data name="reset password" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+    <comment/>
+  </data>
+
+  <data name="clear todays lunch sessions" xml:space="preserve">
+    <value>Heutige Lunchsessions entfernen</value>
+    <comment/>
+  </data>
+
+  <data name="add location" xml:space="preserve">
+    <value>Ort hinzufügen</value>
+    <comment/>
+  </data>
+
+  <data name="user index" xml:space="preserve">
+    <value>Nutzerübersicht</value>
+    <comment/>
+  </data>
+
 </root>

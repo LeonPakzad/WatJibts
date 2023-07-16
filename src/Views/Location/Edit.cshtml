@@ -1,9 +1,9 @@
 @model Location
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<User> l
+@inject IStringLocalizer<Localizer> l
 
 @{
-    ViewData["Title"] = @l["edit_location"];
+    ViewData["Title"] = @l["edit location"];
     ViewData["Active"] = "Home";
 }
 
@@ -44,7 +44,7 @@
         <div class="additional-lunchtime-info-wrapper">
             <details>
 
-                <summary>@l["more_lunchtime_infos"]</summary>
+                <summary>@l["more infos"]</summary>
 
                 <div class="table-wrapper">
                     <div class="form-field table-item">
@@ -106,10 +106,10 @@
     </div>
         
     <div class="form-field submit-button">
-        <input type="submit" value=@l["save"] class="btn btn-default" />
+        <input type="submit" value=@l["submit"] class="btn btn-default" />
     </div>
 }
 
 <div>
-    @Html.ActionLink(@l["back_to_list"], "LocationIndex")
+    @Html.ActionLink(@l["back to list"], "LocationIndex")
 </div>

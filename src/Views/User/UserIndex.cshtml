@@ -1,9 +1,9 @@
 @model List<User>;
 @using Microsoft.Extensions.Localization
-@inject IStringLocalizer<User> l
+@inject IStringLocalizer<Localizer> l
     
 @{
-    ViewData["Title"] = @l["user_index"];
+    ViewData["Title"] = @l["user index"];
     ViewData["Active"] = "Home";
 }
 

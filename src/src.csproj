@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Baseclass.SharedResource" Version="0.2.24" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Localization.AspNetCore.TagHelpers" Version="0.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.7" />
