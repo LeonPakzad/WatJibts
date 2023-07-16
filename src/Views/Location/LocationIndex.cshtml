@@ -40,7 +40,9 @@
                 }
 
                 @Html.ActionLink(@l["edit"], "Edit", new {Id = Model[index].Id})
-                @Html.ActionLink(@l["delete"], "Delete", new {Id = Model[index].Id})
+                <span class="link-red">
+                    @Html.ActionLink(@l["delete"], "Delete", new {Id = Model[index].Id})
+                </span>
         </div>
     }
 </div>

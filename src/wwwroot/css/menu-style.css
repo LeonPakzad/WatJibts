@@ -17,12 +17,12 @@ header {
 
 h1 {
   font-family: beonregular;
-  color: #E200F7;
+  color: #08E8DE;
 }
 
 h1:not(.flickering-headline) {
-  animation: pulsate 2.5s infinite alternate;
-  text-shadow: 0 0 7px #E200F7, 0 0 10px #E200F7, 0 0 21px #E200F7, 0 0 42px white, 0 0 82px white;
+  animation: pulsate-secundary 2.5s infinite alternate;
+  text-shadow: 0 0 7px #08E8DE, 0 0 10px #08E8DE, 0 0 21px #08E8DE, 0 0 42px white, 0 0 82px white;
 }
 
 .flickering-headline {
@@ -40,8 +40,8 @@ a {
 }
 
 a.selected {
-  color: #E200F7 !important;
-  text-shadow: 0 0 7px #E200F7, 0 0 10px #E200F7, 0 0 21px #E200F7, 0 0 34px white, 0 0 42px white;
+  color: #08E8DE !important;
+  text-shadow: 0 0 7px #08E8DE, 0 0 10px #08E8DE, 0 0 21px #08E8DE, 0 0 34px white, 0 0 42px white;
 }
 
 a:hover {
@@ -57,12 +57,25 @@ hr {
   color: white;
 }
 
+.link-red a {
+  color: #FF321A !important;
+  text-shadow: 0 0 4px #b55f5f, 0 0 23px white;
+}
+
 @keyframes pulsate {
   100% {
     text-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 19px #E200F7, 0 0 40px white, 0 0 80px white, 0 0 100px white, 0 0 150px white;
   }
   0% {
     text-shadow: 0 0 2px #E200F7, 0 0 4px #E200F7, 0 0 6px #E200F7, 0 0 10px white, 0 0 45px white, 0 0 55px white, 0 0 70px white, 0 0 80px white;
+  }
+}
+@keyframes pulsate-secundary {
+  100% {
+    text-shadow: 0 0 4px #08E8DE, 0 0 11px #08E8DE, 0 0 19px #08E8DE, 0 0 40px white, 0 0 80px white, 0 0 100px white, 0 0 150px white;
+  }
+  0% {
+    text-shadow: 0 0 2px #08E8DE, 0 0 4px #08E8DE, 0 0 6px #08E8DE, 0 0 10px white, 0 0 45px white, 0 0 55px white, 0 0 70px white, 0 0 80px white;
   }
 }
 @keyframes flicker {
