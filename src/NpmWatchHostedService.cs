@@ -37,8 +37,11 @@ namespace SassCheck
         {
             if (_process != null)
             {
-                _process.Close();
-                _process.Dispose();
+                try {
+                    _process.Close();
+                } catch{
+                    _process.Dispose();
+                }
             }
 
             return Task.CompletedTask;

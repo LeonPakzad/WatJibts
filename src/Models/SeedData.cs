@@ -3,12 +3,24 @@ using Microsoft.EntityFrameworkCore;
 namespace src.Data;
 
 using System;
+using Microsoft.AspNetCore.Identity;
 using src.Models;
 
 public static class SeedData
 {
-    public static void Initialize(IServiceProvider serviceProvider)
+    public static async Task Initialize(IServiceProvider serviceProvider)
     {
+        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var roles = new[] {"Admin", "User"};
+
+        foreach (var role in roles)
+        {
+            if(!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
+        }
+
         using (var context = new WatDbContext(
             serviceProvider.GetRequiredService<
                 DbContextOptions<WatDbContext>>()))
