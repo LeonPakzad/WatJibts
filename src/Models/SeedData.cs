@@ -10,17 +10,6 @@ public static class SeedData
 {
     public static async Task Initialize(IServiceProvider serviceProvider)
     {
-        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        var roles = new[] {"Admin", "User"};
-
-        foreach (var role in roles)
-        {
-            if(!await roleManager.RoleExistsAsync(role))
-            {
-                await roleManager.CreateAsync(new IdentityRole(role));
-            }
-        }
-
         using (var context = new WatDbContext(
             serviceProvider.GetRequiredService<
                 DbContextOptions<WatDbContext>>()))
@@ -55,7 +44,24 @@ public static class SeedData
                 }
             );
 
+
             context.SaveChanges();
+        }
+
+        using (var context = new WatDbContext(
+            serviceProvider.GetRequiredService<
+                DbContextOptions<WatDbContext>>()))
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roles = new[] {"Admin", "User"};
+            roleManager.CreateAsync("Admin");
+            foreach (var role in roles)
+            {
+                if(!await roleManager.RoleExistsAsync(role))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                }
+            }
         }
     }
 }

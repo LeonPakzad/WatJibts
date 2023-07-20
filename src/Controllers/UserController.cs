@@ -66,6 +66,13 @@ namespace src.Controllers {
         }
 
         [Authorize]
+        public IActionResult Profile(User user)
+        {
+            var admin = "Admin";
+            
+        }
+
+        [Authorize]
         public ActionResult Edit(string Id)
         {
             var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();

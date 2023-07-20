@@ -162,7 +162,7 @@ input [type=checkbox]:focus {
 }
 
 input[type=checkbox]:checked {
-  background: white;
+  background: #08E8DE;
 }
 
 select {
