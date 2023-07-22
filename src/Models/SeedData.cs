@@ -54,7 +54,6 @@ public static class SeedData
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var roles = new[] {"Admin", "User"};
-            roleManager.CreateAsync("Admin");
             foreach (var role in roles)
             {
                 if(!await roleManager.RoleExistsAsync(role))

@@ -341,4 +341,8 @@
     <comment/>
   </data>
 
+  <data name="promote to admin" xml:space="preserve">
+    <value>Zu Admin-Account befördern</value>
+    <comment/>
+  </data>
 </root>

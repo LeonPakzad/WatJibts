@@ -7,6 +7,7 @@ using src.Models;
 using Microsoft.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace src.Controllers {
     public class UserController : Controller
@@ -66,10 +67,15 @@ namespace src.Controllers {
         }
 
         [Authorize]
-        public IActionResult Profile(User user)
+        public async Task<IActionResult> AddFirstAdmin(User user)
         {
-            var admin = "Admin";
-            
+            var userRole = new IdentityUserRole<string>();
+            userRole.UserId = _context.User.Where(u => u.Email == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
+            userRole.RoleId = _context.Roles.Where(r => r.Name == "Admin").Select(r => r.Id).FirstOrDefault();
+            _context.UserRoles.Add(userRole);
+            _context.SaveChanges();
+
+            return RedirectToAction("Profile");
         }
 
         [Authorize]
