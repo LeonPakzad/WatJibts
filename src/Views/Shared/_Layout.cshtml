@@ -79,11 +79,14 @@
                                             @l["profile"]
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="@(@actionName == "UserIndex" ? "selected" : "")" asp-area="" asp-controller="User" asp-action="UserIndex">
-                                            @l["users"]
-                                        </a>
-                                    </li>
+                                    @if(User.IsInRole("Admin"))
+                                    {
+                                        <li>
+                                            <a class="@(@actionName == "UserIndex" ? "selected" : "")" asp-area="" asp-controller="User" asp-action="UserIndex">
+                                                @l["users"]
+                                            </a>
+                                        </li>
+                                    }
                                     <li>
                                         <a class="@(@actionName == "LocationIndex" ? "selected" : "")" asp-area="" asp-controller="Location" asp-action="LocationIndex">
                                             @l["locations"]
@@ -97,13 +100,13 @@
                                         </form>
                                     </li>
 
-                                     <br><br><hr><br>
-                            
-                                    <div class="menu-items">
-                                        @Html.ActionLink(@l["clear todays lunch sessions"],"clearTodaysLunchSessions")
-                                    </div>
-
-
+                                    @if(User.IsInRole("Admin"))
+                                    {
+                                        <br><br><hr><br>
+                                        <div class="menu-items">
+                                            @Html.ActionLink(@l["clear todays lunch sessions"],"clearTodaysLunchSessions")
+                                        </div>
+                                    }
                                 }
                                 else 
                                 {

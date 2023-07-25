@@ -345,4 +345,16 @@
     <value>Zu Admin-Account befördern</value>
     <comment/>
   </data>
+
+  <data name="please check your mail" xml:space="preserve">
+    <value>Bitte überpfüfen Sie ihr Postfach</value>
+    <comment/>
+  </data>
+
+  <data name="register confirmation" xml:space="preserve">
+    <value>Registrierung bestätigen</value>
+    <comment/>
+  </data>
+
+
 </root>

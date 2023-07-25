@@ -25,7 +25,7 @@ namespace src.Controllers {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult UserIndex()
         {
             return View(_context.User.ToList());
@@ -81,7 +81,7 @@ namespace src.Controllers {
             return RedirectToAction("Profile");
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(string Id)
         {
             var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
@@ -93,7 +93,7 @@ namespace src.Controllers {
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(User user)
         {
             var currentUser = _context.User.Where(u => u.Id == user.Id).FirstOrDefault();
@@ -111,7 +111,7 @@ namespace src.Controllers {
             return RedirectToAction("UserIndex");
         }
 
-        [Authorize]
+        [Authorize (Roles = "Admin")]
         public ActionResult Delete(string id)
         {
             var user = _context.User.Find(id);

@@ -223,7 +223,7 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
-    [Authorize]
+    [Authorize (Roles = "Admin")]
     public IActionResult clearTodaysLunchSessions()
     {
         _context.LunchSession.RemoveRange(_context.LunchSession.Where
