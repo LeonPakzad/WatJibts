@@ -40,13 +40,16 @@ namespace src.Controllers {
             if(user == null) {
                 return NotFound();
             }
-            
+
+            // check if admin exists to enable first admin
+            ViewBag.adminExists = _context.UserRoles.Any(u => u.RoleId != null);
+
             ViewBag.locationsToEat      = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
             ViewBag.locationsToGetFood  = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
             userProfile.user = _context.User.Where(p => p.Email == user).First();
             userProfile.userLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == user);
-
+            
             return View(userProfile);
         }
 
@@ -60,9 +63,8 @@ namespace src.Controllers {
             currentUser.fk_defaultPlaceToEat = user.fk_defaultPlaceToEat;
             currentUser.fk_defaultPlaceToGetFood = user.fk_defaultPlaceToGetFood;
             currentUser.preferredLunchTime = user.preferredLunchTime;
-
             _context.SaveChanges();
-
+            
             return RedirectToAction("Profile");
         }
 
@@ -73,6 +75,7 @@ namespace src.Controllers {
             userRole.UserId = _context.User.Where(u => u.Email == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
             userRole.RoleId = _context.Roles.Where(r => r.Name == "Admin").Select(r => r.Id).FirstOrDefault();
             _context.UserRoles.Add(userRole);
+            
             _context.SaveChanges();
 
             return RedirectToAction("Profile");

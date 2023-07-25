@@ -50,9 +50,13 @@
         <input type="submit" value= "@l["submit"]" class="btn btn-default" />
     </div>
 
-    @Html.ActionLink(@l["promote to admin"], "AddFirstAdmin")
 
     <a id="forgot-password" href="../Identity/Account/ForgotPassword">@l["reset password"]</a>
+}
+
+@if(ViewBag.adminExists == false)
+{
+    @Html.ActionLink(@l["promote to admin"], "AddFirstAdmin")
 }
 
 @if(Model.userLunchSessions.Count() > 0) 
