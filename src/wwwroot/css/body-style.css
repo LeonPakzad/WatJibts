@@ -157,7 +157,7 @@ input [type=checkbox]:focus {
   display: none;
 }
 
-.participating-wrapper input[type=checkbox]:checked + .lunchtime-details {
+.participating-wrapper .form-field input[type=checkbox]:checked + .lunchtime-details {
   display: flex !important;
 }
 
