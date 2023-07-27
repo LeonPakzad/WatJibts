@@ -241,7 +241,7 @@ button:hover {
   border-radius: 0;
 }
 .form-field .form-checkbox-label {
-  left: 35%;
+  left: 50%;
 }
 .form-field .form-select select option {
   background-color: #110220;

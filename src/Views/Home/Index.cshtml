@@ -99,8 +99,10 @@ else
             @Html.AntiForgeryToken()
             
             <div class="form-field participating-wrapper">
-                <label class="form-checkbox-label">@l["participating"]</label>
-                @Html.CheckBox("participating", false)
+                <div class="form-field">
+                    <label class="form-checkbox-label">@l["participating"]</label>
+                    @Html.CheckBox("participating", false)
+                </div>
             
                 <div class="lunchtime-details">
                     <div class="form-horizontal">
