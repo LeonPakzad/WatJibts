@@ -380,5 +380,49 @@
     <comment/>
   </data>
 
+  <data name="diet" xml:space="preserve">
+    <value>Essen</value>
+    <comment/>
+  </data>
+
+  <data name="dish" xml:space="preserve">
+    <value>Essen</value>
+    <comment/>
+  </data>
+
+  <data name="amenity" xml:space="preserve">
+    <value>Vorzüge</value>
+    <comment/>
+  </data>
+
+  <data name="cuisine" xml:space="preserve">
+    <value>Essensart</value>
+    <comment/>
+  </data>
+
+  <data name="latitude" xml:space="preserve">
+    <value>Breite</value>
+    <comment/>
+  </data>
+
+  <data name="longditude" xml:space="preserve">
+    <value>Länge</value>
+    <comment/>
+  </data>
+
+  <data name="website adress" xml:space="preserve">
+    <value>Webseite</value>
+    <comment/>
+  </data>
+
+  <data name="adress number" xml:space="preserve">
+    <value>Hausnummer</value>
+    <comment/>
+  </data>
+
+  <data name="adress street" xml:space="preserve">
+    <value>Straße</value>
+    <comment/>
+  </data>
 
 </root>

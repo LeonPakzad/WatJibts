@@ -18,25 +18,25 @@
         @Html.HiddenFor(model => model.Id)
 
        <div class="form-field table-item">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "form-label" })
+            <label class="form-label">@l["name"]</label>
             @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field table-item">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "form-label" })
+            <label class="form-label"> @l["description"]</label>
             @Html.TextBoxFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
         </div>
     
         <div class="form-field table-item">
-            @Html.LabelFor(model => model.isPlaceToGetFood, htmlAttributes: new { @class = "form-checkbox-label " })
+            <label class="form-label">@l["place for food"]</label>
             @Html.CheckBoxFor(model=> model.isPlaceToGetFood, "")
             @Html.ValidationMessageFor(model => model.isPlaceToGetFood, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-field table-item">
-            @Html.LabelFor(model => model.isPlaceToEat, htmlAttributes: new { @class = "form-checkbox-label" })
+            <label class="form-label">@l["place to eat"]</label>
             @Html.CheckBoxFor(model => model.isPlaceToEat, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.isPlaceToEat, "", new { @class = "text-danger" })
         </div>
@@ -48,55 +48,55 @@
 
                 <div class="table-wrapper">
                     <div class="form-field table-item">
-                        @Html.LabelFor(model => model.diet, htmlAttributes: new { @class = "form-label" })
+                        <label class="form-label">@l["diet"]</label>
                         @Html.TextBoxFor(model => model.diet, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.diet, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-field table-item">
-                        @Html.LabelFor(model => model.dish, htmlAttributes: new { @class = "form-label" })
+                        <label class="form-label">@l["dish"]</label>
                         @Html.TextBoxFor(model => model.dish, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.dish, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-field table-item">
-                        @Html.LabelFor(model => model.amenity, htmlAttributes: new { @class = "form-label" })
+                        <label class="form-label">@l["amenity"]</label>
                         @Html.TextBoxFor(model => model.amenity, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.amenity, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-field table-item">
-                        @Html.LabelFor(model => model.cuisine, htmlAttributes: new { @class = "form-label" })
+                        <label class="form-label">@l["cuisine"]</label>
                         @Html.TextBoxFor(model => model.cuisine, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.cuisine, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-field table-item">
-                        @Html.LabelFor(model => model.latitude, htmlAttributes: new { @class = "form-label" })
+                        <label class="form-label">@l["latitude"]</label>
                         @Html.EditorFor(model => model.latitude, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.latitude, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-field table-item">
-                        @Html.LabelFor(model => model.longditude, htmlAttributes: new { @class = "form-label" })
+                        <label class="form-label">@l["longditude"]</label>
                         @Html.EditorFor(model => model.longditude, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.longditude, "", new { @class = "text-danger" })
                     </div>
                     
                     <div class="form-field table-item">
-                        @Html.LabelFor(model => model.website_adress, htmlAttributes: new { @class = "form-label" })
+                        <label class="form-label">@l["website adress"]</label>
                         @Html.TextBoxFor(model => model.website_adress, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.website_adress, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-field table-item">
-                        @Html.LabelFor(model => model.address_number, htmlAttributes: new { @class = "form-label" })
+                        <label class="form-label">@l["adress number"]</label>
                         @Html.TextBoxFor(model => model.address_number, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.address_number, "", new { @class = "text-danger" })
                     </div>
                     
                     <div class="form-field table-item">
-                        @Html.LabelFor(model => model.address_street, htmlAttributes: new { @class = "form-label" })
+                        <label class="form-label">@l["adress street"]</label>
                         @Html.TextBoxFor(model => model.address_street, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.address_street, "", new { @class = "text-danger" })
                     </div>
