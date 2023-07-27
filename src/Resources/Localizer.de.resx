@@ -356,5 +356,29 @@
     <comment/>
   </data>
 
+  <data name="demote to user" xml:space="preserve">
+    <value>Zum Nutzer degradieren</value>
+    <comment/>
+  </data>
+  <data name="promote to admin" xml:space="preserve">
+    <value>Zum Admin befördern</value>
+    <comment/>
+  </data>
+
+  <data name="no lunchsessions created yet" xml:space="preserve">
+    <value>Sie haben noch keine Lunchsessions erstellt</value>
+    <comment/>
+  </data>
+
+  <data name="user is admin:" xml:space="preserve">
+    <value>Nutzer ist Administrator: </value>
+    <comment/>
+  </data>
+
+  <data name="user:" xml:space="preserve">
+    <value>Nutzer: </value>
+    <comment/>
+  </data>
+
 
 </root>

@@ -81,11 +81,42 @@ namespace src.Controllers {
             return RedirectToAction("Profile");
         }
 
+        [Authorize]
+        public async Task<IActionResult> PromoteToAdmin(string Id)
+        {
+            var userRole = new IdentityUserRole<string>();
+            userRole.UserId = Id;
+            userRole.RoleId = _context.Roles.Where(r => r.Name == "Admin").Select(r => r.Id).FirstOrDefault();
+           
+            _context.UserRoles.Add(userRole);
+            
+            _context.SaveChanges();
+
+            return RedirectToAction("UserIndex");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> DemoteToUser(string Id)
+        {
+            _context.UserRoles.Remove( _context.UserRoles.Where(r => r.UserId == Id).First());
+            
+            _context.SaveChanges();
+
+            return RedirectToAction("UserIndex");
+        }
+
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(string Id)
         {
+            
             var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
 
+            if(user.Email == User.Identity.Name)
+            {
+                return RedirectToAction("Profile");
+            }
+
+            ViewBag.isAdmin = _context.UserRoles.Where(u => u.UserId == user.Id).Any();
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
             ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
 
@@ -102,11 +133,9 @@ namespace src.Controllers {
             currentUser.fk_defaultPlaceToEat = user.fk_defaultPlaceToEat;
             currentUser.fk_defaultPlaceToGetFood = user.fk_defaultPlaceToGetFood;
             currentUser.preferredLunchTime = user.preferredLunchTime;
+            ViewBag.isAdmin = _context.UserRoles.Where(u => u.RoleId == user.Id).Any();
 
             _context.SaveChanges();
-
-            ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
-            ViewBag.locationsToEat = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
 
             return RedirectToAction("UserIndex");
         }

@@ -43,7 +43,7 @@
         <div class="form-field">
             <label class="form-label">@l["place to eat"]</label>
             <select asp-for="fk_defaultPlaceToEat" class="form-control" asp-items="@(new SelectList(ViewBag.locationsToEat, "Id", "name"))">
-                <option value="-1">@l["no_place"]</option>
+                <option value="-1">@l["no place"]</option>
             </select>
             @Html.ValidationMessageFor(model => model.fk_defaultPlaceToEat, "", new { @class = "text-danger" })
         </div>
@@ -52,6 +52,17 @@
     <div class="form-field submit-button">
         <input type="submit" value="@l["submit"]" class="btn btn-default" />
     </div>
+}
+
+@if(ViewBag.isAdmin == true)
+{
+    <span>@l["user is admin:"]</span>
+    @Html.ActionLink(@l["demote to user"], "DemoteToUser", new {Id = Model.Id})
+}
+else
+{
+    <span>@l["user:"]</span>
+    @Html.ActionLink(@l["promote to admin"], "PromoteToAdmin", new {Id = Model.Id})
 }
 
 <div>

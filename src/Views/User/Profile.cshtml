@@ -54,6 +54,10 @@
     <a id="forgot-password" href="../Identity/Account/ForgotPassword">@l["reset password"]</a>
 }
 
+<div>
+    @Html.ActionLink(@l["back to list"], "UserIndex")
+</div>
+
 @if(ViewBag.adminExists == false)
 {
     @Html.ActionLink(@l["promote to admin"], "AddFirstAdmin")
@@ -98,4 +102,7 @@
     </div>
 
     @Html.ActionLink(@l["delete profile sessions"], "DeleteProfileLunchSessions")
+}
+else {
+    <span>@l["no lunchsessions created yet"]</span>
 }
