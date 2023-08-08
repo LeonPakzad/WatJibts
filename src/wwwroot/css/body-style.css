@@ -62,6 +62,11 @@ hr {
   text-shadow: 0 0 4px #b55f5f, 0 0 23px white;
 }
 
+.link-red a:hover {
+  opacity: 0.8;
+  text-shadow: 0 0 4px #b55f5f, 0 0 23px white, 0 0 40 #FF321A;
+}
+
 @keyframes pulsate {
   100% {
     text-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 19px #E200F7, 0 0 40px white, 0 0 80px white, 0 0 100px white, 0 0 150px white;
@@ -157,7 +162,7 @@ input [type=checkbox]:focus {
   display: none;
 }
 
-.participating-wrapper .form-field input[type=checkbox]:checked + .lunchtime-details {
+.participating-wrapper input[type=checkbox]:checked + .lunchtime-details {
   display: flex !important;
 }
 

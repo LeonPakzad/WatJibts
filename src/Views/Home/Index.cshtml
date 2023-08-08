@@ -71,6 +71,16 @@ else
             }
         }
         </div>
+
+        @if(User.IsInRole("Admin"))
+        {
+            <br>
+            <div class="menu-items">
+                <span class="link-red">
+                    @Html.ActionLink(@l["clear todays lunch sessions"],"clearTodaysLunchSessions")
+                </span>
+            </div>
+        }
     }
 
     @if (Model.privateLunchSessions.Count() > 0)

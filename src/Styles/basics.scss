@@ -105,6 +105,11 @@ hr {
     text-shadow: 0 0 4px #b55f5f, 0 0 23px white;
 }
 
+.link-red a:hover {
+    opacity: 0.8;
+    text-shadow: 0 0 4px #b55f5f, 0 0 23px white, 0 0 40 #FF321A;
+}
+
 // Shoutout to Silvia O'Dwyer who made doing this easy https://css-tricks.com/how-to-create-neon-text-with-css/
 @keyframes pulsate {
     100% {

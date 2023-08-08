@@ -54,10 +54,6 @@
     <a id="forgot-password" href="../Identity/Account/ForgotPassword">@l["reset password"]</a>
 }
 
-<div>
-    @Html.ActionLink(@l["back to list"], "UserIndex")
-</div>
-
 @if(ViewBag.adminExists == false)
 {
     @Html.ActionLink(@l["promote to admin"], "AddFirstAdmin")
@@ -65,44 +61,50 @@
 
 @if(Model.userLunchSessions.Count() > 0) 
 {
+    <span class="link-red">
+        @Html.ActionLink(@l["delete profile sessions"], "DeleteProfileLunchSessions")
+    </span>
     <div class="lunchtime-wrapper">
-    @foreach(var lunchSession in Model.userLunchSessions)
-    {
-        if(lunchSession.fk_user != null)
+        @foreach(var lunchSession in Model.userLunchSessions)
         {
-            <div class="lunchtime-card">
+            if(lunchSession.fk_user != null)
+            {
+                <div class="lunchtime-card">
 
-                <div class="lunchtime-time">
-                    @lunchSession.lunchTime.ToString("dd.mm.yyyy, hh:mm tt")
+                    <div class="lunchtime-time">
+                        @lunchSession.lunchTime.ToString("dd.mm.yyyy, hh:mm tt")
+                    </div>
+
+                    <div class="lunchtime-places">
+                        @if(@lunchSession.fk_foodPlace == -1)
+                        {
+                        }
+                        else{
+                            <span>@l["get food from"]</span>
+                            @lunchSession.fk_foodPlace
+                        }
+
+                        @if(@lunchSession.fk_eatingPlace == -1)
+                        {
+                            
+                        }
+                        else{
+                            <span>@l["eats at"]</span>
+                            @lunchSession.fk_eatingPlace
+                        }
+                    </div>
+                    <span class="link-red">
+                        @Html.ActionLink(@l["delete session"], "DeleteProfileLunchSession", new {id = lunchSession.Id})
+                    </span>
                 </div>
-
-                <div class="lunchtime-places">
-                    @if(@lunchSession.fk_foodPlace == -1)
-                    {
-                    }
-                    else{
-                        <span>@l["get food from"]</span>
-                        @lunchSession.fk_foodPlace
-                    }
-
-                    @if(@lunchSession.fk_eatingPlace == -1)
-                    {
-                        
-                    }
-                    else{
-                        <span>@l["eats at"]</span>
-                        @lunchSession.fk_eatingPlace
-                    }
-                </div>
-
-                @Html.ActionLink(@l["delete session"], "DeleteProfileLunchSession", new {id = lunchSession.Id})
-            </div>
+            }
         }
-    }
     </div>
-
-    @Html.ActionLink(@l["delete profile sessions"], "DeleteProfileLunchSessions")
 }
 else {
     <span>@l["no lunchsessions created yet"]</span>
 }
+
+<div>
+    @Html.ActionLink(@l["back to user list"], "UserIndex")
+</div>

@@ -132,6 +132,11 @@
     <comment/>
   </data>
 
+  <data name="back to user list" xml:space="preserve">
+    <value>Zurück zur Nutzerübersicht</value>
+    <comment/>
+  </data>
+
   <data name="description" xml:space="preserve">
     <value>Beschreibung</value>
     <comment/>

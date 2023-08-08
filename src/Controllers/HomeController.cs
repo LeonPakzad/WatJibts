@@ -94,7 +94,6 @@ public class HomeController : Controller
     [Authorize]
     public IActionResult Index(DateTime lunchTime, bool participating, int fk_foodPlace, int fk_eatingPlace)
     {
-        HomeIndexModel HomeIndexModel       = new HomeIndexModel();
         LunchSession lunchSession   = new LunchSession();
 
         bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
@@ -120,49 +119,7 @@ public class HomeController : Controller
 
         _context.SaveChanges();
 
-        //get grouped lists of todays lunchsessions
-        IEnumerable<LunchSession> todaysLunchSessions = getTodaysLunchSessions();
-        HomeIndexModel.publicLunchSessions  = HomeIndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
-        HomeIndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
-        HomeIndexModel.LunchSession = lunchSession;
-
-        // If there is already a lunchsession from the user, fill the data of this lunch session into the form. 
-        // If not, fill the form with the user preferred setings 
-        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any())
-        {
-            HomeIndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
-        }
-        else if (_context.User.Where(u => u.Email == User.Identity.Name).Any())
-        {
-            User currentUser = _context.User.Where(u => u.Email == User.Identity.Name).FirstOrDefault();
-            string userId = HttpContext.User.Identity.Name;
-
-            if(userId == null) {
-                return NotFound();
-            }
-            
-            ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
-
-            HomeIndexModel.LunchSession = new LunchSession();
-            HomeIndexModel.LunchSession.fk_eatingPlace = currentUser.fk_defaultPlaceToEat;
-            HomeIndexModel.LunchSession.fk_foodPlace = currentUser.fk_defaultPlaceToGetFood;
-
-            HomeIndexModel.LunchSession.lunchTime = DateTime.Now.AddHours(currentUser.preferredLunchTime.Value.Hour);
-            HomeIndexModel.LunchSession.lunchTime = DateTime.Now.AddMinutes(currentUser.preferredLunchTime.Value.Minute);
-        }
-        else
-        {
-            HomeIndexModel.LunchSession = new LunchSession(); 
-            HomeIndexModel.LunchSession.lunchTime = DateTime.Now;  
-        }
-        
-        HomeIndexModel.LunchSession     = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
-
-        // get locations
-        ViewBag.LocationsToEat      = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
-        ViewBag.LocationsToGetFood  = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
-
-        return View(HomeIndexModel);
+        return RedirectToAction("Index");
     }
 
     public IActionResult Impressum()

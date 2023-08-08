@@ -54,10 +54,8 @@
                             <span class="line line5"></span>
                     </div>  
                     <div class="logo">
-                        <a class="" asp-area="" asp-controller="Home" asp-action="Index">
-                            <a asp-area="" asp-controller="Home" asp-action="Index">
-                                <h1 class="@(@actionName == "Index" ? "selected" : "flickering-headline") ">WatJibts</h1>
-                            </a>
+                        <a aria-label="WatJibts" asp-area="" asp-controller="Home" asp-action="Index">
+                            <h1 class="@(@actionName == "Index" ? "selected" : "flickering-headline") ">WatJibts</h1>
                         </a>
                     </div>
                     
@@ -65,7 +63,9 @@
                         <div class="menu-items">
 
                             @await Html.PartialAsync("_SelectLanguagePartial")
+                            <ul>
 
+                            
                             <li>
                                 <a asp-area="" asp-controller="Home" asp-action="Index">
                                     <h1 class="@(@actionName == "Index" ? "selected" : "flickering-headline") ">WatJibts</h1>
@@ -99,14 +99,6 @@
                                             </button>
                                         </form>
                                     </li>
-
-                                    @if(User.IsInRole("Admin"))
-                                    {
-                                        <br><br><hr><br>
-                                        <div class="menu-items">
-                                            @Html.ActionLink(@l["clear todays lunch sessions"],"clearTodaysLunchSessions")
-                                        </div>
-                                    }
                                 }
                                 else 
                                 {
@@ -121,16 +113,13 @@
                                         </a>
                                     </li>
                                 }
-                                
                                 <br><br><hr><br>
 
-                                <div>
-                                    &copy; 2023 - src - 
-                                    <a class="@(@actionName == "Impressum" ? "selected" : "")" asp-area="" asp-controller="Home" asp-action="Impressum">
-                                        @l["imprint"]
-                                    </a>
-                                </div>
+                                <a class="@(@actionName == "Impressum" ? "selected" : "")" asp-area="" asp-controller="Home" asp-action="Impressum">
+                                    @l["imprint"]
+                                </a>
                             }
+                            </ul>
                         </div>
                     </div>
                 </div>
