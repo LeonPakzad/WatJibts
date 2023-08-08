@@ -151,7 +151,7 @@ textarea {
 input[type=checkbox] {
   height: 50px;
   width: 50px;
-  border: solid 1px white;
+  border: solid 2px white;
 }
 
 input [type=checkbox]:focus {
@@ -242,7 +242,7 @@ button:hover {
   min-width: 100px;
   padding: 5px;
   background: black;
-  border: solid 1px;
+  border: solid 2px;
   border-radius: 0;
 }
 .form-field .form-checkbox-label {
@@ -258,13 +258,12 @@ button:hover {
   flex-wrap: wrap;
   padding: 10px;
   margin: 10px;
-  border: solid 1px;
 }
 .table-wrapper .table-item, .lunchtime-wrapper .table-item, .lunchtime-wrapper .lunchtime-card {
   flex: 1 1 auto;
-  border: solid 2px white;
   margin: 10px;
   padding: 10px;
+  box-shadow: 0 10px 10px -1px #E200F7;
 }
 
 .refdata-head a {
@@ -275,6 +274,12 @@ button:hover {
 
 .form-field.table-item, .lunchtime-wrapper .form-field.lunchtime-card {
   border: none !important;
+}
+
+@media (max-width: 400px) {
+  details .table-wrapper .form-field, details .lunchtime-wrapper .form-field {
+    margin-left: -10px;
+  }
 }
 
 /*# sourceMappingURL=body-style.css.map */
