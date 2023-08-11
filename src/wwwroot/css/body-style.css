@@ -263,7 +263,7 @@ button:hover {
   flex: 1 1 auto;
   margin: 10px;
   padding: 10px;
-  box-shadow: 0 10px 10px -1px #E200F7;
+  box-shadow: 0 3px 4px 0 #E200F7;
 }
 
 .refdata-head a {

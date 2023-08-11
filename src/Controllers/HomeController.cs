@@ -30,15 +30,42 @@ public class HomeController : Controller
         return LocalRedirect(returnUrl);
     }
 
-    private IEnumerable<LunchSession> getTodaysLunchSessions()
+    private IEnumerable<LunchSessionModel> getTodaysLunchSessions()
     {
-        return  _context.LunchSession.Where
+        List<LunchSessionModel> todaysLunchSessions = new List<LunchSessionModel>();
+
+        var tmpLunchSessions = _context.LunchSession.Where
                 (l => l.lunchTime.Date == DateTime.Today)
                 .OrderBy(l => l.participating)
                 .ThenByDescending(l => l.lunchTime)
                 .ThenByDescending(l => l.fk_eatingPlace)
                 .ThenByDescending(l => l.fk_foodPlace)
                 .ToList();
+
+        foreach(LunchSession tmpLunchSession in tmpLunchSessions)
+        {
+            LunchSessionModel todaysLunchSessionModel = new LunchSessionModel();
+            todaysLunchSessionModel.Id = tmpLunchSession.Id;
+            todaysLunchSessionModel.lunchTime = tmpLunchSession.lunchTime;
+            todaysLunchSessionModel.participating = tmpLunchSession.participating;
+            todaysLunchSessionModel.fk_foodPlace = tmpLunchSession.fk_foodPlace;
+            todaysLunchSessionModel.fk_eatingPlace = tmpLunchSession.fk_eatingPlace;
+            todaysLunchSessionModel.fk_user = tmpLunchSession.fk_user;
+
+            if(todaysLunchSessionModel.fk_eatingPlace != -1)
+            {
+                todaysLunchSessionModel.eatingPlace = _context.Location.Where(l => l.Id == todaysLunchSessionModel.fk_eatingPlace).FirstOrDefault().name;
+            }
+
+            if(todaysLunchSessionModel.fk_foodPlace != -1)
+            {
+                todaysLunchSessionModel.foodPlace = _context.Location.Where(l => l.Id == todaysLunchSessionModel.fk_foodPlace).FirstOrDefault().name;
+            }
+
+            todaysLunchSessions.Add(todaysLunchSessionModel);
+        }
+
+        return todaysLunchSessions;
     }
 
     [HttpGet]
@@ -82,9 +109,15 @@ public class HomeController : Controller
         ViewBag.LocationsToGetFood  = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
         //get grouped lists of todays lunchsessions
-        IEnumerable<LunchSession> todaysLunchSessions = getTodaysLunchSessions();
+        IEnumerable<LunchSessionModel> todaysLunchSessions = getTodaysLunchSessions();
 
-        HomeIndexModel.publicLunchSessions  = HomeIndexModel.groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).ToList());
+        if(todaysLunchSessions != null)
+        {
+            HomeIndexModel.publicLunchSessions  = HomeIndexModel.
+            groupPublicLunchSessions(todaysLunchSessions.Where(l => l.participating == true).
+            ToList());
+        }
+
         HomeIndexModel.privateLunchSessions = todaysLunchSessions.Where(l => l.participating == false).ToList();
 
         return View(HomeIndexModel);

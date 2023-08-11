@@ -5,22 +5,27 @@ using src.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Collections;
+using src.Data;
+using src.Models;
+
 
 public class HomeIndexModel
 {
-    public ICollection<LunchSession>? publicLunchSessions{get;set;}
+    public ICollection<LunchSessionModel>? publicLunchSessions{get;set;}
     public IEnumerable<LunchSession>? privateLunchSessions{get;set;}
     public LunchSession? LunchSession {get;set;}
 
+    private readonly WatDbContext _context;
+
     /**
-    / gets an icollection of publicsessions
+    / gets an icollection of publicLuchSessions
     / grouping all lunchSessions with same parameters
     / return new List with concat-names of those with equal lunchSession
     **/
-    public List<LunchSession> groupPublicLunchSessions(ICollection<LunchSession> publicLunchSessions)
+    public List<LunchSessionModel> groupPublicLunchSessions(ICollection<LunchSessionModel> publicLunchSessions)
     {
         var lunchSessionGroups = publicLunchSessions.GroupBy(ls => new { ls.lunchTime, ls.fk_eatingPlace, ls.fk_foodPlace});
-        List<LunchSession> newLunchSession = new List<LunchSession>();
+        List<LunchSessionModel> newLunchSession = new List<LunchSessionModel>();
         
         foreach(var group in lunchSessionGroups)
         {
@@ -33,6 +38,17 @@ public class HomeIndexModel
                         ls.fk_user);
                 }
             }
+
+            // if(group.FirstOrDefault().fk_eatingPlace != -1)
+            // {
+            //     group.FirstOrDefault().eatingPlace = _context.Location.Where(l => l.Id == group.FirstOrDefault().fk_eatingPlace).FirstOrDefault().name;
+            // }
+
+            // if(group.FirstOrDefault().fk_foodPlace != -1)
+            // {
+            //     group.FirstOrDefault().foodPlace = _context.Location.Where(l => l.Id == group.FirstOrDefault().fk_foodPlace).FirstOrDefault().name;
+            // }
+
             newLunchSession.Add(group.FirstOrDefault());
         }
         return newLunchSession;
