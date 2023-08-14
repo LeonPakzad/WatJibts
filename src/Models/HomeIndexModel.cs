@@ -39,16 +39,6 @@ public class HomeIndexModel
                 }
             }
 
-            // if(group.FirstOrDefault().fk_eatingPlace != -1)
-            // {
-            //     group.FirstOrDefault().eatingPlace = _context.Location.Where(l => l.Id == group.FirstOrDefault().fk_eatingPlace).FirstOrDefault().name;
-            // }
-
-            // if(group.FirstOrDefault().fk_foodPlace != -1)
-            // {
-            //     group.FirstOrDefault().foodPlace = _context.Location.Where(l => l.Id == group.FirstOrDefault().fk_foodPlace).FirstOrDefault().name;
-            // }
-
             newLunchSession.Add(group.FirstOrDefault());
         }
         return newLunchSession;

@@ -105,6 +105,58 @@ else {
     <span>@l["no lunchsessions created yet"]</span>
 }
 
+@* 
+<div class="lunchtime-form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-field participating-wrapper">
+            <div class="form-field">
+                <label class="form-checkbox-label">@l["participating"]</label>
+                @Html.CheckBox("participating", false)
+        
+                <div class="lunchtime-details">
+                    <div class="form-horizontal">
+                        <div class="form-field-section">
+
+                            <div class="form-field">
+                                <label class="form-label">@l["place for food"]</label>
+                                <select class="form-select" name="fk_foodPlace" asp-for="LunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
+                                        <option value="-1">@l["no place"]</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label class="form-label">@l["place to eat"]</label>
+                                <select class="form-select" name="fk_eatingPlace" asp-for="LunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
+                                    <option value="-1">@l["no place"]</option>
+                                </select>
+                            </div>
+
+                            <a id="add-location" href="../Location/Add">@l["new place"]</a>
+                        </div>
+
+                        <div class="form-field-section">
+                            <div class="form-field"> 
+                                <div class="time-container">
+                                    <div class="form-field">
+                                        <label class="form-label">@l["lunch time"]</label>
+                                        <input type="datetime" id="lunchTime" name="lunchTime" min="00:01" max="23:59" value="@Model.LunchSession.lunchTime.ToString("hh:mm tt")"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="">
+            @l["submit"]
+        </button>
+    }
+</div> *@
+
 <div>
     @Html.ActionLink(@l["back to user list"], "UserIndex")
 </div>

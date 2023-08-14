@@ -10,9 +10,7 @@ public static class SeedData
 {
     public static async Task Initialize(IServiceProvider serviceProvider)
     {
-        using (var context = new WatDbContext(
-            serviceProvider.GetRequiredService<
-                DbContextOptions<WatDbContext>>()))
+        using (var context = new WatDbContext(serviceProvider.GetRequiredService<DbContextOptions<WatDbContext>>()))
         {
             // Look for tables, if they are filled the db is seeded
             if (context.Location.Any())
@@ -44,13 +42,11 @@ public static class SeedData
                 }
             );
 
-
             context.SaveChanges();
         }
 
-        using (var context = new WatDbContext(
-            serviceProvider.GetRequiredService<
-                DbContextOptions<WatDbContext>>()))
+        // add admin role
+        using (var context = new WatDbContext(serviceProvider.GetRequiredService<DbContextOptions<WatDbContext>>()))
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var roles = new[] {"Admin", "User"};

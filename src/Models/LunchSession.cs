@@ -5,7 +5,11 @@ public class LunchSession
     public int Id {get;set;}
     public DateTime lunchTime {get; set;}
     public bool participating {get; set;}
-    
+
+    public bool isDefault {get; set;}
+    public int weekday { get; set; }
+
+
     [ForeignKey("Location")]
     public int? fk_foodPlace {get; set;}
 
@@ -14,4 +18,16 @@ public class LunchSession
 
     [ForeignKey("User")]
     public string? fk_user {get; set;}
+
 }
+
+public enum Weekday  
+{  
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday 
+}  

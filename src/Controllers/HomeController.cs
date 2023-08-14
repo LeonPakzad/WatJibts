@@ -33,14 +33,22 @@ public class HomeController : Controller
     private IEnumerable<LunchSessionModel> getTodaysLunchSessions()
     {
         List<LunchSessionModel> todaysLunchSessions = new List<LunchSessionModel>();
+        // var currentWeekday = (int)DateTime.Now.DayOfWeek;
 
-        var tmpLunchSessions = _context.LunchSession.Where
-                (l => l.lunchTime.Date == DateTime.Today)
-                .OrderBy(l => l.participating)
-                .ThenByDescending(l => l.lunchTime)
-                .ThenByDescending(l => l.fk_eatingPlace)
-                .ThenByDescending(l => l.fk_foodPlace)
-                .ToList();
+        var tmpLunchSessions = _context.LunchSession
+            .Where(l => l.lunchTime.Date == DateTime.Today)
+            .OrderBy(l => l.participating)
+            .ThenByDescending(l => l.lunchTime)
+            .ThenByDescending(l => l.fk_eatingPlace)
+            .ThenByDescending(l => l.fk_foodPlace)
+            .ToList();
+            
+        //get default lunchSessions
+        // var defaultLunchSessions = _context.LunchSession
+        //     .Where(l => l.isDefault == true & l.weekday == currentWeekday)
+        //     .ToList();
+
+        // tmpLunchSessions = tmpLunchSessions.Union(defaultLunchSessions).OrderBy(x => x.Id).ToList();
 
         foreach(LunchSession tmpLunchSession in tmpLunchSessions)
         {
@@ -64,7 +72,7 @@ public class HomeController : Controller
 
             todaysLunchSessions.Add(todaysLunchSessionModel);
         }
-
+        
         return todaysLunchSessions;
     }
 

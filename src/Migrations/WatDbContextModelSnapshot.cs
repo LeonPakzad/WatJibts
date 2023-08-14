@@ -34,11 +34,17 @@ namespace src.Migrations
                     b.Property<string>("fk_user")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("isDefault")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime>("lunchTime")
                         .HasColumnType("datetime(6)");
 
                     b.Property<bool>("participating")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("weekday")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
