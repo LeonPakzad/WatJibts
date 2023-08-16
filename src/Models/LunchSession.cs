@@ -21,7 +21,7 @@ public class LunchSession
 
 }
 
-public enum Weekday  
+public enum weekday  
 {  
     Monday,
     Tuesday,

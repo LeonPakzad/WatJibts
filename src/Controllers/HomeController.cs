@@ -33,6 +33,7 @@ public class HomeController : Controller
     private IEnumerable<LunchSessionModel> getTodaysLunchSessions()
     {
         List<LunchSessionModel> todaysLunchSessions = new List<LunchSessionModel>();
+        List<User> userList = new List<User>();
         // var currentWeekday = (int)DateTime.Now.DayOfWeek;
 
         var tmpLunchSessions = _context.LunchSession
@@ -52,15 +53,17 @@ public class HomeController : Controller
 
         foreach(LunchSession tmpLunchSession in tmpLunchSessions)
         {
-            LunchSessionModel todaysLunchSessionModel = new LunchSessionModel();
-            todaysLunchSessionModel.Id = tmpLunchSession.Id;
-            todaysLunchSessionModel.lunchTime = tmpLunchSession.lunchTime;
-            todaysLunchSessionModel.participating = tmpLunchSession.participating;
-            todaysLunchSessionModel.fk_foodPlace = tmpLunchSession.fk_foodPlace;
-            todaysLunchSessionModel.fk_eatingPlace = tmpLunchSession.fk_eatingPlace;
-            todaysLunchSessionModel.fk_user = tmpLunchSession.fk_user;
+            LunchSessionModel todaysLunchSessionModel = new LunchSessionModel
+            {
+                Id = tmpLunchSession.Id,
+                lunchTime = tmpLunchSession.lunchTime,
+                participating = tmpLunchSession.participating,
+                fk_foodPlace = tmpLunchSession.fk_foodPlace,
+                fk_eatingPlace = tmpLunchSession.fk_eatingPlace,
+                fk_user = _context.User.Where(u => u.Email == tmpLunchSession.fk_user).FirstOrDefault().UserName
+            };
 
-            if(todaysLunchSessionModel.fk_eatingPlace != -1)
+            if (todaysLunchSessionModel.fk_eatingPlace != -1)
             {
                 todaysLunchSessionModel.eatingPlace = _context.Location.Where(l => l.Id == todaysLunchSessionModel.fk_eatingPlace).FirstOrDefault().name;
             }
