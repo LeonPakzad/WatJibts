@@ -44,6 +44,7 @@ namespace src.Controllers {
             // check if admin exists to enable first admin
             ViewBag.adminExists = _context.UserRoles.Any(u => u.RoleId != null);
 
+            // add locations for 
             ViewBag.locationsToEat      = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
             ViewBag.locationsToGetFood  = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 

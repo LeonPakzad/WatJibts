@@ -386,12 +386,12 @@
   </data>
 
   <data name="diet" xml:space="preserve">
-    <value>Essen</value>
+    <value>Diät</value>
     <comment/>
   </data>
 
   <data name="dish" xml:space="preserve">
-    <value>Essen</value>
+    <value>Gerichte</value>
     <comment/>
   </data>
 
@@ -401,7 +401,7 @@
   </data>
 
   <data name="cuisine" xml:space="preserve">
-    <value>Essensart</value>
+    <value>Küche</value>
     <comment/>
   </data>
 

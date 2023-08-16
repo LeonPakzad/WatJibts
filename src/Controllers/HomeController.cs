@@ -51,6 +51,7 @@ public class HomeController : Controller
 
         // tmpLunchSessions = tmpLunchSessions.Union(defaultLunchSessions).OrderBy(x => x.Id).ToList();
 
+        // build each lunchsessionmodel
         foreach(LunchSession tmpLunchSession in tmpLunchSessions)
         {
             LunchSessionModel todaysLunchSessionModel = new LunchSessionModel
