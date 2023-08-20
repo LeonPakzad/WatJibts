@@ -34,7 +34,7 @@ public class HomeController : Controller
     {
         List<LunchSessionModel> todaysLunchSessions = new List<LunchSessionModel>();
         List<User> userList = new List<User>();
-        // var currentWeekday = (int)DateTime.Now.DayOfWeek;
+        var currentWeekday = (int)DateTime.Now.DayOfWeek;
 
         var tmpLunchSessions = _context.LunchSession
             .Where(l => l.lunchTime.Date == DateTime.Today)
@@ -44,12 +44,12 @@ public class HomeController : Controller
             .ThenByDescending(l => l.fk_foodPlace)
             .ToList();
             
-        //get default lunchSessions
-        // var defaultLunchSessions = _context.LunchSession
-        //     .Where(l => l.isDefault == true & l.weekday == currentWeekday)
-        //     .ToList();
+        // get default lunchSessions
+        var defaultLunchSessions = _context.LunchSession
+            .Where(l => l.isDefault == true & l.weekday == currentWeekday)
+            .ToList();
 
-        // tmpLunchSessions = tmpLunchSessions.Union(defaultLunchSessions).OrderBy(x => x.Id).ToList();
+        tmpLunchSessions = tmpLunchSessions.Union(defaultLunchSessions).OrderBy(x => x.Id).ToList();
 
         // build each lunchsessionmodel
         foreach(LunchSession tmpLunchSession in tmpLunchSessions)
@@ -61,7 +61,7 @@ public class HomeController : Controller
                 participating = tmpLunchSession.participating,
                 fk_foodPlace = tmpLunchSession.fk_foodPlace,
                 fk_eatingPlace = tmpLunchSession.fk_eatingPlace,
-                fk_user = _context.User.Where(u => u.Email == tmpLunchSession.fk_user).FirstOrDefault().UserName
+                fk_user = _context.User.Where(u => u.UserName == tmpLunchSession.fk_user).FirstOrDefault().UserName
             };
 
             if (todaysLunchSessionModel.fk_eatingPlace != -1)

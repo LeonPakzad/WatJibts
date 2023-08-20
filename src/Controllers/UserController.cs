@@ -41,6 +41,30 @@ namespace src.Controllers {
                 return NotFound();
             }
 
+            // add default Lunchsessions if they are not created yet
+            if(!_context.LunchSession.Where(l => l.fk_user == user && l.isDefault == true).Any())
+            {
+                int daysOfWeek = 7;
+                int defaultPlacefk = -1;
+
+                for(int weekdayIndex = 1; weekdayIndex <= daysOfWeek; weekdayIndex++)
+                {
+                    LunchSession defaultLunchSession = new LunchSession
+                    {
+                        lunchTime = new DateTime(),
+                        participating = false,
+                        fk_foodPlace = -1,
+                        fk_eatingPlace = -1,
+                        fk_user = user,
+                        isDefault = true,
+                        weekday = weekdayIndex
+                    };
+
+                    _context.Add(defaultLunchSession);
+                }
+                _context.SaveChanges();
+            }
+
             // check if admin exists to enable first admin
             ViewBag.adminExists = _context.UserRoles.Any(u => u.RoleId != null);
 
@@ -48,9 +72,11 @@ namespace src.Controllers {
             ViewBag.locationsToEat      = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
             ViewBag.locationsToGetFood  = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
-            userProfile.user = _context.User.Where(p => p.Email == user).First();
-            userProfile.userLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == user);
-            
+            userProfile.user = _context.User.Where(p => p.UserName == user).First();
+            userProfile.userLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == user & l.isDefault == false);
+
+            userProfile.defaultLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == user & l.isDefault == true);
+
             return View(userProfile);
         }
 
@@ -58,7 +84,7 @@ namespace src.Controllers {
         [Authorize]
         public IActionResult Profile(User user)
         {
-            var currentUser = _context.User.Where(u => u.Email == User.Identity.Name).First();
+            var currentUser = _context.User.Where(u => u.UserName == User.Identity.Name).First();
             
             currentUser.UserName = user.UserName;
             currentUser.fk_defaultPlaceToEat = user.fk_defaultPlaceToEat;
@@ -73,7 +99,7 @@ namespace src.Controllers {
         public async Task<IActionResult> AddFirstAdmin(User user)
         {
             var userRole = new IdentityUserRole<string>();
-            userRole.UserId = _context.User.Where(u => u.Email == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
+            userRole.UserId = _context.User.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
             userRole.RoleId = _context.Roles.Where(r => r.Name == "Admin").Select(r => r.Id).FirstOrDefault();
             _context.UserRoles.Add(userRole);
             
@@ -112,7 +138,7 @@ namespace src.Controllers {
             
             var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
 
-            if(user.Email == User.Identity.Name)
+            if(user.UserName == User.Identity.Name)
             {
                 return RedirectToAction("Profile");
             }
