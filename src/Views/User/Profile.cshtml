@@ -109,7 +109,7 @@ else {
 @foreach(var defaultLunchSession in Model.defaultLunchSessions)
 {
     <div class="lunchtime-form">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Profile"))
         {
             @Html.AntiForgeryToken()
             

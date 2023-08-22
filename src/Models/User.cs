@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using src.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 
 public class User : IdentityUser
 {
-
+private readonly WatDbContext _context;
     public TimeOnly? preferredLunchTime {get;set;} = new TimeOnly(12,0,0); 
 
     [ForeignKey("Location")]

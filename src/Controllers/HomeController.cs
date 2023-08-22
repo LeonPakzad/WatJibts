@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using src.Data;
 using src.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace src.Controllers;
 
@@ -25,7 +26,7 @@ public class HomeController : Controller
         Response.Cookies.Append(
             CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMinutes(10) });
+            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMinutes(10)});
 
         return LocalRedirect(returnUrl);
     }
@@ -54,6 +55,8 @@ public class HomeController : Controller
         // build each lunchsessionmodel
         foreach(LunchSession tmpLunchSession in tmpLunchSessions)
         {
+            User tmpUser = _context.User.Where(u => u.Id == tmpLunchSession.fk_user).FirstOrDefault();
+
             LunchSessionModel todaysLunchSessionModel = new LunchSessionModel
             {
                 Id = tmpLunchSession.Id,
@@ -61,7 +64,8 @@ public class HomeController : Controller
                 participating = tmpLunchSession.participating,
                 fk_foodPlace = tmpLunchSession.fk_foodPlace,
                 fk_eatingPlace = tmpLunchSession.fk_eatingPlace,
-                fk_user = _context.User.Where(u => u.UserName == tmpLunchSession.fk_user).FirstOrDefault().UserName
+                fk_user = tmpUser.Id,
+                userName = tmpUser.UserName
             };
 
             if (todaysLunchSessionModel.fk_eatingPlace != -1)
@@ -88,18 +92,13 @@ public class HomeController : Controller
 
         // If there is already a lunchsession from the user, fill the data of this lunch session into the form. 
         // If not, fill the form with the user preferred setings 
-        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == User.Identity.Name).Any())
+        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == getCurrentUserId()).Any())
         {
-            HomeIndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == User.Identity.Name).FirstOrDefault();
+            HomeIndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == getCurrentUserId()).FirstOrDefault();
         }
-        else if (_context.User.Where(u => u.Email == User.Identity.Name).Any())
+        else if (_context.User.Where(u => u.Id == getCurrentUserId()).Any())
         {
-            User currentUser = _context.User.Where(u => u.Email == User.Identity.Name).FirstOrDefault();
-            string userId = HttpContext.User.Identity.Name;
-
-            if(userId == null) {
-                return NotFound();
-            }
+            User currentUser = _context.User.Where(u => u.Id == getCurrentUserId()).FirstOrDefault();
             
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
@@ -141,19 +140,19 @@ public class HomeController : Controller
     {
         LunchSession lunchSession   = new LunchSession();
 
-        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
+        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == getCurrentUserId()).Any();
 
         // check if user already added a lunchsession, edit the existing, if that is the case. Use preferred Lunchsettings otherwise
         if(lunchSessionExists)
         {
-            lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+            lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == getCurrentUserId()).FirstOrDefault();
             lunchSession.participating  = participating;
             lunchSession.fk_foodPlace   = fk_foodPlace;
             lunchSession.fk_eatingPlace = fk_eatingPlace;
             lunchSession.lunchTime      = lunchTime;
         }
         else{
-            lunchSession.fk_user        = User.Identity.Name;
+            lunchSession.fk_user        = getCurrentUserId();
             lunchSession.participating  = participating;
             lunchSession.fk_foodPlace   = fk_foodPlace;
             lunchSession.fk_eatingPlace = fk_eatingPlace;
@@ -198,14 +197,14 @@ public class HomeController : Controller
         LunchSession joinedSession = _context.LunchSession.Where(l => l.Id == lunchSessionId).FirstOrDefault();
 
         // check if the user already has a lunch Session
-        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).Any();
+        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == getCurrentUserId()).Any();
         
         _context.LunchSession.Where
                 (l => l.lunchTime.Date == DateTime.Today);
 
         if(lunchSessionExists)
         {
-            lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == User.Identity.Name).FirstOrDefault();
+            lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == getCurrentUserId()).FirstOrDefault();
             lunchSession.participating  = joinedSession.participating;
             lunchSession.fk_foodPlace   = joinedSession.fk_foodPlace;
             lunchSession.fk_eatingPlace = joinedSession.fk_eatingPlace;
@@ -213,7 +212,7 @@ public class HomeController : Controller
         }
         else
         {
-            lunchSession.fk_user        = User.Identity.Name;
+            lunchSession.fk_user        = getCurrentUserId();
             lunchSession.participating  = joinedSession.participating;
             lunchSession.fk_foodPlace   = joinedSession.fk_foodPlace;
             lunchSession.fk_eatingPlace = joinedSession.fk_eatingPlace;
@@ -233,5 +232,11 @@ public class HomeController : Controller
         _context.SaveChanges();
         
         return RedirectToAction("Index");
+    }
+
+    //class to get UserId by Name since i dont get the usermanager to give me the Id rn and dont want to perform db actions with data that change (UserName)
+    public string getCurrentUserId()
+    {
+        return _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
     }
 }

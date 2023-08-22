@@ -25,7 +25,7 @@ else
             {
                 <div class="lunchtime-card">
                     <div class="lunchtime-users">
-                        @lunchSession.fk_user
+                        @lunchSession.userName
                     </div>
 
                     <div class="lunchtime-time">
@@ -57,7 +57,7 @@ else
                         }
                     </div>
 
-                    @if(@lunchSession.fk_user.Contains(User.Identity.Name))
+                    @if(@lunchSession.userName.Contains(User.Identity.Name))
                     {
                         <span>@l["joined"]</span>
                     }
@@ -89,7 +89,7 @@ else
         @foreach(var lunchSession in Model.privateLunchSessions)
         {
             <div class="table-item">
-                @lunchSession.fk_user
+                @lunchSession.userName
                 <span>, </span> 
             </div>
         }

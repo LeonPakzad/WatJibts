@@ -21,4 +21,5 @@ namespace src.Data
             base.OnModelCreating(modelBuilder);
         }
     }
+
 }

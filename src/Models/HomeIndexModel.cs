@@ -12,10 +12,8 @@ using src.Models;
 public class HomeIndexModel
 {
     public ICollection<LunchSessionModel>? publicLunchSessions{get;set;}
-    public IEnumerable<LunchSession>? privateLunchSessions{get;set;}
+    public IEnumerable<LunchSessionModel>? privateLunchSessions{get;set;}
     public LunchSession? LunchSession {get;set;}
-
-    private readonly WatDbContext _context;
 
     /**
     / gets an icollection of publicLuchSessions
