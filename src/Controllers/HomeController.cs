@@ -85,6 +85,7 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public IActionResult Index()
     {
         HomeIndexModel HomeIndexModel   = new HomeIndexModel();
@@ -237,6 +238,14 @@ public class HomeController : Controller
     //class to get UserId by Name since i dont get the usermanager to give me the Id rn and dont want to perform db actions with data that change (UserName)
     public string getCurrentUserId()
     {
-        return _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+        var user = _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+        if(user != null)
+        {
+            return user;
+        }
+        else 
+        {
+            return "no user";
+        }
     }
 }

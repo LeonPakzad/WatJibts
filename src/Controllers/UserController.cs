@@ -149,7 +149,7 @@ namespace src.Controllers {
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(User user)
         {
-            var currentUser = _context.User.Where(u => u.Id == user.Id).FirstOrDefault();
+            var currentUser = _context.User.Where(u => u.Id == getCurrentUserId()).FirstOrDefault();
             
             currentUser.UserName = user.UserName;
             currentUser.fk_defaultPlaceToEat = user.fk_defaultPlaceToEat;
@@ -199,7 +199,15 @@ namespace src.Controllers {
         // TODO: change in case this needs to hold more data as frequent requests might slow down the db
         public string getCurrentUserId()
         {
-            return _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+             var user = _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+            if(user != null)
+            {
+                return user;
+            }
+            else 
+            {
+                return "no user";
+            }
         }
     }
 }
