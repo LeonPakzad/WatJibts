@@ -15,6 +15,7 @@ namespace src.Areas.Identity.Pages.Account
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
+        
         private readonly ILogger<LogoutModel> _logger;
 
         public LogoutModel(SignInManager<User> signInManager, ILogger<LogoutModel> logger)

@@ -8,10 +8,14 @@ using Microsoft.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 
 namespace src.Controllers {
     public class UserController : Controller
     {
+
+        private readonly SignInManager<User> _signInManager;
+
         private readonly WatDbContext _context;
 
         public UserController(WatDbContext context)
@@ -80,13 +84,47 @@ namespace src.Controllers {
         public IActionResult Profile(User user)
         {
             var currentUser = _context.User.Where(u => u.Id == getCurrentUserId()).First();
-            
+            bool logout = false;
+            if(currentUser.UserName != user.UserName)
+            {
+                logout = true;
+            }
+
             currentUser.UserName = user.UserName;
             currentUser.fk_defaultPlaceToEat = user.fk_defaultPlaceToEat;
             currentUser.fk_defaultPlaceToGetFood = user.fk_defaultPlaceToGetFood;
             currentUser.preferredLunchTime = user.preferredLunchTime;
             _context.SaveChanges();
+            if(logout)
+            {
+                // SignOutResult();
+
+               return RedirectToAction("LogOut", "Account", new { area = "Identity"});
+            }
             
+            return RedirectToAction("Profile");
+        }
+
+        [HttpPost]
+        public IActionResult ProfileLunchSessions (int id, string userId, int weekday,  bool participating, int fk_foodPlace, int fk_eatingPlace, DateTime lunchTime)
+        {
+            var oldLunchSession = _context.LunchSession.Where(l => l.Id == id).FirstOrDefault();
+            _context.LunchSession.Remove(oldLunchSession);
+
+            _context.LunchSession.Add (new LunchSessionModel
+            {
+                Id = id,
+                lunchTime = lunchTime,
+                participating = participating,
+                fk_foodPlace = fk_foodPlace,
+                fk_eatingPlace = fk_eatingPlace,
+                fk_user = userId,
+                weekday = weekday,
+                isDefault = true,
+            });
+
+            _context.SaveChanges();
+
             return RedirectToAction("Profile");
         }
 
@@ -171,7 +209,10 @@ namespace src.Controllers {
                 return NotFound();
             }
 
+            _context.LunchSession.Remove(_context.LunchSession.Where(l=>l.fk_user == id).First());
             _context.User.Remove(user);
+            _context.SaveChanges();
+
             _context.SaveChanges();
             
             return RedirectToAction("UserIndex");
@@ -196,13 +237,12 @@ namespace src.Controllers {
         }
 
         //class to get UserId by Name since i dont get the usermanager to give me the Id rn and dont want to perform db actions with data that change (UserName)..
-        // TODO: change in case this needs to hold more data as frequent requests might slow down the db
+        // TODO: change when solution found, might be unsafe and frequent requests slow down the db
         public string getCurrentUserId()
         {
-            var user = _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
-            if(user != null)
+            if(_context.User.Where(u => u.UserName == User.Identity.Name).Any())
             {
-                return user;
+                return _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
             }
             else 
             {

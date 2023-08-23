@@ -154,7 +154,7 @@ else {
             }
         </summary>
         <div class="lunchtime-form">
-            @using (Html.BeginForm("Profile"))
+            @using (Html.BeginForm("ProfileLunchSessions", "User", new { id = defaultLunchSession.Id, userId = defaultLunchSession.fk_user , weekday = defaultLunchSession.weekday}))
             {
                 @Html.AntiForgeryToken()
                 

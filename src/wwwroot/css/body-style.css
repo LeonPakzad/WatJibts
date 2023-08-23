@@ -114,6 +114,10 @@ button {
   appearance: none;
 }
 
+.btn:hover {
+  cursor: pointer;
+}
+
 input,
 select,
 textarea {

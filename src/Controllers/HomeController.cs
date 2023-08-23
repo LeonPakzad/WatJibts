@@ -52,6 +52,18 @@ public class HomeController : Controller
 
         tmpLunchSessions = tmpLunchSessions.Union(defaultLunchSessions).OrderBy(x => x.Id).ToList();
 
+        // delete dublicates
+        foreach(LunchSession tmpLunchSession in tmpLunchSessions.ToList())
+        {
+            if(tmpLunchSession.isDefault)
+            {
+                if(tmpLunchSessions.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == tmpLunchSession.fk_user).Any())
+                {
+                    tmpLunchSessions.Remove(tmpLunchSession);
+                }
+            }
+        }
+
         // build each lunchsessionmodel
         foreach(LunchSession tmpLunchSession in tmpLunchSessions)
         {
@@ -151,6 +163,7 @@ public class HomeController : Controller
             lunchSession.fk_foodPlace   = fk_foodPlace;
             lunchSession.fk_eatingPlace = fk_eatingPlace;
             lunchSession.lunchTime      = lunchTime;
+            lunchSession.isDefault = false;
         }
         else{
             lunchSession.fk_user        = getCurrentUserId();
@@ -158,6 +171,7 @@ public class HomeController : Controller
             lunchSession.fk_foodPlace   = fk_foodPlace;
             lunchSession.fk_eatingPlace = fk_eatingPlace;
             lunchSession.lunchTime      = lunchTime;
+            lunchSession.isDefault = false;
             
             _context.Add(lunchSession);
         }
@@ -243,9 +257,6 @@ public class HomeController : Controller
         {
             return user;
         }
-        else 
-        {
-            return "no user";
-        }
+        return null;
     }
 }
