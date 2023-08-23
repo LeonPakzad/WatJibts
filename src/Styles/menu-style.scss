@@ -207,26 +207,10 @@
         input[type="checkbox"]:checked ~ .menu-item-container {
             transform: translateX(0);
         }
-          
-        // input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
-        //     transform: rotate(45deg) scaleX(1.1);
-        //     border-radius: 50%;
-        //     height: 5px;
-        // }
-          
+
         input[type="checkbox"]:checked ~ .hamburger-lines {
             justify-content: space-between;
         }
-          
-        // input[type="checkbox"]:checked ~ .hamburger-lines .line5 {
-        //     transform: rotate(-45deg) scaleX(1.1);
-        //     border-radius: 50%;
-        //     height: 5px;
-        // }
-          
-        // input[type="checkbox"]:checked ~ .logo{
-        //     transform: scaleY(0);
-        // }
     }
 
     .language-select-wrapper {
@@ -239,10 +223,8 @@
             margin-bottom: 5px;
         }
     }
-}
 
-
-
-@media (min-width: 768px) {
-
+    .seo-ul {
+        padding-left: 0;
+    }
 }

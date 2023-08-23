@@ -231,6 +231,12 @@
     <value>Profil</value>
     <comment/>
   </data>
+
+  <data name="edit profile" xml:space="preserve">
+    <value>Profil bearbeiten</value>
+    <comment/>
+  </data>
+
   <data name="locations" xml:space="preserve">
     <value>Orte</value>
     <comment/>
@@ -243,6 +249,17 @@
     <value>Heute wurde noch keine Session hinzugefügt</value>
     <comment/>
   </data>
+  
+  <data name="todays lunchsessions:" xml:space="preserve">
+    <value>Heutige Sessions:</value>
+    <comment/>
+  </data>
+
+<data name="add / edit your session" xml:space="preserve">
+    <value>Eigene Session hinzufügen / bearbeiten</value>
+    <comment/>
+  </data>
+
   <data name="join" xml:space="preserve">
     <value>Anschließen</value>
     <comment/>
@@ -427,6 +444,51 @@
 
   <data name="adress street" xml:space="preserve">
     <value>Straße</value>
+    <comment/>
+  </data>
+
+  <data name="previous lunch sessions" xml:space="preserve">
+    <value>Bisherige Essen</value>
+    <comment/>
+  </data>
+  
+  <data name="default lunch times" xml:space="preserve">
+    <value>Gewöhnliche Esszeiten</value>
+    <comment/>
+  </data>
+
+  <data name="monday" xml:space="preserve">
+    <value>Montag</value>
+    <comment/>
+  </data>
+
+  <data name="tuesday" xml:space="preserve">
+    <value>Dienstag</value>
+    <comment/>
+  </data>
+
+  <data name="wednesday" xml:space="preserve">
+    <value>Mittwoch</value>
+    <comment/>
+  </data>
+
+  <data name="thursday" xml:space="preserve">
+    <value>Donnerstag</value>
+    <comment/>
+  </data>
+
+  <data name="friday" xml:space="preserve">
+    <value>Freitag</value>
+    <comment/>
+  </data>
+
+  <data name="saturday" xml:space="preserve">
+    <value>Samstag</value>
+    <comment/>
+  </data>
+
+  <data name="sunday" xml:space="preserve">
+    <value>Sonntag</value>
     <comment/>
   </data>
 

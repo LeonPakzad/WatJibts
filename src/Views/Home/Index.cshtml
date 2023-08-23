@@ -16,6 +16,11 @@
 }
 else
 {
+    <h2>
+        @l["todays lunchsessions:"]
+    </h2>
+    <hr>
+
     @if(Model.publicLunchSessions.Count() > 0) 
     {
         <div class="lunchtime-wrapper">
@@ -86,6 +91,8 @@ else
     @if (Model.privateLunchSessions.Count() > 0)
     {
         <h2>@l["The following people will eat privately today:"]</h2>
+        <hr>
+        <br>
         @foreach(var lunchSession in Model.privateLunchSessions)
         {
             <div class="table-item">
@@ -100,7 +107,12 @@ else
         <p>@l["No Lunchsession has been added yet"]</p>
     }
 
-    <br><hr>
+    <br>
+    <h2>
+        @l["add / edit your session"]
+    </h2>
+    <hr>
+    <br>
 
     <div class="lunchtime-form">
 

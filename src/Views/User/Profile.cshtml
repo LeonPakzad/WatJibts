@@ -8,6 +8,14 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<br>
+<h2>
+    @l["edit profile"]
+</h2>
+
+<hr>
+<br>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -59,6 +67,11 @@
     @Html.ActionLink(@l["promote to admin"], "AddFirstAdmin")
 }
 
+<br>
+<h2>@l["previous lunch sessions"]</h2>
+<hr>
+
+
 @if(Model.userLunchSessions.Count() > 0) 
 {
     <span class="link-red">
@@ -105,46 +118,77 @@ else {
     <span>@l["no lunchsessions created yet"]</span>
 }
 
+<br>
+<h2>@l["default lunch times"]</h2>
+<hr>
+<br>
+
 
 @foreach(var defaultLunchSession in Model.defaultLunchSessions)
 {
-    <div class="lunchtime-form">
-        @using (Html.BeginForm("Profile"))
-        {
-            @Html.AntiForgeryToken()
-            
-            <div class="form-field participating-wrapper">
-                <div class="form-field">
-                    <label class="form-checkbox-label">@l["participating"]</label>
-                    @Html.CheckBox("participating", false)
-            
-                    <div class="lunchtime-details">
-                        <div class="form-horizontal">
-                            <div class="form-field-section">
+    <details @(@defaultLunchSession.weekday == (int)DateTime.Now.DayOfWeek ? "open class=lunchtime-wrapper-today " : "")>
+        <summary class="profile-lunchtime-wrapper">
+            @switch(defaultLunchSession.weekday)
+            {
+                case 1:
+                        @l["monday"] 
+                    break;
+                case 2:
+                    @l["tuesday"] 
+                    break;
+                case 3:
+                    @l["wednesday"] 
+                    break;
+                case 4:
+                    @l["thursday"] 
+                    break;
+                case 5:
+                    @l["friday"] 
+                    break;
+                case 6:
+                    @l["saturday"] 
+                    break;   
+                case 7: 
+                    @l["sunday"]
+                    break;
+            }
+        </summary>
+        <div class="lunchtime-form">
+            @using (Html.BeginForm("Profile"))
+            {
+                @Html.AntiForgeryToken()
+                
+                <div class="form-field participating-wrapper">
+                    <div class="form-field">
+                        <label class="form-checkbox-label">@l["participating"]</label>
+                        @Html.CheckBox("participating", false)
+                
+                        <div class="lunchtime-details">
+                            <div class="form-horizontal">
+                                <div class="form-field-section">
 
-                                <div class="form-field">
-                                    <label class="form-label">@l["place for food"]</label>
-                                    <select class="form-select" name="fk_foodPlace" asp-for="defaultLunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
+                                    <div class="form-field">
+                                        <label class="form-label">@l["place for food"]</label>
+                                        <select class="form-select" name="fk_foodPlace" asp-for="defaultLunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
+                                                <option value="-1">@l["no place"]</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-field">
+                                        <label class="form-label">@l["place to eat"]</label>
+                                        <select class="form-select" name="fk_eatingPlace" asp-for="defaultLunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
                                             <option value="-1">@l["no place"]</option>
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div class="form-field">
-                                    <label class="form-label">@l["place to eat"]</label>
-                                    <select class="form-select" name="fk_eatingPlace" asp-for="defaultLunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
-                                        <option value="-1">@l["no place"]</option>
-                                    </select>
-                                </div>
-
-                                <a id="add-location" href="../Location/Add">@l["new place"]</a>
-                            </div>
-
-                            <div class="form-field-section">
-                                <div class="form-field"> 
-                                    <div class="time-container">
-                                        <div class="form-field">
-                                            <label class="form-label">@l["lunch time"]</label>
-                                            <input type="datetime" id="lunchTime" name="lunchTime" min="00:01" max="23:59" value=@defaultLunchSession.lunchTime.ToString("hh:mm tt")/>
+                                <div class="form-field-section">
+                                    <div class="form-field"> 
+                                        <div class="time-container">
+                                            <div class="form-field">
+                                                <label class="form-label">@l["lunch time"]</label>
+                                                <input type="datetime" id="lunchTime" name="lunchTime" min="00:01" max="23:59" value=@defaultLunchSession.lunchTime.ToString("hh:mm tt")/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -152,12 +196,12 @@ else {
                         </div>
                     </div>
                 </div>
-            </div>
-            <button type="submit" class="">
-                @l["submit"]
-            </button>
-        }
-    </div>
+                <button type="submit" class="">
+                    @l["submit"]
+                </button>
+            }
+        </div>
+    </details>
 }
 
 <div>

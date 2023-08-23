@@ -1,5 +1,5 @@
 $color-header-primary: #E200F7;
-$color-header-secundary: #08E8DE;
+$color-header-secondary: #08E8DE;
 $color-font: white;
 $color-glow: white;
 
@@ -35,17 +35,17 @@ header {
 
 h1 {
     font-family: beonregular;
-    color: $color-header-secundary;
+    color: $color-header-secondary;
 }
 
 h1:not(.flickering-headline) {
-    animation: pulsate-secundary 2.5s infinite alternate; 
+    animation: pulsate-secondary 2.5s infinite alternate; 
 
     // primary color glow
     text-shadow:
-    0 0 7px $color-header-secundary,
-    0 0 10px $color-header-secundary,
-    0 0 21px $color-header-secundary,
+    0 0 7px $color-header-secondary,
+    0 0 10px $color-header-secondary,
+    0 0 21px $color-header-secondary,
 
     // secondary color glow
     0 0 42px $color-glow,
@@ -73,12 +73,12 @@ a {
 }
 
 a.selected {
-    color: $color-header-secundary !important;
+    color: $color-header-secondary !important;
 
     text-shadow:
-    0 0 7px $color-header-secundary,
-    0 0 10px $color-header-secundary,
-    0 0 21px $color-header-secundary,
+    0 0 7px $color-header-secondary,
+    0 0 10px $color-header-secondary,
+    0 0 21px $color-header-secondary,
     0 0 34px $color-glow,
     0 0 42px $color-glow,
 }
@@ -138,13 +138,13 @@ hr {
     }
 }
 
-@keyframes pulsate-secundary {
+@keyframes pulsate-secondary {
     100% {
       // Larger blur radius */
       text-shadow:
-        0 0 4px $color-header-secundary,
-        0 0 11px $color-header-secundary,
-        0 0 19px $color-header-secundary,
+        0 0 4px $color-header-secondary,
+        0 0 11px $color-header-secondary,
+        0 0 19px $color-header-secondary,
         0 0 40px $color-glow,
         0 0 80px $color-glow,
         0 0 100px $color-glow,
@@ -154,9 +154,9 @@ hr {
     0% {
       // Smaller blur radius 
       text-shadow:
-        0 0 2px $color-header-secundary,
-        0 0 4px $color-header-secundary,
-        0 0 6px $color-header-secundary,
+        0 0 2px $color-header-secondary,
+        0 0 4px $color-header-secondary,
+        0 0 6px $color-header-secondary,
         0 0 10px $color-glow,
         0 0 45px $color-glow,
         0 0 55px $color-glow,

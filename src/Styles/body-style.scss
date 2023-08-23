@@ -66,7 +66,7 @@ input [type="checkbox"]:focus {
 }
 
 input[type="checkbox"]:checked {
-    background: $color-header-secundary;
+    background: $color-header-secondary;
 }
 
 select {
@@ -139,11 +139,7 @@ button:hover {
     text-align:left;
 }
 
-.form-horizontal {
-    display: flex;
-    max-width: 400px;
-    margin: 0 auto;
-}
+
 
 .form-field {
     position: relative;
@@ -238,6 +234,47 @@ button:hover {
         .lunchtime-places {
 
         }
+    }
+}
+
+details {
+    padding: 10px;
+}
+
+summary {
+    padding: 10px;
+}
+
+.profile-lunchtime-wrapper {
+    margin: 15px;
+    box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
+}
+
+.lunchtime-form {
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 3px 4px 0 $color-header-primary;
+}
+
+.lunchtime-wrapper-today {
+    .profile-lunchtime-wrapper {
+        box-shadow: 0 0 4px $color-header-secondary, 0 0 11px $color-header-secondary, 0 0 17px $color-header-secondary, 0 0 23px white, 0 0 27px white, 0 0 33px white;
+        
+        .lunchtime-form {
+            box-shadow: 0 3px 4px 0 $color-header-secondary;
+        }
+    }
+}
+
+.form-horizontal {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+@media (min-width: 600px)
+{
+    .form-horizontal {
+        display: flex;
     }
 }
 

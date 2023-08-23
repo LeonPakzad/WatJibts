@@ -199,7 +199,7 @@ namespace src.Controllers {
         // TODO: change in case this needs to hold more data as frequent requests might slow down the db
         public string getCurrentUserId()
         {
-             var user = _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+            var user = _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
             if(user != null)
             {
                 return user;

@@ -21,7 +21,7 @@ h1 {
 }
 
 h1:not(.flickering-headline) {
-  animation: pulsate-secundary 2.5s infinite alternate;
+  animation: pulsate-secondary 2.5s infinite alternate;
   text-shadow: 0 0 7px #08E8DE, 0 0 10px #08E8DE, 0 0 21px #08E8DE, 0 0 42px white, 0 0 82px white;
 }
 
@@ -75,7 +75,7 @@ hr {
     text-shadow: 0 0 2px #E200F7, 0 0 4px #E200F7, 0 0 6px #E200F7, 0 0 10px white, 0 0 45px white, 0 0 55px white, 0 0 70px white, 0 0 80px white;
   }
 }
-@keyframes pulsate-secundary {
+@keyframes pulsate-secondary {
   100% {
     text-shadow: 0 0 4px #08E8DE, 0 0 11px #08E8DE, 0 0 19px #08E8DE, 0 0 40px white, 0 0 80px white, 0 0 100px white, 0 0 150px white;
   }
@@ -252,6 +252,9 @@ hr {
   max-width: 200px;
   margin: 0;
   margin-bottom: 5px;
+}
+.navbar .seo-ul {
+  padding-left: 0;
 }
 
 /*# sourceMappingURL=menu-style.css.map */

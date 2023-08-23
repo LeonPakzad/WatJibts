@@ -63,62 +63,61 @@
                         <div class="menu-items">
 
                             @await Html.PartialAsync("_SelectLanguagePartial")
-                            <ul>
-
-                            
-                            <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Index">
-                                    <h1 class="@(@actionName == "Index" ? "selected" : "flickering-headline") ">WatJibts</h1>
-                                </a>
-                            </li>
-                            @{
-                                if (SignInManager.IsSignedIn(User))
-                                {
-                                    <li>
-                                        <a class="@(@actionName == "Profile" ? "selected" : "")" asp-area="" asp-controller="User" asp-action="Profile">
-                                            @l["profile"]
-                                        </a>
-                                    </li>
-                                    @if(User.IsInRole("Admin"))
+                            <ul class="seo-ul">
+                                <li>
+                                    <a asp-area="" asp-controller="Home" asp-action="Index">
+                                        <h1 class="@(@actionName == "Index" ? "selected" : "flickering-headline") ">WatJibts</h1>
+                                    </a>
+                                </li>
+                                
+                                @{
+                                    if (SignInManager.IsSignedIn(User))
                                     {
                                         <li>
-                                            <a class="@(@actionName == "UserIndex" ? "selected" : "")" asp-area="" asp-controller="User" asp-action="UserIndex">
-                                                @l["users"]
+                                            <a class="@(@actionName == "Profile" ? "selected" : "")" asp-area="" asp-controller="User" asp-action="Profile">
+                                                @l["profile"]
+                                            </a>
+                                        </li>
+                                        @if(User.IsInRole("Admin"))
+                                        {
+                                            <li>
+                                                <a class="@(@actionName == "UserIndex" ? "selected" : "")" asp-area="" asp-controller="User" asp-action="UserIndex">
+                                                    @l["users"]
+                                                </a>
+                                            </li>
+                                        }
+                                        <li>
+                                            <a class="@(@actionName == "LocationIndex" ? "selected" : "")" asp-area="" asp-controller="Location" asp-action="LocationIndex">
+                                                @l["locations"]
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                                <button id="logout" type="submit" class="logout-button">
+                                                    @l["logout"]
+                                                </button>
+                                            </form>
+                                        </li>
+                                    }
+                                    else 
+                                    {
+                                        <li>
+                                            <a class="@(@displayName == "/Account/Login" ? "selected" : "")" id="login" asp-area="Identity" asp-page="/Account/Login">
+                                                @l["login"]
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="@(@displayName == "/Account/Register" ? "selected" : "")" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                                @l["register"]
                                             </a>
                                         </li>
                                     }
-                                    <li>
-                                        <a class="@(@actionName == "LocationIndex" ? "selected" : "")" asp-area="" asp-controller="Location" asp-action="LocationIndex">
-                                            @l["locations"]
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                            <button id="logout" type="submit" class="logout-button">
-                                                @l["logout"]
-                                            </button>
-                                        </form>
-                                    </li>
-                                }
-                                else 
-                                {
-                                    <li>
-                                        <a class="@(@displayName == "/Account/Login" ? "selected" : "")" id="login" asp-area="Identity" asp-page="/Account/Login">
-                                            @l["login"]
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="@(@displayName == "/Account/Register" ? "selected" : "")" id="register" asp-area="Identity" asp-page="/Account/Register">
-                                            @l["register"]
-                                        </a>
-                                    </li>
-                                }
-                                <br><br><hr><br>
+                                    <br><br><hr><br>
 
-                                <a class="@(@actionName == "Impressum" ? "selected" : "")" asp-area="" asp-controller="Home" asp-action="Impressum">
-                                    @l["imprint"]
-                                </a>
-                            }
+                                    <a class="@(@actionName == "Impressum" ? "selected" : "")" asp-area="" asp-controller="Home" asp-action="Impressum">
+                                        @l["imprint"]
+                                    </a>
+                                }
                             </ul>
                         </div>
                     </div>
