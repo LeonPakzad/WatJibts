@@ -1,22 +1,16 @@
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Data;
 using src.Models;
-using Microsoft.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
+using Microsoft.AspNetCore.Authentication;
 
 namespace src.Controllers {
     public class UserController : Controller
     {
-
-        private readonly SignInManager<User> _signInManager;
-
         private readonly WatDbContext _context;
+        private readonly SignInManager<User> _signInManager;
 
         public UserController(WatDbContext context)
         {
@@ -83,10 +77,11 @@ namespace src.Controllers {
 
         [HttpPost]
         [Authorize]
-        public IActionResult Profile(User user)
+        public async Task<IActionResult> ProfileAsync(User user)
         {
             var currentUser = _context.User.Where(u => u.Id == getCurrentUserId()).First();
             
+            // logout user to prevent crashes
             bool logout = false;
             if(currentUser.UserName != user.UserName)
             {
@@ -98,10 +93,13 @@ namespace src.Controllers {
             currentUser.fk_defaultPlaceToGetFood = user.fk_defaultPlaceToGetFood;
             currentUser.preferredLunchTime = user.preferredLunchTime;
             _context.SaveChanges();
+
+
             if(logout)
             {
-                // HttpContext.Session.Clear();
-                return RedirectToAction("Login", "Account", new { area = "Identity"});
+                await HttpContext.SignOutAsync();
+                await HttpContext.SignOutAsync("Identity.Application");
+                HttpContext.Response.Cookies.Delete("Identity.Application");
             }
             
             return RedirectToAction("Profile");
@@ -249,7 +247,7 @@ namespace src.Controllers {
             else 
             {
                 RedirectToAction("Index");
-                return "fuck dotnet";
+                return "error";
             }
         }
     }
