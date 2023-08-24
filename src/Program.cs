@@ -65,7 +65,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-
 builder.Services.AddTransient<IEmailSender, SendGridEmailSender>();
 
 builder.Services.AddLocalization(options=>

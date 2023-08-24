@@ -67,30 +67,33 @@ public class HomeController : Controller
         // build each lunchsessionmodel
         foreach(LunchSession tmpLunchSession in tmpLunchSessions)
         {
-            User tmpUser = _context.User.Where(u => u.Id == tmpLunchSession.fk_user).FirstOrDefault();
-
-            LunchSessionModel todaysLunchSessionModel = new LunchSessionModel
+            if(_context.User.Where(u => u.Id == tmpLunchSession.fk_user).Any())
             {
-                Id = tmpLunchSession.Id,
-                lunchTime = tmpLunchSession.lunchTime,
-                participating = tmpLunchSession.participating,
-                fk_foodPlace = tmpLunchSession.fk_foodPlace,
-                fk_eatingPlace = tmpLunchSession.fk_eatingPlace,
-                fk_user = tmpUser.Id,
-                userName = tmpUser.UserName
-            };
+                User tmpUser = _context.User.Where(u => u.Id == tmpLunchSession.fk_user).FirstOrDefault();
 
-            if (todaysLunchSessionModel.fk_eatingPlace != -1)
-            {
-                todaysLunchSessionModel.eatingPlace = _context.Location.Where(l => l.Id == todaysLunchSessionModel.fk_eatingPlace).FirstOrDefault().name;
+                LunchSessionModel todaysLunchSessionModel = new LunchSessionModel
+                {
+                    Id = tmpLunchSession.Id,
+                    lunchTime = tmpLunchSession.lunchTime,
+                    participating = tmpLunchSession.participating,
+                    fk_foodPlace = tmpLunchSession.fk_foodPlace,
+                    fk_eatingPlace = tmpLunchSession.fk_eatingPlace,
+                    fk_user = tmpUser.Id,
+                    userName = tmpUser.UserName
+                };
+
+                if (todaysLunchSessionModel.fk_eatingPlace != -1)
+                {
+                    todaysLunchSessionModel.eatingPlace = _context.Location.Where(l => l.Id == todaysLunchSessionModel.fk_eatingPlace).FirstOrDefault().name;
+                }
+
+                if(todaysLunchSessionModel.fk_foodPlace != -1)
+                {
+                    todaysLunchSessionModel.foodPlace = _context.Location.Where(l => l.Id == todaysLunchSessionModel.fk_foodPlace).FirstOrDefault().name;
+                }
+
+                todaysLunchSessions.Add(todaysLunchSessionModel);
             }
-
-            if(todaysLunchSessionModel.fk_foodPlace != -1)
-            {
-                todaysLunchSessionModel.foodPlace = _context.Location.Where(l => l.Id == todaysLunchSessionModel.fk_foodPlace).FirstOrDefault().name;
-            }
-
-            todaysLunchSessions.Add(todaysLunchSessionModel);
         }
         
         return todaysLunchSessions;
@@ -252,11 +255,14 @@ public class HomeController : Controller
     //class to get UserId by Name since i dont get the usermanager to give me the Id rn and dont want to perform db actions with data that change (UserName)
     public string getCurrentUserId()
     {
-        var user = _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
-        if(user != null)
+        if(_context.User.Where(u => u.UserName == User.Identity.Name).Any())
         {
-            return user;
+            return _context.User.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
         }
-        return null;
+        else 
+        {
+            return "error";
+        }
+
     }
 }

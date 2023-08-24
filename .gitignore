@@ -399,3 +399,6 @@ FodyWeavers.xsd
 
 src/Migrations/*
 src/Migrations/
+src/wwwroot/css/basics.css
+src/wwwroot/css/body-style.css
+src/wwwroot/css/menu-style.css

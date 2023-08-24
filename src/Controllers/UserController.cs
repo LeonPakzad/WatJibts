@@ -71,7 +71,9 @@ namespace src.Controllers {
             ViewBag.locationsToEat      = _context.Location.ToList().Where(p => p.isPlaceToEat == true);
             ViewBag.locationsToGetFood  = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
 
+            //add user data from the db
             userProfile.user = _context.User.Where(p => p.Id == getCurrentUserId()).First();
+            
             userProfile.userLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == getCurrentUserId() & l.isDefault == false);
 
             userProfile.defaultLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == getCurrentUserId() & l.isDefault == true);
@@ -84,6 +86,7 @@ namespace src.Controllers {
         public IActionResult Profile(User user)
         {
             var currentUser = _context.User.Where(u => u.Id == getCurrentUserId()).First();
+            
             bool logout = false;
             if(currentUser.UserName != user.UserName)
             {
@@ -97,9 +100,8 @@ namespace src.Controllers {
             _context.SaveChanges();
             if(logout)
             {
-                // SignOutResult();
-
-               return RedirectToAction("LogOut", "Account", new { area = "Identity"});
+                // HttpContext.Session.Clear();
+                return RedirectToAction("Login", "Account", new { area = "Identity"});
             }
             
             return RedirectToAction("Profile");
@@ -246,7 +248,8 @@ namespace src.Controllers {
             }
             else 
             {
-                return "no user";
+                RedirectToAction("Index");
+                return "fuck dotnet";
             }
         }
     }
