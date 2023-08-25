@@ -9,22 +9,33 @@
 
 <h1>@ViewData["Title"]</h1>
 
+@if(ViewBag.error != null)
+{
+    <div class="error-msg">
+        @ViewBag.error
+    </div>
+}
+
 <div class="table-wrapper">
     @for (int index = 0; index < Model.Count; index++)
     {
         <div class="table-item">
-                <p>
-                    <b>
-                        @Model[index].UserName
-                    </b>
-                </p>
-                <p>
-                    @Model[index].Email
-                </p>
-                @Html.ActionLink(@l["edit"], "Edit", new {Id = Model[index].Id})
+            <p>
+                <b>
+                    @Model[index].UserName
+                </b>
+            </p>
+            <p>
+                @Model[index].Email
+            </p>
+            @Html.ActionLink(@l["edit"], "Edit", new {Id = Model[index].Id})
+            
+            @if(@Model[index].UserName != User.Identity.Name)
+            {
                 <span class="link-red">
                     @Html.ActionLink(@l["delete"], "Delete", new {Id = Model[index].Id})
                 </span>
+            }
         </div>
     }
 </div>

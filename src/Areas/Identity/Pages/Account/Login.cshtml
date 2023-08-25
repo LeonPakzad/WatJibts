@@ -15,8 +15,7 @@
 
     <form id="account" method="post">
 
-
-        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        <div class="error-msg" asp-validation-summary="ModelOnly" role="alert"></div>
 
         <div class="form-field">
             <label class="form-label"   asp-for="Input.Email" >@l["email"]</label>

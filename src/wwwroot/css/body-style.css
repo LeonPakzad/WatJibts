@@ -266,7 +266,7 @@ button:hover {
   padding: 10px;
   margin: 10px;
 }
-.table-wrapper .table-item, .lunchtime-wrapper .table-item, .lunchtime-wrapper .lunchtime-card {
+.table-wrapper .table-item, .lunchtime-wrapper .table-item, .lunchtime-wrapper .lunchtime-card-highlighted, .lunchtime-wrapper .lunchtime-card {
   flex: 1 1 auto;
   margin: 10px;
   padding: 10px;
@@ -280,8 +280,12 @@ button:hover {
   display: initial;
 }
 
-.form-field.table-item, .lunchtime-wrapper .form-field.lunchtime-card {
+.form-field.table-item, .lunchtime-wrapper .form-field.lunchtime-card-highlighted, .lunchtime-wrapper .form-field.lunchtime-card {
   border: none !important;
+}
+
+.lunchtime-wrapper .lunchtime-card-highlighted {
+  box-shadow: 0 3px 4px 0 #08E8DE;
 }
 
 details {
@@ -298,6 +302,7 @@ summary {
 }
 
 .error-msg {
+  margin: 20px;
   padding: 10px;
   color: #FF321A;
   text-shadow: 0 0 7px white, 0 0 10px #A33A0E, 0 0 82px white;

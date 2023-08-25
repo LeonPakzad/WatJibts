@@ -229,7 +229,14 @@ button:hover {
 
         }
     }
+
+    .lunchtime-card-highlighted
+    {
+        @extend .table-item;
+        box-shadow: 0 3px 4px 0 $color-header-secondary;
+    }
 }
+
 
 details {
     padding: 10px;
@@ -245,6 +252,7 @@ summary {
 }
 
 .error-msg {
+    margin: 20px;
     padding: 10px;
     color: #FF321A;
     text-shadow: 0 0 7px white, 0 0 10px #A33A0E, 0 0 82px white;

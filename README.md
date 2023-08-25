@@ -9,7 +9,8 @@
 ## Overview
 WatJibts is a planning tool for lunch sessions: - when does who eat what and where does who get what food from.
 <br>
-
+Images displayed could be outdated - it might look better ;).
+<br>
 you can:
 <ul>
 <li> Create and validate your Account

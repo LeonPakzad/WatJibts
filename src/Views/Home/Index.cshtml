@@ -29,7 +29,7 @@ else
         {
             if(lunchSession.fk_user != null)
             {
-                <div class="lunchtime-card">
+                <div class="@(@lunchSession.userName == User.Identity.Name ? "lunchtime-card-highlighted" : "lunchtime-card")">
                     <div class="lunchtime-users">
                         @lunchSession.userName
                     </div>

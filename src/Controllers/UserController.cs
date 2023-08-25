@@ -24,8 +24,13 @@ namespace src.Controllers {
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult UserIndex()
+        public IActionResult UserIndex(string error = null)
         {
+            if(error != null)
+            {
+                ViewBag.error = error;
+            }
+
             return View(_context.User.ToList());
         }
 
@@ -241,6 +246,12 @@ namespace src.Controllers {
             if (user == null)
             {
                 return NotFound();
+            }
+
+            //check if location is already in use, redirect if its the case. ToDo: error message
+            if(id == getCurrentUserId())
+            {
+                return RedirectToAction("UserIndex", new { error = "error: you cant delete yourself"});    
             }
 
             _context.LunchSession.Remove(_context.LunchSession.Where(l=>l.fk_user == id).First());

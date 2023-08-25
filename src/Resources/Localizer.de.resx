@@ -233,8 +233,13 @@
     <value>Nutzername</value>
     <comment/>
   </data>
-  <data name="Please register a new Account, to plan your next lunchsession" xml:space="preserve">
+  <data name="Please register a new Account, to plan your next lunchsession." xml:space="preserve">
     <value>Erstellen Sie einen Account, um sich zusammen mit den Anderen mit dem Essen abzustimmen</value>
+    <comment/>
+  </data>
+
+<data name="Your Password should have at least 6 Digits, and contain at least one non alphanumeric, one lowercase and a uppercase character." xml:space="preserve">
+    <value>Ihr Passwort sollte aus mindestens 6 Zeichen bestehen. Achten sie ebenfalls darauf mindestens ein Sonderzeichen sowie Upper und Lower Case Zeichen zu verwenden.</value>
     <comment/>
   </data>
 
@@ -402,8 +407,8 @@
     <comment/>
   </data>
 
-  <data name="you can manage default weekly lunchsessions here" xml:space="preserve">
-    <value>Hier können Sie festlegen, an welchen Tagen welche Lunchsessions automatisch erstellt werden sollen.</value>
+  <data name="You can manage default weekly lunchsessions here. Unless you overwrite them with manual lunchsessions, they will be displayed on their assigned each day" xml:space="preserve">
+    <value>Hier können Sie festlegen, an welchen Tagen Lunchsessions automatisch erstellt werden sollen. Automatisch erstellte Sessions werden von Manuell hinzugefügten überschrieben.</value>
     <comment/>
   </data>
 
