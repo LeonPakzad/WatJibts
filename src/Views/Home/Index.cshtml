@@ -123,7 +123,7 @@ else
             <div class="form-field participating-wrapper">
                 <div class="form-field">
                     <label class="form-checkbox-label">@l["participating"]</label>
-                    @Html.CheckBox("participating", false)
+                    @Html.CheckBox("participating", @Model.LunchSession.participating)
             
                     <div class="lunchtime-details">
                         <div class="form-horizontal">

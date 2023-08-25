@@ -246,6 +246,12 @@ button:hover {
 .form-field .form-checkbox-label {
   left: 50%;
 }
+.form-field .form-control {
+  width: 200px;
+}
+.form-field .form-select {
+  width: 200px;
+}
 .form-field .form-select select option {
   background-color: #110220;
   background-color: white;
@@ -285,6 +291,13 @@ summary {
 .profile-lunchtime-wrapper {
   margin: 15px;
   box-shadow: 0 0 4px #E200F7, 0 0 11px #E200F7, 0 0 17px #E200F7, 0 0 23px white, 0 0 27px white, 0 0 33px white;
+}
+
+.error-msg {
+  padding: 10px;
+  color: #FF321A;
+  text-shadow: 0 0 7px white, 0 0 10px #A33A0E, 0 0 82px white;
+  border: solid 2px #FF321A;
 }
 
 .lunchtime-form {

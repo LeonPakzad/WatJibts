@@ -161,7 +161,7 @@ else {
                 <div class="form-field participating-wrapper">
                     <div class="form-field">
                         <label class="form-checkbox-label">@l["participating"]</label>
-                        @Html.CheckBox("participating", false)
+                        @Html.CheckBox("participating", defaultLunchSession.participating)
                 
                         <div class="lunchtime-details">
                             <div class="form-horizontal">
@@ -169,14 +169,14 @@ else {
 
                                     <div class="form-field">
                                         <label class="form-label">@l["place for food"]</label>
-                                        <select class="form-select" name="fk_foodPlace" asp-for="defaultLunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name"))">
+                                        <select class="form-select" name="fk_foodPlace" asp-for="defaultLunchSession.fk_foodPlace" asp-items="@(new SelectList(ViewBag.LocationsToGetFood, "Id", "name", defaultLunchSession.fk_foodPlace))">
                                                 <option value="-1">@l["no place"]</option>
                                         </select>
                                     </div>
 
                                     <div class="form-field">
                                         <label class="form-label">@l["place to eat"]</label>
-                                        <select class="form-select" name="fk_eatingPlace" asp-for="defaultLunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name"))">
+                                        <select class="form-select" name="fk_eatingPlace" asp-for="defaultLunchSession.fk_eatingPlace" asp-items="@(new SelectList(ViewBag.LocationsToEat, "Id", "name", defaultLunchSession.fk_eatingPlace))">
                                             <option value="-1">@l["no place"]</option>
                                         </select>
                                     </div>
@@ -203,7 +203,3 @@ else {
         </div>
     </details>
 }
-
-<div>
-    @Html.ActionLink(@l["back to user list"], "UserIndex")
-</div>

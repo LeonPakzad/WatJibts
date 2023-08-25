@@ -12,6 +12,12 @@
     @Html.ActionLink("+", "Add", new {})
 </div>
 
+@if(ViewBag.error != null)
+{
+    <div class="error-msg">
+        @ViewBag.error
+    </div>
+}
 
 <div class="table-wrapper">
     @for (int index = 0; index < Model.Count; index++)

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using src.Data;
 using src.Models;
-
 namespace src.Controllers;
 
 public class LocationController : Controller
@@ -19,8 +18,13 @@ public class LocationController : Controller
     }
 
     [Authorize]
-    public ActionResult LocationIndex()
+    public ActionResult LocationIndex(string error = null)
     {
+        if(error != null)
+        {
+            ViewBag.error = error;
+        }
+
         return View(_context.Location.ToList());
     }
 
@@ -100,9 +104,16 @@ public class LocationController : Controller
     public ActionResult Delete(int id)
     {
         var location = _context.Location.Find(id);
+        
         if (location == null)
         {
             return NotFound();
+        }
+
+        //check if location is already in use, redirect if its the case. ToDo: error message
+        if(_context.LunchSession.Where(l => l.fk_foodPlace == id || l.fk_eatingPlace == id ).Any())
+        {
+            return RedirectToAction("LocationIndex", new {error = "error: cant delete a location that is already in use, delete associated lunchsessions first"});    
         }
         
         _context.Location.Remove(location);
