@@ -14,6 +14,7 @@ Images displayed could be outdated - it might look better ;).
 you can:
 <ul>
 <li> Create and validate your Account
+    
 <img src="readme_images/login.png">
 
 <li> Add Locations to eat at or get your food from
