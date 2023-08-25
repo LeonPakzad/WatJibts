@@ -142,8 +142,6 @@ button:hover {
     text-align:left;
 }
 
-
-
 .form-field {
     position: relative;
 
@@ -200,16 +198,10 @@ button:hover {
 
 .refdata-head {
     a {
-        // position: absolute;
-        // right: 20px;
-        // bottom: 75px;
-
         width: 55px;
         font-size: 50px;
         text-decoration: none;
-        
-        // border: 2px solid white;
-        // background: black;
+        display: initial;
     }
 }
 
@@ -220,15 +212,10 @@ button:hover {
 .lunchtime-wrapper {
 
     @extend .table-wrapper;
-    // display: flex;
-    // flex-wrap: wrap;
 
     .lunchtime-card {
 
         @extend .table-item;
-
-        // margin: 10px;
-        // padding: 10px;
         
         .lunchtime-users {
 

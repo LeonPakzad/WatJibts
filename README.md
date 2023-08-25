@@ -1,7 +1,34 @@
 # WatJibts README
+<li>
+    <a href="#overview">Overview</a>
+</li>
+<li>
+    <a href="#installation">Installation</a>
+</li>
 
-## Explanation
+## Overview
 WatJibts is a planning tool for lunch sessions: - when does who eat what and where does who get what food from.
+<br>
+
+you can:
+<ul>
+<li> Create and validate your Account
+
+<img src="readme_images/login.png">
+
+<li> Add Locations to eat at or get your food from
+<img src="readme_images/locations.png">
+
+<li> Save your typical LunchSessions in your Profile (both general and depending on the weekday)
+<img src="readme_images/profile_1.png">
+<img src="readme_images/profile_2.png">
+
+<li> See what your friends / collegues will be foodin and join their session
+<img src="readme_images/lunchsessions.png">
+
+<li> as of now, WatJibts is supported in two languages, english and german
+<img src="readme_images/menu.png">
+</ul>
 
 ## Installation
 ### step 0
@@ -40,4 +67,9 @@ dotnet user-secrets set SendGridKey <key>
 dotnet run
 ```
 
-### enjoy :)
+### step 5: register and promote to admin
+
+make sure to register and promote yourself to be the administrator of the page before sharing (will log you out to reset cookies)
+<img src="readme_images/promote.png">
+
+### Bon Appetit :)

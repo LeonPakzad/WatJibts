@@ -8,6 +8,6 @@ public class UserProfile
     public User? user {get;set;}
     public LunchSession? defaultLunchSession{get;set;}
 
-    public IEnumerable<LunchSession>? userLunchSessions {get;set;}
+    public IList<LunchSessionModel>? userLunchSessions {get;set;}
     public IEnumerable<LunchSession>? defaultLunchSessions{get;set;}
 }

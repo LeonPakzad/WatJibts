@@ -44,7 +44,7 @@ else
                         }
                         else{
                             <span>@l["get food from"]</span>
-                            <a id="" href="../Location/Edit/@lunchSession.fk_eatingPlace">@lunchSession.foodPlace</a>
+                            <a href="../Location/Edit/@lunchSession.fk_eatingPlace">@lunchSession.foodPlace</a>
                         }
 
                         @if(@lunchSession.fk_eatingPlace == -1)
@@ -58,7 +58,7 @@ else
                             else
                             {
                                 <span>@l["eats at"]</span>
-                                <a id="" href="../Location/Edit/@lunchSession.fk_eatingPlace">@lunchSession.eatingPlace</a>
+                                <a href="../Location/Edit/@lunchSession.fk_eatingPlace">@lunchSession.eatingPlace</a>
                             }
                         }
                     </div>

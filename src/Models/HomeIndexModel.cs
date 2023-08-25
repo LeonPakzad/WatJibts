@@ -8,7 +8,6 @@ using System.Collections;
 using src.Data;
 using src.Models;
 
-
 public class HomeIndexModel
 {
     public ICollection<LunchSessionModel>? publicLunchSessions{get;set;}

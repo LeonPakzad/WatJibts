@@ -67,8 +67,38 @@ namespace src.Controllers {
 
             //add user data from the db
             userProfile.user = _context.User.Where(p => p.Id == getCurrentUserId()).First();
-            
-            userProfile.userLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == getCurrentUserId() & l.isDefault == false);
+            userProfile.userLunchSessions = new List<LunchSessionModel>();
+
+            var lunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == getCurrentUserId() & l.isDefault == false);
+            // build each lunchsessionmodel
+            foreach(LunchSession tmpLunchSession in lunchSessions)
+            {
+                if(_context.User.Where(u => u.Id == tmpLunchSession.fk_user).Any())
+                {
+                    LunchSessionModel todaysLunchSessionModel = new LunchSessionModel
+                    {
+                        Id = tmpLunchSession.Id,
+                        lunchTime = tmpLunchSession.lunchTime,
+                        participating = tmpLunchSession.participating,
+                        fk_foodPlace = tmpLunchSession.fk_foodPlace,
+                        fk_eatingPlace = tmpLunchSession.fk_eatingPlace,
+                        fk_user = tmpLunchSession.fk_user,
+                        userName = userProfile.user.UserName
+                    };
+
+                    if (todaysLunchSessionModel.fk_eatingPlace != -1)
+                    {
+                        todaysLunchSessionModel.eatingPlace = _context.Location.Where(l => l.Id == todaysLunchSessionModel.fk_eatingPlace).FirstOrDefault().name;
+                    }
+
+                    if(todaysLunchSessionModel.fk_foodPlace != -1)
+                    {
+                        todaysLunchSessionModel.foodPlace = _context.Location.Where(l => l.Id == todaysLunchSessionModel.fk_foodPlace).FirstOrDefault().name;
+                    }
+
+                    userProfile.userLunchSessions.Add(todaysLunchSessionModel);
+                }
+            }
 
             userProfile.defaultLunchSessions = _context.LunchSession.ToList().Where(l =>l.fk_user == getCurrentUserId() & l.isDefault == true);
 
@@ -140,7 +170,9 @@ namespace src.Controllers {
             _context.UserRoles.Add(userRole);
             
             _context.SaveChanges();
-
+            await HttpContext.SignOutAsync();
+            await HttpContext.SignOutAsync("Identity.Application");
+            HttpContext.Response.Cookies.Delete("Identity.Application");
             return RedirectToAction("Profile");
         }
 
