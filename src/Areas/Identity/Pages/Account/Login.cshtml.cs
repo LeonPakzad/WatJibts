@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
 
 namespace src.Areas.Identity.Pages.Account
 {
@@ -21,6 +22,8 @@ namespace src.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+
+        IStringLocalizer _localizer;
 
         public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger)
         {
@@ -128,7 +131,7 @@ namespace src.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, _localizer["Invalid login attempt."]);
                     return Page();
                 }
             }

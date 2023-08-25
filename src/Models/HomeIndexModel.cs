@@ -36,7 +36,6 @@ public class HomeIndexModel
                         ls.userName);
                 }
             }
-
             newLunchSession.Add(group.FirstOrDefault());
         }
         return newLunchSession;

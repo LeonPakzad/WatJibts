@@ -15,6 +15,10 @@ header {
   background-color: black;
 }
 
+hr {
+  color: #ffc640;
+}
+
 h1 {
   font-family: beonregular;
   color: #08E8DE;
@@ -50,10 +54,6 @@ a:hover {
 }
 
 label {
-  color: white;
-}
-
-hr {
   color: white;
 }
 

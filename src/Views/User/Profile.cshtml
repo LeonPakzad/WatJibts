@@ -88,24 +88,31 @@
                         @lunchSession.lunchTime.ToString("dd.mm.yyyy, hh:mm tt")
                     </div>
 
-                    <div class="lunchtime-places">
-                        @if(@lunchSession.fk_foodPlace == -1)
-                        {
-                        }
-                        else{
-                            <span>@l["get food from"]</span>
-                            @lunchSession.fk_foodPlace
-                        }
+                    @if(lunchSession.participating == false)
+                    {
+                        <span>@l["not participating"]</span>
+                    }
+                    else
+                    {
+                        <div class="lunchtime-places">
+                            @if(@lunchSession.fk_foodPlace == -1)
+                            {
+                            }
+                            else{
+                                <span>@l["get food from"]</span>
+                                @lunchSession.fk_foodPlace
+                            }
 
-                        @if(@lunchSession.fk_eatingPlace == -1)
-                        {
-                            
-                        }
-                        else{
-                            <span>@l["eats at"]</span>
-                            @lunchSession.fk_eatingPlace
-                        }
-                    </div>
+                            @if(@lunchSession.fk_eatingPlace == -1)
+                            {
+                                
+                            }
+                            else{
+                                <span>@l["eats at"]</span>
+                                @lunchSession.fk_eatingPlace
+                            }
+                        </div>
+                    }
                     <span class="link-red">
                         @Html.ActionLink(@l["delete session"], "DeleteProfileLunchSession", new {id = lunchSession.Id})
                     </span>
@@ -120,6 +127,9 @@ else {
 
 <br>
 <h2>@l["default lunch times"]</h2>
+<p>
+    @l["you can manage default weekly lunchsessions here"]
+</p>
 <hr>
 <br>
 

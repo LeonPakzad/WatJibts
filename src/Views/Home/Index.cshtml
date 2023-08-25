@@ -16,13 +16,14 @@
 }
 else
 {
-    <h2>
-        @l["todays lunchsessions:"]
-    </h2>
-    <hr>
 
     @if(Model.publicLunchSessions.Count() > 0) 
     {
+        <h2>
+            @l["todays lunchsessions:"]
+        </h2>
+        <hr>
+
         <div class="lunchtime-wrapper">
         @foreach(var lunchSession in Model.publicLunchSessions)
         {

@@ -40,9 +40,17 @@ public class LocationController : Controller
     [Authorize]
     public ActionResult Add(Location location)
     {
-        _context.Add(location);
-        _context.SaveChanges();
-        return View("LocationIndex", _context.Location.ToList());
+        if(location.name != null)
+        {
+            _context.Add(location);
+            _context.SaveChanges();
+            return View("LocationIndex", _context.Location.ToList());
+        }
+        else
+        {
+            return RedirectToAction("LocationIndex", new {error = "error: locations need a name to be created"});
+        }
+    
     }
 
     [Authorize]
@@ -74,10 +82,17 @@ public class LocationController : Controller
     [Authorize]
     public ActionResult Edit(Location location)
     {
-        var oldLocation = _context.Location.Where(l => l.Id == location.Id).FirstOrDefault();
-        _context.Location.Remove(oldLocation);
-        _context.Location.Add(location);
-        _context.SaveChanges();
+        if(location.name != null)
+        {
+            var oldLocation = _context.Location.Where(l => l.Id == location.Id).FirstOrDefault();
+            _context.Location.Remove(oldLocation);
+            _context.Location.Add(location);
+            _context.SaveChanges();
+        }
+        else
+        {
+            return RedirectToAction("LocationIndex", new {error = "error: locations need a name"});
+        }
 
         return RedirectToAction("LocationIndex");
     }
@@ -113,7 +128,7 @@ public class LocationController : Controller
         //check if location is already in use, redirect if its the case. ToDo: error message
         if(_context.LunchSession.Where(l => l.fk_foodPlace == id || l.fk_eatingPlace == id ).Any())
         {
-            return RedirectToAction("LocationIndex", new {error = "error: cant delete a location that is already in use, delete associated lunchsessions first"});    
+            return RedirectToAction("LocationIndex", new { error = "error: cant delete a location that is already in use, delete associated lunchsessions first"});    
         }
         
         _context.Location.Remove(location);

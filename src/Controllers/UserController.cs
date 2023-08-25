@@ -108,8 +108,11 @@ namespace src.Controllers {
         [HttpPost]
         public IActionResult ProfileLunchSessions (int id, string userId, int weekday,  bool participating, int fk_foodPlace, int fk_eatingPlace, DateTime lunchTime)
         {
-            var oldLunchSession = _context.LunchSession.Where(l => l.Id == id).FirstOrDefault();
-            _context.LunchSession.Remove(oldLunchSession);
+            if(_context.LunchSession.Where(l => l.Id == id).Any())
+            {
+                LunchSession oldLunchSession = _context.LunchSession.Where(l => l.Id == id).FirstOrDefault();
+                _context.LunchSession.Remove(oldLunchSession);
+            }
 
             _context.LunchSession.Add (new LunchSessionModel
             {

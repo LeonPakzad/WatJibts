@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -5,6 +6,8 @@ namespace src.Models {
     public class Location
     {  
         public int Id {get;set;}
+        
+        [Required]
         public string? name {get;set;}
         public string? description {get;set;}
 

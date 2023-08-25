@@ -156,7 +156,7 @@ public class HomeController : Controller
     {
         LunchSession lunchSession   = new LunchSession();
 
-        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == getCurrentUserId()).Any();
+        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == getCurrentUserId() && l.isDefault == false).Any();
 
         // check if user already added a lunchsession, edit the existing, if that is the case. Use preferred Lunchsettings otherwise
         if(lunchSessionExists)
@@ -214,13 +214,10 @@ public class HomeController : Controller
         LunchSession lunchSession = new LunchSession();
         LunchSession joinedSession = _context.LunchSession.Where(l => l.Id == lunchSessionId).FirstOrDefault();
 
-        // check if the user already has a lunch Session
-        bool lunchSessionExists = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == getCurrentUserId()).Any();
-        
         _context.LunchSession.Where
                 (l => l.lunchTime.Date == DateTime.Today);
 
-        if(lunchSessionExists)
+        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == getCurrentUserId() && l.isDefault == false).Any())
         {
             lunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == getCurrentUserId()).FirstOrDefault();
             lunchSession.participating  = joinedSession.participating;
@@ -238,6 +235,7 @@ public class HomeController : Controller
             
             _context.Add(lunchSession);
         }
+
         _context.SaveChanges();
         return RedirectToAction("Index");
     }
