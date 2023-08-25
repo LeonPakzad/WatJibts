@@ -168,13 +168,12 @@ namespace src.Controllers {
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(string Id)
         {
-            
-            var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
-
-            if(user.Id == getCurrentUserId())
+            if(Id == getCurrentUserId())
             {
                 return RedirectToAction("Profile");
             }
+
+            var user = _context.User.Where(u => u.Id == Id).FirstOrDefault();
 
             ViewBag.isAdmin = _context.UserRoles.Where(u => u.UserId == user.Id).Any();
             ViewBag.locationsToGetFood = _context.Location.ToList().Where(p => p.isPlaceToGetFood == true);
@@ -230,7 +229,7 @@ namespace src.Controllers {
         [Authorize]
         public ActionResult DeleteProfileLunchSessions()
         {
-            _context.LunchSession.RemoveRange(_context.LunchSession.Where(l=> l.fk_user == getCurrentUserId()));
+            _context.LunchSession.RemoveRange(_context.LunchSession.Where(l=> l.fk_user == getCurrentUserId() && l.isDefault == false));
             _context.SaveChanges();
         
             return RedirectToAction("Profile");

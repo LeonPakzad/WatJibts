@@ -20,14 +20,3 @@ public class LunchSession
     public string? fk_user {get; set;}
 
 }
-
-public enum weekday  
-{  
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday,
-    Sunday 
-}  

@@ -31,9 +31,9 @@ public class HomeIndexModel
             {
                 if(group.FirstOrDefault().fk_user != ls.fk_user)
                 {
-                    group.FirstOrDefault().fk_user = String.Format("{0}, {1}", 
-                        group.FirstOrDefault().fk_user,
-                        ls.fk_user);
+                    group.FirstOrDefault().userName = String.Format("{0}, {1}", 
+                        group.FirstOrDefault().userName,
+                        ls.userName);
                 }
             }
 

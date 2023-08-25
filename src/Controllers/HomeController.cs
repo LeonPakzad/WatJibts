@@ -57,7 +57,7 @@ public class HomeController : Controller
         {
             if(tmpLunchSession.isDefault)
             {
-                if(tmpLunchSessions.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == tmpLunchSession.fk_user).Any())
+                if(tmpLunchSessions.Where(l => l.lunchTime.Date == DateTime.Today & l.fk_user == tmpLunchSession.fk_user && l.isDefault == false).Any())
                 {
                     tmpLunchSessions.Remove(tmpLunchSession);
                 }
@@ -108,9 +108,9 @@ public class HomeController : Controller
 
         // If there is already a lunchsession from the user, fill the data of this lunch session into the form. 
         // If not, fill the form with the user preferred setings 
-        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == getCurrentUserId()).Any())
+        if(_context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == getCurrentUserId() && l.isDefault == false).Any())
         {
-            HomeIndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == getCurrentUserId()).FirstOrDefault();
+            HomeIndexModel.LunchSession = _context.LunchSession.Where(l => l.lunchTime.Date == DateTime.Today && l.fk_user == getCurrentUserId() && l.isDefault == false).FirstOrDefault();
         }
         else if (_context.User.Where(u => u.Id == getCurrentUserId()).Any())
         {
@@ -246,7 +246,7 @@ public class HomeController : Controller
     public IActionResult clearTodaysLunchSessions()
     {
         _context.LunchSession.RemoveRange(_context.LunchSession.Where
-                (l => l.lunchTime.Date == DateTime.Today));
+                (l => l.lunchTime.Date == DateTime.Today && l.isDefault == false));
         _context.SaveChanges();
         
         return RedirectToAction("Index");
